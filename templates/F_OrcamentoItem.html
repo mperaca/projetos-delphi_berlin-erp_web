@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style type="text/css">
+      /* Style the tab */
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        /*background-color: #f1f1f1;*/
+        background-color: white;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        color: black;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+       background-color: #ddd;
+       color: white;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        /*background-color: #ccc;*/
+        background-color: navy;
+        color: white;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+
+      .tabcontent2 {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      textarea {
+          font-size: 20px; 
+          font-weight: bold; 
+          color: #00bfff;
+          letter-spacing: 1px;
+          text-align: left;
+          padding: 5px;
+          line-height: 1.5;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+      }
+        label{
+          margin-bottom: -10px;
+          font-weight: bold;
+          font-size: 13px;
+        }
+        .w_load_icon{
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          background: url(/images/w_load.gif) no-repeat;
+        }
+
+        .w_load_body{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(233, 233, 232, 0.5);
+        }
+
+        #loader {
+          position: absolute;
+          left: 50%;
+          top: 10%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader2 {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader3 {
+          position: absolute;
+          left: 50%;
+          top: 85%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+  /* Add animation to "page content" */
+        .animate-bottom {
+          position: relative;
+          -webkit-animation-name: animatebottom;
+          -webkit-animation-duration: 1s;
+          animation-name: animatebottom;
+          animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+
+        .red {
+              background-color: red !important;
+              color: white;
+        }   
+
+        #Lote{
+            background:#1C1C1C;
+            left: -300px; 
+            margin-top: -170px; 
+            height: 200px; 
+            width: 200px; 
+            position: absolute;       
+            border-radius: 5px;          
+            -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+            -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+            box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+          }
+    </style>
+  </head>
+  <body>
+
+  <div class="container">
+    <form>
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-filter-square" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M6 11.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+          </svg>                        
+          <span>Orçamento - Inclui Ítem</span>
+        </span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Confirma">Confirma</button>
+            <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Cancela">Cancela</button>
+          </div>
+        </div>                               
+
+      </div>  
+
+      <div class="card-body">
+        <div id="itemOrcamento" style="display: block;">
+          <div class="row">
+            <div class="col col-md-12">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: -10px">
+                <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                  <h3 class="page-title" style="font-size: 20px">Dados do Ítem</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">Código</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpProduto('codigo');"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCODIGO%}
+                  </div>                    
+                </div>              
+                <div class="col col-md-9">
+                  <span class="text-uppercase page-subtitle">Descrição Produto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpProduto('descricao');"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITDESCRICAO%}
+                  </div>                    
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">CFOP</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCFOP();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCFOP%}
+                  </div>                    
+                </div>                              
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">Cean</span>
+                  {%IWEDITCEAN%}
+                </div>                              
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">Unidade</span>
+                  {%IWEDITUNIDADE%}
+                </div>                              
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">Valor Unitário</span>
+                  {%IWEDITUNITARIO%}
+                </div>                              
+              </div>
+
+            </div>
+          </div>      
+          <div class="row">
+            <div class="col col-md-3">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                <div class="col text-center text-sm-left mb-0">
+                  <h3 class="page-title" style="font-size: 20px">Totais</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Quantidade</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITQUANTIDADE%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Percentual Desconto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITPERCDESCONTO%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor do Desconto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITVALORDESCONTO%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor Total</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITVALORTOTAL%}
+                  </div>                    
+                </div>                              
+              </div>
+            </div>
+
+            <div class="col col-md-3">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                <div class="col text-center text-sm-left mb-0">
+                  <h3 class="page-title" style="font-size: 20px">ICMS</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">CST</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCSTICMS();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCSTICMS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Alíquota</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCSTICMS();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCODALIQICMS%}
+                    {%IWEDITALIQICMS%}
+                  </div>                    
+                </div>                              
+              </div>
+
+                <!--<div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Alíquota</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpAliquotaICMS();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITALIQICMS%}
+                  </div>                    
+                </div>-->
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor da Base</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITBASEICMS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor do Imposto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITVALORICMS%}
+                  </div>                    
+                </div>                              
+              </div>
+            </div>
+
+            <div class="col col-md-3">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                <div class="col text-center text-sm-left mb-0">
+                  <h3 class="page-title" style="font-size: 20px">PIS</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">CST</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCSTPIS();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCSTPIS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Alíquota</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITALIQPIS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Percentual da Base</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITBASEPIS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor do Imposto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITVALORPIS%}
+                  </div>                    
+                </div>                              
+              </div>
+            </div>
+
+
+
+            <div class="col col-md-3">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                <div class="col text-center text-sm-left mb-0">
+                  <h3 class="page-title" style="font-size: 20px">COFINS</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">CST</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCSTCOFINS();"></i>
+                      </span>                                     
+                    </div>
+                    {%IWEDITCSTCOFINS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Alíquota</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITALIQCOFINS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Percentual da Base</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITBASECOFINS%}
+                  </div>                    
+                </div>                              
+              </div>
+              <div class="row">
+                <div class="col col-md-12">
+                  <span class="text-uppercase page-subtitle">Valor do Imposto</span>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    {%IWEDITVALORCOFINS%}
+                  </div>                    
+                </div>                              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </form>
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITIDORCAMENTO%}{%IWEDITIDPRODUTO%}
+  </div>
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+  <!--Modal Produto-->
+  <div class="modal" id="ModalProduto">
+    <div class="modal-dialog modal-lg" >
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloProduto" style="font-size: 15px">Seleciona Produto</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="produtos"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="7%">Código</th>
+                  <th width="35%">Descrição do Produto</th>
+                  <th width="12%">Estrutural</th>
+                  <th width="12%">Referência</th>
+                  <th width="9%">CEAN</th>
+                  <th width="10%">Preço Venda</th>
+                  <th width="10%">Saldo</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <script>
+    $(document).ready(function() {      
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONCANCELA").hide();
+       limpaOrcamentoItem();
+       $('html,body').scrollTop(0);      
+    });
+
+// funções
+    function fechaModalProduto() {
+      $("#ModalProduto").modal("hide");
+    }
+
+    function chamaHelpProduto(tipo) {
+      document.getElementById('IWEDITNOME').value = '[HelpProduto]'+tipo;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                      
+    }
+
+    function limpaOrcamentoItem() {
+      document.getElementById('IWEDITNOME').value = '[LimpaOrcamentoItem]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                      
+    }
+
+// HELPS
+
+    function carregaListaProdutos(num) {     
+      $('#produtos').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "columnDefs": [{"targets": [5,6], "className": "text-right"}],
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetProdutosHelp"
+          });      
+    }
+
+    function carregaOrcamento(idOrcamento) {
+      document.getElementById('IWEDITID').value = idOrcamento;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[CarregaOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+       document.getElementById("defaultOpen").click();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONALTERA").show();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONEXCLUI").show();            
+    }
+
+    function setPagina(numPage) {
+      $('#orcamentos').DataTable().page(numPage).draw('page');
+    }
+
+    function selecionaProduto(idProduto, codigoProduto, descProduto) {
+      $("#IWBUTTONCONFIRMA").show();
+      $("#IWBUTTONCANCELA").show();
+      document.getElementById('IWEDITIDPRODUTO').value = idProduto;
+      AddChangedControl('IWEDITIDPRODUTO');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITID').value = codigoProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      document.getElementById('IWEDITNOME').value = '[SelecionaProduto]'+descProduto;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalProduto").modal("hide");
+    }
+
+
+// botões
+    $("#IWBUTTONCANCELA").on("click",function(){      
+//      document.getElementById('IWEDITNOME').value = '[CancelaOrcamentoItem]';
+//      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+//      $("#IWBUTTONACAO").click();              
+      window.location.href ="/TrabinWeb/orcamento.html?1";
+
+    })
+
+    $("#IWBUTTONCONFIRMA").on("click",function(){      
+      var elemento  = document.getElementById('IWEDITNOMECLIENTE');
+      var elemento1 = document.getElementById('IWEDITCONDICAOPAGAMENTO');
+      var elemento2 = document.getElementById('IWEDITNOMEVENDEDOR');
+      var elemento3 = document.getElementById('IWEDITDOCUMENTOCOBRANCA');
+      if ((elemento.value=='') || (elemento1.value=='') || (elemento2.value=='') || (elemento3.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+         if (elemento.value=='') {
+            document.getElementById('IWEDITNOMECLIENTE').focus();
+         } else if (elemento1.value=='') {
+            document.getElementById('IWEDITCONDICAOPAGAMENTO').focus();          
+         } else if (elemento2.value=='') {
+            document.getElementById('IWEDITNOMEVENDEDOR').focus();          
+         } else if (elemento3.value=='') {
+            document.getElementById('IWEDITDOCUMENTOCOBRANCA').focus();          
+         }
+
+      } else {        
+              desabilitaEdicao();
+              $(this).hide();
+              $("#IWBUTTONALTERA").show();
+              $("#IWBUTTONCANCELA").hide();
+              $("#IWBUTTONINCLUI").show();
+              $("#IWBUTTONEXCLUI").show();      
+              $("#loader3").css("display","block");     
+              $("#ModalAcessaAPI").modal('show');
+//              alert($("#obsorcamento").val());
+              document.getElementById('IWEDITOBSERVACAO').value = $("#obsorcamento").val();
+              AddChangedControl('IWEDITOBSERVACAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              document.getElementById('IWEDITNOME').value = '[ConfirmaOrcamento]'+wpagina;
+              AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              $("#IWBUTTONACAO").click(); 
+
+      }             
+    })
+  </script>
+  </body>
+</html>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader3 {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+      .red {
+            background-color: red !important;
+            color: white;
+      }   
+
+      #Lote{
+          background:#1C1C1C;
+          left: -300px; 
+          margin-top: -170px; 
+          height: 200px; 
+          width: 200px; 
+          position: absolute;       
+          border-radius: 5px;          
+          -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+          -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+          box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+        }
+  </style>  
+  </head>
+  <body>
+  <!--<div class="container-fluid">-->
+  <div class="container">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-diagram-3" viewBox="0 -2 16 16">
+            <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+          </svg>
+          <span>Plano de Estoques</span>
+        </span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONINCLUI" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Inclui novo plano de estqoue">Inclui</button>
+          </div>
+        </div>                
+      </div>  
+      <div class="card-body">
+          <div class="table-responsive" style="margin-top: -20px">
+            <table class="table table-bordered table-hover table-striped table-sm" id="planoestoques"  width="100%" cellspacing="0">
+              <thead class="thead-dark">
+                <tr>
+                <th width="8">Estrutura</th>
+                <th width="61%">Descrição Plano de Estoque</th>
+                <th width="5%" style="text-align: center;">Prod</th>
+                <th width="13%">Categoria</th>
+                <th width="5%">Ativo</th>
+                <th width="8%" style="text-align: center;">Ação</th>
+                </tr>
+              </thead>
+            </table>    
+          </div>
+          <div id="loader2" style="display: none;"></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITATIVO%}{%IWEDITIDCATEGORIA%}
+  </div>
+
+
+<!--Modal Categorias-->
+  <div class="modal" id="ModalCategorias">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header" style="background: navy"> 
+          <span class="text-uppercase page-subtitle" id="tituloCategorias" style="font-size: 15px">Categorias</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalCategoriax" onclick="fechaModalCategoria();">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="categorias"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="92%">Nome Categoria</th>
+                  <th width="8%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Produto-->
+  <div class="modal" id="ModalProduto">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header" style="background: navy"> 
+          <span class="text-uppercase page-subtitle" id="tituloPlanoEstoque" style="font-size: 15px">Produtos</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalProdutox" onclick="fechaModalProduto();">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="cadastroPlanoEstoque" style="display: block;">
+            <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: -30px">
+              <div class="text-center text-sm-left mb-0">
+                <h4 id="estruturaProduto">Estrutura: 99.9999</h4>
+              </div>                        
+            </div>
+            {%IWLabelProdutos%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+<!--Modal Plano Estoque-->
+  <div class="modal hide fade in" id="ModalPlanoEstoque" data-keyboard="false" data-backdrop="false">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy"> 
+          <span class="text-uppercase page-subtitle" id="tituloPlanoEstoque" style="font-size: 15px">Plano de Estoques</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalPlanoEstoque" onclick="fechaModal();">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!--Cadastro do Produto-->
+          <div id="cadastroPlanoEstoque" style="display: block;">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: -20px">
+                <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                  <h3 class="page-title">Geral</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                <div class="col col-md-5">
+                  <span class="text-uppercase page-subtitle">Estrutura</span>
+                  {%IWEDITESTRUTURA%}
+                </div>              
+                  <div class="col col-md-5">
+                  </div>              
+                  <div class="col col-md-2">
+                    {%IWLabelAtivo%}
+                  </div>              
+              </div>
+              <div class="row">
+                  <div class="col col-md-12">
+                    <span class="text-uppercase page-subtitle">Descrição Plano de Estoque</span>
+                    {%IWEDITDESCRICAO%}
+                  </div>              
+              </div>
+              <div class="row">
+                <div class="col-md-12" id="divcliente">
+                  <span class="text-uppercase page-subtitle">Categoria</span>
+                    <div class="input-group">
+                      {%IWEDITCATEGORIA%}
+                      <div class="input-group-append" onclick="carregaHelp();">
+                        <span class="input-group-text">
+                          <i class="fas fa-eye"></i>
+                        </span>                                     
+                      </div>
+                    </div>
+                    <div id="listacategoria" class="form-control"
+                         style="z-index:1000;  
+                                display: none; 
+                                margin-left: 5px;
+                                position: absolute; 
+                                border: 1px solid #000;    
+                                width: 400px;
+                                height: 300px;            
+                                overflow:auto;
+                                padding: 10px;">
+                            {%IWLabelListaCategorias%}
+                    </div>                   
+                </div>        
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" id="IWBUTTONCONFIRMA" class="btn btn-success">Confirma</button>
+          <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger">Cancela</button>      
+        </div>
+      </div>
+    </div>
+  </div>  
+  </div>
+
+
+  <script>
+
+    $(document).ready(function() {      
+       carregaListaPlanoEstoques(10);
+    });
+
+// funções
+    function carregaListaPlanoEstoques(num) {     
+      $('#planoestoques').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetPlanoEstoques"
+          });      
+    }
+
+    function carregaListaCategorias(num) {     
+      $('#categorias').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCategorias"
+          });      
+    }
+
+    function alteraPlanoEstoque(idPlanoEstoque) {
+      document.getElementById('IWEDITCATEGORIA').value = '';
+      document.getElementById('IWEDITDESCRICAO').value = '';
+      document.getElementById('IWEDITESTRUTURA').value = '';
+      $("#tituloPlanoEstoque").text('Altera Plano de Estoque');
+      document.getElementById('IWEDITID').value = idPlanoEstoque;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[AlteraPlanoEstoque]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $('#ModalPlanoEstoque').modal("show");
+    }
+
+    function excluiPlanoEstoque(idPlanoEstoque, estruturaPlanoEstoque) {
+      var wpagina = $('#planoestoques').DataTable().page();
+        if (confirm("Deseja excluir plano de estoque: "+estruturaPlanoEstoque+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+            document.getElementById('IWEDITID').value = idPlanoEstoque;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiPlanoEstoque]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+    }
+
+    function retornaProdutos(idPlanoEstoque, estruturaPlanoEstoque, nomeContaPlanoEstoque, qtdeProdutos) {
+      if (qtdeProdutos==0) {
+         alert('Nenhum produto cadastrado nesse plano de estoque')
+      } else {
+        document.getElementById('IWEDITID').value = idPlanoEstoque;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[RetornaProdutos]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();       
+        $("#estruturaProduto").text('Estrutura: '+estruturaPlanoEstoque+' - '+nomeContaPlanoEstoque);
+        $('#ModalProduto').modal("show");
+      }
+    }
+
+    function setPagina(numPage) {
+      $('#planoestoques').DataTable().page(numPage).draw('page');
+    }
+
+    function fechaModal() {
+      $("#ModalPlanoEstoque").modal("hide");
+    }
+
+    function fechaModalProduto() {
+      $("#ModalProduto").modal("hide");
+    }
+
+    function carregaHelp() {
+      document.getElementById('IWEDITNOME').value = '[CarregaCategorias]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();       
+      document.getElementById("listacategoria").style.display = "block";
+    }
+
+    function selecionaCategoria(idCategoria,nomeCategoria) {
+      document.getElementById("listacategoria").style.display = "none";
+      document.getElementById('IWEDITCATEGORIA').value = nomeCategoria;
+      document.getElementById('IWEDITIDCATEGORIA').value = idCategoria;
+      AddChangedControl('IWEDITIDCATEGORIA');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCategoria]'+nomeCategoria;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click(); 
+    }
+
+
+// botões
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      var elemento  = document.getElementById('IWEDITESTRUTURA');
+      var elemento1 = document.getElementById('IWEDITDESCRICAO');
+      if ((elemento.value=='') || (elemento1.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+      } else {        
+        $("#loader3").css("display","block");     
+        $("#ModalAcessaAPI").modal('show');
+        var wpagina = $('#planoestoques').DataTable().page();
+        document.getElementById('IWEDITNOME').value = '[ConfirmaPlanoEstoque]'+wpagina;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        //Ativo
+        if ($("#customToggle1").is(':checked')) { 
+          document.getElementById('IWEDITATIVO').value = 'SIM';
+          AddChangedControl('IWEDITATIVO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        } else {
+          document.getElementById('IWEDITATIVO').value = 'NÃO';
+          AddChangedControl('IWEDITATIVO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        }
+        $("#IWBUTTONACAO").click();              
+        $("#ModalPlanoEstoque").modal("hide");
+      }
+    })
+
+    $("#IWBUTTONINCLUI").on("click",function(){
+      document.getElementById('IWEDITCATEGORIA').value = '';
+      document.getElementById('IWEDITDESCRICAO').value = '';
+      document.getElementById('IWEDITESTRUTURA').value = '';
+      $("#tituloPlanoEstoque").text('Inclui Plano de Estoque');
+      $("#ModalPlanoEstoque").modal("show");
+      $("#IWEDITESTRUTURA").focus();
+      document.getElementById('IWEDITID').value = 0;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[IncluiPlanoEstoque]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){
+        $("#ModalPlanoEstoque").modal("hide");
+    })
+
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->	    
+    <style>
+        /* esse css é responsável por não deixar o html espremer as colunas criando quantas linhas forem necessárias */
+        /* com ele se não couber na celula ele vai ocultar para quando clicar no maiszinho verde abrir os dados da responsividade */
+        td{
+           white-space: nowrap !important;
+        }
+    </style>    
+</head>  
+<body>
+<div class="container" style="background: yellow">
+  <div class="row" style="height: 30px; margin-right: : 5px;">
+	 <small class="text-muted ml-auto mr-md-3">{%CaminhoPao%}</small>
+  </div>	  
+	<div class="card mb-3" style="background: green">
+	  <div class="card-header" style="background: red">
+		<i class="fas fa-table fa-2x"></i> Cadastro de Atividades
+		<div style="float: right">
+			<button type="button" id="IWBUTTONATIVIDADE" class="fas fa-fw fa-plus-circle" style="width: 50px; height: 30px" data-toggle="tooltip" data-placement="top" title="Nova Atividade"></button>
+			<button type="button" id="IWBUTTONIMPRIME" class="fas fa-fw fa-print" style="width: 50px; height: 30px" data-toggle="tooltip" data-placement="top" title="Imprime"></button>
+		</div>
+	  </div>		
+	  <div class="card-body">
+		<div class="table-responsive">
+		  <table class="table table-bordered table-hover table-striped table-sm" id="clientes" width="100%" cellspacing="0">
+			<thead class="thead-dark">
+			  <tr>
+				<th width="93%">Descrição da Atividade</th>
+				<th width="7%">Ação</th>
+			  </tr>
+			</thead>
+		  </table>		
+		</div>
+	  </div>		
+	</div>	   	
+</div>
+    <!-- The Modal -->
+	<div class="modal" id="ModalAtividade">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+
+		  <!-- Modal Header -->
+		  <div class="modal-header bg-light">
+			<h4 class="modal-title">Cadastro de Atividades</h4>
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  </div>
+
+		  <!-- Modal body -->
+		  <div class="modal-body">
+			<form action="/action_page.php">
+			  <div class="form-group">
+				<label for="atividade">Descri&ccedil&atildeo Atividade</label>
+				<div>{%IWDBEDITATIVIDADE%}</div>	
+			  </div>
+			</form>	
+  	      </div>
+		  <!-- Modal footer -->
+		  <div class="modal-footer">
+			<button type="button" id="IWBUTTONEXCLUI" class="btn btn-dark">Exclui</button>
+			<button type="submit" id="IWBUTTONCONFIRMA" class="btn btn-success">Confirma</button>
+			<button type="button" id="IWBUTTONCANCELA" class="btn btn-danger">Cancela</button>			
+		  </div>
+
+		</div>
+	  </div>
+	</div>  	
+
+
+    <script>
+        
+        $(document).ready(function() {
+            carregaListaAtividades(10);
+        });
+        
+       function carregaListaAtividades(num) {     
+            $('#clientes').DataTable(
+                {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetAtividades"
+                });
+       }
+
+        
+        function SetaAcao(Acao, ID){
+		   document.getElementById('IWEDITATIVIDADE').value = ID;
+		   document.getElementById('IWBUTTONACAO').OnClick();
+        }
+
+        $("#IWDBEDITATIVIDADE").focus();
+    </script>
+
+</body>
+</html>

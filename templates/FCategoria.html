@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <link href="css/tree.css" type="text/css" rel="stylesheet" />
+  <style type="text/css">
+
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      input[type="text"]:disabled {
+       background: #dddddd;
+      }
+
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+      #nivel1 {
+        font-size: 15px;
+        font-weight: bold;
+      }
+      #nivel2 {
+        font-size: 12px;
+        font-weight: bold;
+      }
+      #nivel3 {
+        font-size: 10px;
+        font-weight: bold;
+      }
+
+      #loader {        
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        width: 90px;
+        height: 90px;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader2 {        
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        z-index: 1;
+        width: 90px;
+        height: 90px;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+      #Lote{
+          background:#1C1C1C;
+          left: -300px; 
+          margin-top: -170px; 
+          height: 200px; 
+          width: 200px; 
+          position: absolute;       
+          border-radius: 5px;          
+          -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+          -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+          box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+        }
+
+
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Categorias</span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button class="btn-info material-icons" id="IWBUTTONCARREGAAPI" style="width: 50px; height: 30px;" title="Baixa Dados da API">cloud_download
+            </button>
+            <button class="btn-info material-icons" id="IWBUTTONGRAVAAPI" style="width: 50px; height: 30px;" title="Envia Categorias para o site">cloud_upload
+            </button>
+          </div>
+        </div>        
+      </div>  
+      <div class="card-body">          
+        <form>
+          <div class="content">
+            <!--{%IWMemo1%}-->
+            {%IWLabelListaCategorias%}
+          </div>
+          <div class="btn-group" style="margin-top: 10px">
+            <button type="button" id="IWBUTTONATUALIZA" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Verifica categorias">Verifica Todas</button>
+            <button type="button" id="IWBUTTONMARCA" class="btn btn-success" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Marca todos as categorias para envio ao site">Marca Todas</button>
+            <button type="button" id="IWBUTTONDESMARCA" class="btn btn-warning" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Desmarca todas as categorias para envio ao site">Desmarca Todas</button>            
+            <button type="button" id="IWBUTTONLOTE" class="btn btn-secondary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Envia categorias para o site por lote">Envia por Lote</button>            
+          </div>                  
+        </form>
+      </div>
+      <div class="card-footer">       
+      </div>
+    </div>
+
+
+    <div id="Lote">
+      <div class="row">
+        <div class="col-md-10">
+          <h5 style="margin: 10px">Envio por Lote</h5>              
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="close" id="fechaLote" style="float: right; margin-right: 10px">&times;</button>            
+        </div>            
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label style="margin-left: 10px; margin-top: 10px">Categorias por Lote</label>
+          <select id="NumeroLote" class="custom-select custom-select-sm" style="margin-left: 10px; width: 90%">
+            <option selected>2</option>
+            <option value="1">5</option>
+            <option value="2">10</option>
+            <option value="3">20</option>
+            <option value="4">50</option>
+            <option value="5">100</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button  id="EnviaLote" class="btn btn-primary" style="margin-left:10px; margin-top: 50px; display: block; width: 90%">ENVIAR
+            <i class="material-icons">cloud_upload</i>                
+          </button>            
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWButtonSubCategoria%}{%IWBUTTONACAO%}</div>
+
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando API Nuvem Shop</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/nuvemshop.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>    
+
+<!--Modal Atualiza Lista de Categorias-->
+  <div class="modal" id="ModalAtualizaLista" data-refresh="true">
+      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="height: 200px">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+          <span class="text-uppercase page-subtitle" id="tituloAtualizaLista" style="font-size: 15px">Aguarde</span>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="background-image: linear-gradient(#D8D8D8, #EFFBF2);">
+          <!--<img style="width: 464px; height: 198px; margin-top: -29px; 
+          border-radius: 2%" class="mx-auto d-block" src="/images/integradorNS.png">-->
+          <div id="loader2" style="display: none;"></div>
+          <h5 id="statusAtualizacao" style="margin-top: 25px" class="text-uppercase">Verificando categorias...</h5>
+        </div>
+        <!--<div class="modal-footer">
+          <button onclick="atualizaStatus('teste');">Atualiza</button>
+        </div>-->
+      </div>
+    </div>
+  </div>  
+
+
+  <script>
+// Funções
+
+// Botões
+    $("#IWBUTTONCARREGAAPI").on("click",function(){
+      if (confirm("Deseja baixar Categorias do site?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITNOME').value = '[BaixarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONGRAVAAPI").on("click",function(){
+      if (confirm("Deseja enviar Categorias marcadas para o site?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+
+        document.getElementById('IWEDITNOME').value = '[EnviarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONATUALIZA").on("click",function(){
+      if (confirm("Deseja verificar lista de Categorias?")) {        
+        $("#loader2").css("display","block");     
+        $("#ModalAtualizaLista").modal({backdrop: "static"});
+        document.getElementById('IWEDITNOME').value = '[AtualizaCategorias]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+      
+    $("#IWBUTTONMARCA").on("click",function(){
+      if (confirm("Deseja marcar todas Categorias para envio ao site?")) {        
+         $("#statusAtualizacao").text('Marcando todas as categorias...');
+         $("#loader2").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: "static"});
+         document.getElementById('IWEDITID').value = "0";
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[MarcaTodas]';
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONDESMARCA").on("click",function(){
+      if (confirm("Deseja desmarcar todas Categorias para envio ao site?")) {        
+         $("#statusAtualizacao").text('Desmarcando todas as categorias...');
+         $("#loader2").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: "static"});
+         document.getElementById('IWEDITID').value = "0";
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[DesmarcaTodas]';
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONLOTE").on("click",function(){
+      desabilitaDownload();	
+      $("#Lote").animate({left: '10'});
+    })
+    $("#fechaLote").on("click",function(){
+      $("#Lote").animate({left: '-300'});
+    })
+
+    $("#EnviaLote").on("click",function(){
+      if (confirm("Deseja enviar Categorias para o site por lote? ")) {        
+         $("#loader").css("display","block");     
+         $("#ModalAcessaAPI").modal({backdrop: "static"});
+         document.getElementById('IWEDITID').value = $( "#NumeroLote option:selected" ).text();
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[EnviarAPILote]';
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })
+
+  </script>
+
+
+</body>
+</html>

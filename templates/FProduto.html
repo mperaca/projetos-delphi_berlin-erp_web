@@ -1,0 +1,847 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader3 {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+      .red {
+            background-color: red !important;
+            color: white;
+      }   
+
+      #Lote{
+          background:#1C1C1C;
+          left: -300px; 
+          margin-top: -170px; 
+          height: 200px; 
+          width: 200px; 
+          position: absolute;       
+          border-radius: 5px;          
+          -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+          -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+          box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+        }
+  </style>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Produtos</span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button class="btn-info material-icons" id="IWBUTTONCARREGAAPI" style="width: 50px; height: 30px;" title="Baixa Dados da API">cloud_download
+            </button>
+            <button class="btn-info material-icons" id="IWBUTTONGRAVAAPI" style="width: 50px; height: 30px;" title="Envia produtos marcados para o site">cloud_upload
+            </button>
+          </div>
+        </div>                
+      </div>  
+      <div class="card-body">
+        <form>          
+<!--          <img style="width: 30%; margin-top: 35px" class="mx-auto d-block" src="/fotos/7_1.jpg">-->
+
+          <!--{%IWMemo1%}-->
+          <div class="table-responsive display">
+            <table class="table table-bordered table-hover table-striped table-sm" id="produtos" width="100%" cellspacing="0">
+              <thead class="thead-dark">
+                <tr>
+                <th width="7%">code</th>
+                <th width="48%">name</th>
+                <th width="25%">brand</th>
+                <th width="5%">envia</th>
+                <th width="5%">publica</th>
+                <th width="10%" style="text-align: center;">Ação</th>
+                </tr>
+              </thead>
+            </table>    
+          </div>
+          <div class="btn-group" style="margin-top: 10px">
+            <button type="button" id="IWBUTTONATUALIZA" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Verifica produtos alterados">Verifica Todos</button>
+            <button type="button" id="IWBUTTONMARCA" class="btn btn-success" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Marca todos os produtos para envio ao site">Marca Todos</button>
+            <button type="button" id="IWBUTTONDESMARCA" class="btn btn-warning" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Desmarca todos os produtos para envio ao site">Desmarca Todos</button>
+            <button type="button" id="IWBUTTONLOTE" class="btn btn-secondary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Envia produtos para o site por lote">Envia por Lote</button>
+            <button type="button" id="IWBUTTONEXCLUI" class="btn btn-info" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Exclui imagens repetidas">Exclui Imagens</button>
+          </div> 
+          <div id="loader2" style="display: none;"></div>
+        </form>
+      </div>
+      <div class="card-footer">       
+
+      </div>
+    </div>
+
+    <div id="Lote">
+      <div class="row">
+        <div class="col-md-10">
+          <h5 style="margin: 10px">Envio por Lote</h5>              
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="close" id="fechaLote" style="float: right; margin-right: 10px">&times;</button>            
+        </div>            
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label style="margin-left: 10px; margin-top: 10px">Produtos por Lote</label>
+          <select id="NumeroLote" class="custom-select custom-select-sm" style="margin-left: 10px; width: 90%">
+            <option selected>2</option>
+            <option value="1">5</option>
+            <option value="2">10</option>
+            <option value="3">20</option>
+            <option value="4">50</option>
+            <option value="5">100</option>
+            <option value="6">200</option>
+          </select>
+          <input id="NumeroLote2" type="text" value="" style="display: none; margin-left: 10px; height: 33px; width: 90%; font-size: 12px; padding-left: 15px" autofocus="autofocus">          
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label id="labelPadrao" style="margin-left: 10px; margin-top: 5px">Padrão</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button  id="EnviaLote" class="btn btn-primary" style="margin-left:10px; margin-top: 20px; display: block; width: 90%">ENVIAR
+            <i class="material-icons">cloud_upload</i>                
+          </button>            
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}</div>
+
+
+<!--Modal Atualiza Lista de Produtos-->
+  <div class="modal" id="ModalAtualizaLista">
+      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="height: 200px">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        	<span class="text-uppercase page-subtitle" id="tituloAtualizaLista" style="font-size: 15px">Aguarde</span>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body" style="background-image: linear-gradient(#D8D8D8, #EFFBF2);">
+          <!--<img style="width: 464px; height: 198px; margin-top: -29px; 
+          border-radius: 2%" class="mx-auto d-block" src="/images/integradorNS.png">-->
+          <div id="loader" style="display: none;"></div>
+          <h5 id="statusAtualizacao" style="margin-top: 25px" class="text-uppercase">Verificando produtos alterados...</h5>
+        </div>
+        <!--<div class="modal-footer">
+          <button onclick="atualizaStatus('teste');">Atualiza</button>
+        </div>-->
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Variação Produto-->
+  <div class="modal" id="ModalVariacaoProduto">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+          <span class="text-uppercase page-subtitle" id="tituloAtualizaLista" style="font-size: 15px">Variações</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalAtualizaLista">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          {%IWLabelVariacaoProduto%}
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+<!--Modal Foto Produto-->
+  <div class="modal fade" id="ModalFotoProduto">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        {%IWLabelFotosProduto%}
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando API Nuvem Shop</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/nuvemshop.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>    
+
+
+
+<!--Modal Produto-->
+  <div class="modal" id="ModalProduto">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        	<span class="text-uppercase page-subtitle" id="tituloProduto" style="font-size: 15px">Produto</span>
+        	<button type="button" class="close" data-dismiss="modal" id="fechaModalProduto">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+        	<!--Cadastro do Produto-->
+    	    <div id="cadastroProduto" style="display: block;">
+	            <div class="row">
+              		<div class="col col-md-2">
+	                	<span class="text-uppercase page-subtitle">id</span>
+	                	{%IWEditProdutoId%}
+	              	</div>              
+	              	<div class="col col-md-10">
+	                	<span class="text-uppercase page-subtitle">name</span>
+		                {%IWEditProdutoName%}
+		            </div>              
+	            </div>
+    	        <div class="row">
+	    			    <div class="col col-md-12">
+            	    	<span class="text-uppercase page-subtitle">brand</span>
+		                {%IWEditProdutoBrand%}
+ 	    	        </div>              
+            	</div>
+	            <div class="row">
+	              <div class="col col-md-12">
+	                <span class="text-uppercase page-subtitle">handle</span>
+	                {%IWEditProdutoHandle%}
+	              </div>              
+	            </div>
+	            <div class="row">
+	              	<div class="col col-md-12">
+	                	<span class="text-uppercase page-subtitle">attributes</span>
+		              	<div class="input-group">
+		                	{%IWEditProdutoAttributes%}
+		                	<div class="input-group-append">
+		                  		<span class="input-group-text" style="background-color: #009999;" onclick="selecionaAtributos();">Seleciona</span>                                     
+		                	</div>
+		              	</div>
+	              	</div>              
+	            </div>
+
+	            <div class="row">
+	              	<div class="col col-md-12">
+	                	<span class="text-uppercase page-subtitle">categories</span>
+		             	<div class="input-group">
+		                	{%IWEditProdutoCategories%}
+		                	<div class="input-group-append">
+		                  		<span class="input-group-text" style="background-color: #009999;" onclick="selecionaCategoria();">Seleciona</span>                                     
+		                	</div>
+	              		</div>
+	              	</div>              
+	            </div>
+
+              <div class="row">
+                  <div class="col col-md-12">
+                    <span class="text-uppercase page-subtitle">tags</span>
+                    {%IWEditProdutoTags%}
+                  </div>              
+              </div>
+              <div class="row">
+                  <div class="col col-md-12">
+                    <span class="text-uppercase page-subtitle">description</span>
+                    {%IWMemoDescription%}
+                  </div>              
+              </div>
+
+    	    </div>
+
+	      	<!--Inclui Atributo-->
+          <!--
+      		<div id="cadastroAtributo" style="display: none;">
+            	<div>
+                	<span class="text-uppercase page-subtitle">attribute</span>
+                	{%IWEditAtributoName%}
+	            	<div class="btn-group" style="margin-top: 10px">
+	           		 	<button type="button" id="IWBUTTONCONFIRMAATRIBUTO" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+	           		 	<button type="button" id="IWBUTTONCANCELAATRIBUTO" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+	      			</div>	
+            	</div>                    			
+	        </div>-->
+
+          	<!--Lista de Atributos-->
+          <!--  
+    	    <div id="listaAtributos" style="display: none;">
+		        <div class="table-responsive display">
+		          <table class="table table-bordered table-hover table-striped table-sm" id="atributos" width="100%" cellspacing="0">
+		            <thead class="thead-dark">
+		              <tr>
+		              <th width="90%">attribute name</th>
+		              <th width="10%" style="text-align: center;">Ação</th>
+		              </tr>
+		            </thead>
+		          </table>    
+		        </div>
+
+            	<div class="btn-group" style="margin-top: 0px">
+            		<button type="button" id="IWBUTTONVOLTAATRIBUTO" class="btn btn-dark" data-toggle="tooltip" 	data-placement="top" title="Volta">Volta</button>
+           		 	<button type="button" id="IWBUTTONINCLUIATRIBUTO" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Inclui">Inclui</button>
+      			</div>	
+	      	</div>-->
+
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <script>
+
+    $(document).ready(function() {      
+       var elemento = document.getElementById('IWEDITPAGELENGTH');
+       carregaListaProdutos(elemento.value);
+    });
+
+// funções
+    function carregaListaProdutos(numProdutos) {     
+      $('#produtos').DataTable(
+          {
+          "responsive": true,
+//          "pageLength": 10,   
+          "pageLength": numProdutos,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetProdutos",
+          "createdRow": function( row, data, dataIndex ) {
+                          if ( data[3] == "<center>Sim</center>" ) {        
+                              $(row).addClass('red');
+                             }      
+                        }          
+
+          });      
+
+//      $('#produtos').DataTable().page(5).draw('page');
+
+//      setPagina(5);
+
+    }
+
+    function carregaListaAtributos() {     
+      $('#atributos').DataTable(
+          {
+          "responsive": true,
+          "pageLength": 10,       
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "paging":   false,
+          "ordering": true,
+          "searching": false,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetAtributos"       
+          });            
+    }
+
+    function selecionaProduto(idProduto,nameProduto) {
+      carregaListaAtributos();
+      $("#IWBUTTONALTERA").attr("disabled",false);
+      $("#IWBUTTONCONFIRMA").attr("disabled",true);
+      $("#IWBUTTONCANCELA").attr("disabled",true);
+      $("#tituloProduto").text('Produto');
+      $("#cadastroProduto").css("display","block");
+      $("#listaAtributos").css("display","none");
+      $("#cadastroAtributo").css("display","none");
+      $("#ModalProduto").modal({backdrop: "static"});
+
+      document.getElementById('IWEDITID').value = idProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaProduto]'+nameProduto;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+    }
+
+    function mostraFotoProduto(idProduto,nameProduto) {
+      $("#ModalFotoProduto").modal("show");
+      document.getElementById('IWEDITID').value = idProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[FotoProduto]'+nameProduto;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+    }
+
+    function mostraVariacaoProduto(idProduto,nameProduto) {
+      $("#ModalVariacaoProduto").modal({backdrop: "static"});
+      document.getElementById('IWEDITID').value = idProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[VariacaoProduto]'+nameProduto;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function selecionaAtributos() {
+      document.getElementById('IWEDITID').value = '';
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaAtributos]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+    }
+
+    function excluiProdutox(idProduto, nameProduto) {
+      if (confirm('Confirma exclusão do produto '+nameProduto+'?')) {
+        document.getElementById('IWEDITID').value = idProduto;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[ExcluiProduto]';
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();      
+      }
+    }
+
+    function excluiAtributox(idProduto, nameAtributo) {
+      if (confirm('Confirma exclusão do atributo '+nameAtributo+'?')) {
+        document.getElementById('IWEDITID').value = idProduto;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[ExcluiAtributo]'+nameAtributo;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();      
+      }
+    }
+
+    function selecionaAtributo(idProduto, nameAtributo) {
+
+      $("#cadastroAtributo").attr("name",nameAtributo);
+      document.getElementById('IWEDITID').value = nameAtributo;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaAtributo]'+nameAtributo;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();  
+
+    }
+
+    function baixaProdutoAPI(idNSProduto, nameProduto) {
+      if (confirm("Deseja baixar Produto do site?")) {        
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal({backdrop: "static"});
+
+          document.getElementById('IWEDITID').value = idNSProduto;
+          AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+          document.getElementById('IWEDITNOME').value = '[BaixarAPI]';
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();        
+        }
+    }
+
+    function enviaProdutoAPI(idProduto, nameProduto) {
+      if (confirm("Deseja enviar Produto para o site?")) {        
+          var wpagina = $('#produtos').DataTable().page();        
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal({backdrop: "static"});
+
+          document.getElementById('IWEDITID').value = idProduto;
+          AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+          document.getElementById('IWEDITNOME').value = '[EnviarAPI]'+wpagina;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();        
+        }
+    }
+
+    function marcaDesmarcaProduto(idProduto, nameProduto) {
+      var wpagina = $('#produtos').DataTable().page();
+
+      document.getElementById('IWEDITID').value = idProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[MarcaDesmarcaProduto]'+wpagina;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click(); 
+
+    }
+
+    function publicaProduto(idProduto, nameProduto) {
+      var wpagina = $('#produtos').DataTable().page();
+
+      document.getElementById('IWEDITID').value = idProduto;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[PublicaProduto]'+wpagina;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click(); 
+
+    }
+
+    function excluiProduto(idProduto, nameProduto, idNSProduto) {
+      var wpagina = $('#produtos').DataTable().page();
+      var widns   = parseInt(idNSProduto);
+      if (widns>0) {
+        if (confirm("Deseja excluir produto "+nameProduto+"?")) {
+            $("#statusAtualizacao").text('Excluindo produto...');
+            $("#loader").css("display","block");     
+            $("#ModalAtualizaLista").modal({backdrop: true});
+
+            document.getElementById('IWEDITID').value = idProduto;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiProduto]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+     }
+    }
+
+    function setPagina(numPage) {
+      $('#produtos').DataTable().page(numPage).draw('page');
+//      alert(numPage);
+    }
+
+    function excluiFoto(codProduto,indice) {
+      if (confirm("Deseja excluir foto?")==true) {
+        var worigem  = codProduto+'_'+indice+'.jpg';
+        var wdestino = codProduto+'_excluido_'+indice+'.jpg';
+
+        document.getElementById('IWEDITID').value = worigem;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[ExcluiFoto]'+wdestino;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();      
+      }
+    }
+
+    function excluiFotoVerificado(codProduto,indice) {
+      if (confirm("Deseja excluir foto?")==true) {
+        var worigem  = codProduto+'_verificado_'+indice+'.jpg';
+        var wdestino = codProduto+'_excluido_'+indice+'.jpg';
+
+        document.getElementById('IWEDITID').value = worigem;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[ExcluiFoto]'+wdestino;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();      
+      }
+    }
+
+
+// botões
+
+    $("#IWBUTTONATUALIZA").on("click",function(){
+    	if (confirm("Deseja verificar produtos alterados?")==true) {
+         $("#statusAtualizacao").text('Verificando produtos alterados...');
+         $("#loader").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: true});
+
+	      document.getElementById('IWEDITID').value = '';
+    	  AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+    	  document.getElementById('IWEDITNOME').value = '[AtualizaLista]';
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();      
+    	}
+    })
+
+    $("#IWBUTTONINCLUIATRIBUTO").on("click",function(){
+	  	$("#tituloProduto").text('Novo Atributo');
+      	$("#cadastroProduto").css("display","none");
+      	$("#listaAtributos").css("display","none");    	    	
+      	$("#cadastroAtributo").css("display","block");  
+    	document.getElementById('IWEDITNOME').value = '[IncluiAtributo]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();      
+    })
+
+    $("#IWBUTTONVOLTAATRIBUTO").on("click",function(){
+	  	  $("#tituloProduto").text('Produto');
+      	$("#cadastroProduto").css("display","block");
+      	$("#listaAtributos").css("display","none");    	    	
+      	$("#cadastroAtributo").css("display","none");    	    	    	
+    })
+
+    $("#IWBUTTONCONFIRMAATRIBUTO").on("click",function(){
+    	var wtitulo = $("#tituloProduto").text();
+	  	$("#tituloProduto").text('Atributos');
+      	$("#cadastroProduto").css("display","none");
+      	$("#listaAtributos").css("display","block");    	    	
+      	$("#cadastroAtributo").css("display","none");    	    	    	
+    	document.getElementById('IWEDITID').value = $("#cadastroAtributo").attr("name");
+        AddChangedControl('IWEDIID');   // colocar essa linha sempre que usar o onAsyncClick ois       
+    	document.getElementById('IWEDITNOME').value = '[ConfirmaAtributo]'+wtitulo;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();      
+    })
+
+    $("#IWBUTTONCANCELAATRIBUTO").on("click",function(){
+    	document.getElementById('IWEDITNOME').value = '[CancelaAtributo]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();      
+    })
+
+    $("#IWBUTTONALTERA").on("click",function(){
+      	$("#IWBUTTONALTERA").attr("disabled",true);
+      	$("#IWBUTTONCONFIRMA").attr("disabled",false);
+      	$("#IWBUTTONCANCELA").attr("disabled",false);
+    })
+
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      	$("#IWBUTTONALTERA").attr("disabled",false);
+      	$("#IWBUTTONCONFIRMA").attr("disabled",true);
+      	$("#IWBUTTONCANCELA").attr("disabled",true);
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){
+      	$("#IWBUTTONALTERA").attr("disabled",false);
+      	$("#IWBUTTONCONFIRMA").attr("disabled",true);
+      	$("#IWBUTTONCANCELA").attr("disabled",true);
+    })
+
+    $("#IWBUTTONCARREGAAPI").on("click",function(){
+      if (confirm("Deseja baixar Produtos do site?")) {        
+        $("#loader3").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = "0";
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[BaixarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONGRAVAAPI").on("click",function(){
+      if (confirm("Deseja enviar Produtos para o site?")) {        
+        var wpagina = $('#produtos').DataTable().page();        
+        $("#loader3").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = "0";
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[EnviarAPI]'+wpagina;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONMARCA").on("click",function(){
+      if (confirm("Deseja marcar todos Produtos para envio ao site?")) {        
+         var wpagina = $('#produtos').DataTable().page();        
+         $("#statusAtualizacao").text('Marcando todos os produtos...');
+         $("#loader").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: true});
+         document.getElementById('IWEDITID').value = "0";
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[MarcaTodos]'+wpagina;
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONDESMARCA").on("click",function(){
+      if (confirm("Deseja desmarcar todos Produtos para envio ao site?")) {        
+         var wpagina = $('#produtos').DataTable().page();        
+         $("#statusAtualizacao").text('Desmarcando todos os produtos...');
+         $("#loader").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: "static"});
+         document.getElementById('IWEDITID').value = "0";
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[DesmarcaTodos]'+wpagina;
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })
+    $("#IWBUTTONEXCLUI").on("click",function(){
+      if (confirm("Deseja excluir imagens repetidas?")) {        
+         var wpagina = $('#produtos').DataTable().page();        
+         $("#statusAtualizacao").text('Excluindo imagens repetidas...');
+         $("#loader").css("display","block");     
+         $("#ModalAtualizaLista").modal({backdrop: "static"});
+         document.getElementById('IWEDITID').value = "0";
+         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+         document.getElementById('IWEDITNOME').value = '[ExcluiImagens]'+wpagina;
+         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+         $("#IWBUTTONACAO").click();  
+      }
+    })    
+    $("#IWBUTTONLOTE").on("click",function(){
+      $("#Lote").animate({left: '10'});
+    })
+    $("#fechaLote").on("click",function(){
+      $("#Lote").animate({left: '-300'});
+    })
+
+    $("#btnExcluiFoto").on("click",function(){
+      alert('teste');
+    })
+
+    $("#labelPadrao").on("click",function(){
+      if ($("#labelPadrao").text()=='Padrão') {
+          $("#labelPadrao").text('Configurável');
+          $('#NumeroLote').css('display', 'none');          
+          $('#NumeroLote2').css('display', 'block');          
+      } else {
+          $("#labelPadrao").text('Padrão');        
+          $('#NumeroLote').css('display', 'block');          
+          $('#NumeroLote2').css('display', 'none');          
+      }
+    })
+
+    $("#EnviaLote").on("click",function(){
+//      if (($("#labelPadrao").text()=='Configurável') && ($("#NumeroLote2" ).val()=='')) {
+//         alert("Quantidade de produtos inválida");
+//         return;
+//         }
+
+//      if (confirm("Deseja enviar Produtos para o site por lote? ")) {        
+//         var wpagina = $('#produtos').DataTable().page();
+//         $("#loader3").css("display","block");     
+//         $("#ModalAcessaAPI").modal({backdrop: "static"});
+         
+//         alert('teste');
+
+//         if ($("#labelPadrao").text()=='Padrão') {
+//             document.getElementById('IWEDITID').value = $("#NumeroLote option:selected").text();
+//          } else {
+//             document.getElementById('IWEDITID').value = $("#NumeroLote2" ).val();           
+//          }
+
+//         alert(document.getElementById('IWEDITID').value);
+//         alert(wpagina);
+
+//         AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+//         document.getElementById('IWEDITNOME').value = '[EnviarAPILote]'+wpagina;
+//         AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+
+//         alert(document.getElementById('IWEDITNOME').value);
+
+//         $("#IWBUTTONACAO").click();  
+
+      if (confirm("Deseja enviar Produtos para o site?")) {        
+        var wpagina = $('#produtos').DataTable().page();        
+        $("#loader3").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = "2";
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[EnviarAPILote]'+wpagina;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+
+//      }
+    })
+
+
+
+      
+  </script>
+
+
+</body>
+</html>

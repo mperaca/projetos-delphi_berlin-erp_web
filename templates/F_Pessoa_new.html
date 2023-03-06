@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader3 {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+      .red {
+            background-color: red !important;
+            color: white;
+      }   
+
+      #Lote{
+          background:#1C1C1C;
+          left: -300px; 
+          margin-top: -170px; 
+          height: 200px; 
+          width: 200px; 
+          position: absolute;       
+          border-radius: 5px;          
+          -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+          -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+          box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+        }
+  </style>  
+  </head>
+  <body>
+  <!--<div class="container-fluid">-->
+  <div class="container">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+          <span>Pessoas</span>
+        </span>
+        <!--<div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONINCLUI" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Inclui nova pessoa">Inclui</button>
+          </div>
+        </div>-->                
+      </div>  
+      <div class="card-body">
+          <!-- Tab links -->
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Ficha')" id="defaultOpen">Ficha</button>
+            <button class="tablinks" onclick="openTab(event, 'Lista')">Lista</button>
+          </div>
+
+          <!-- Tab content -->
+          <div id="Ficha" class="tabcontent">
+            <div id="cadastroPessoa" style="display: block;">
+              <div class="row">
+                <div class="col col-md-9">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Dados da Pessoa</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Código</span>
+                        {%IWEDITCODIGOPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Nome</span>
+                        {%IWEDITNOMEPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">Contato</span>
+                        {%IWEDITCONTATOPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Nome Fantasia</span>
+                        {%IWEDITNOMEFANTASIAPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Observação</span>
+                        {%IWEDITOBSERVACAOPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-5">
+                        <span class="text-uppercase page-subtitle">Atividade</span>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i id="helpatividade" class="fas fa-search"></i>
+                            </span>                                     
+                          </div>
+                          {%IWEDITATIVIDADEPESSOA%}
+                        </div>
+                    </div>              
+                    <div class="col col-md-5">
+                        <span class="text-uppercase page-subtitle">Pasta</span>
+                        {%IWEDITPASTAPESSOA%}
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Cod Banco</span>
+                        {%IWEDITCODBANCOPESSOA%}
+                    </div>              
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                    <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Geral</h3>
+                    </div>                        
+                  </div>    
+                  <label id="Geral" for="exemplo">Texto:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-md-9">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                    <div class="col-9 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Documentos</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">CPF</span>
+                        {%IWEDITCPFPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">RG</span>
+                        {%IWEDITRGPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">IM</span>
+                        {%IWEDITIMPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">CNPJ</span>
+                        {%IWEDITCNPJPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">IE</span>
+                      {%IWEDITIEPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">SUFRAMA</span>
+                        {%IWEDITSUFRAMAPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">IE SUBSTITUTO</span>
+                        {%IWEDITIESUBSTITUTOPESSOA%}
+                    </div>              
+                    <div class="col col-md-8">
+                        <span class="text-uppercase page-subtitle">TIPO CONTRIBUIÇÃO ICMS</span><br>
+                        <select id="selectcontribuicao" style="width: 497px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true" disabled="true">
+                        </select>
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">SITE</span>
+                        {%IWEDITSITEPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">EMAIL</span>
+                        {%IWEDITEMAILPESSOA%}
+                    </div>              
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Classificação</h3>
+                      </div>                        
+                    </div>    
+                    <label id="Total" for="exemplo">Texto:</label>
+                </div>
+              </div>
+
+                <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                  <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                    <h3 class="page-title">Endereço</h3>
+                  </div>                        
+                </div>
+                <div class="row">
+                  <div class="col col-md-8">
+                      <span class="text-uppercase page-subtitle">LOGRADOURO</span>
+                      {%IWEDITLOGRADOUROPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">COMPLEMENTO</span>
+                      {%IWEDITCOMPLEMENTOPESSOA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">BAIRRO</span>
+                      {%IWEDITBAIRROPESSOA%}
+                  </div>              
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">CIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helplocalidade" class="fas fa-search"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCIDADEPESSOA%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-2">
+                      <span class="text-uppercase page-subtitle">CEP</span>
+                      {%IWEDITCEPPESSOA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">FONE</span>
+                      {%IWEDITFONEPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">CELULAR/FAX</span>
+                      {%IWEDITCELULARPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">CAIXA POSTAL</span>
+                      {%IWEDITCAIXAPOSTALPESSOA%}
+                  </div>              
+                </div>
+            </div>
+
+            <!--Botões-->
+            <div class="card-footer">
+            </div>
+            <div>
+              <div class="btn-group">
+                <button type="button" id="IWBUTTONINCLUI" class="btn btn-primary" data-toggle="button" data-placement="top" style="width: 100px" title="Inclui pessoa">Inclui</button>
+                <button type="button" id="IWBUTTONALTERA" class="btn btn-warning" data-toggle="button data-placement="top" style="width: 100px" title="Altera pessoa">Altera</button>
+                <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success" data-toggle="button" data-placement="top" style="width: 100px" title="Confirma">Confirma</button>
+                <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger" data-toggle="button" data-placement="top" style="width: 100px" title="Cancela">Cancela</button>
+                <button type="button" id="IWBUTTONEXCLUI" class="btn btn-dark" data-toggle="button" data-placement="top" style="width: 100px" title="Exclui pessoa">Exclui</button>
+              </div>
+            </div>                
+
+
+          </div>
+
+          <div id="Lista" class="tabcontent">
+            <div class="table-responsive display" style="margin-top: 10px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="pessoas"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="5%">Código</th>
+                  <th width="37%">Nome da Pessoa</th>
+                  <th width="15%">CPF/CNPJ</th>
+                  <th width="15%">RG/IE</th>
+                  <th width="15%">Cidade</th>
+                  <th width="5%">Ativo</th>
+                  <th width="8%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </div>
+          <!--<div class="table-responsive display" style="margin-top: -20px">
+            <table class="table table-bordered table-hover table-striped table-sm" id="pessoas"  width="100%" cellspacing="0">
+              <thead class="thead-dark">
+                <tr>
+                <th width="5%">Código</th>
+                <th width="37%">Nome da Pessoa</th>
+                <th width="15%">CPF/CNPJ</th>
+                <th width="15%">RG/IE</th>
+                <th width="15%">Cidade</th>
+                <th width="5%">Ativo</th>
+                <th width="8%" style="text-align: center;">Ação</th>
+                </tr>
+              </thead>
+            </table>    
+          </div>
+          <div id="loader2" style="display: none;"></div>-->
+
+
+      </div>
+    </div>
+    
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITUF%}</div>
+
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+  <script>
+
+    $(document).ready(function() {      
+       //var elemento = document.getElementById('IWEDITPAGELENGTH');
+       carregaListaPessoas(25);
+       document.getElementById("defaultOpen").click();
+       montaGeral('0000000');
+       montaClassificacao('0000000000');
+
+      $("#helpatividade").click(function(ev){
+         if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+         } else {
+           alert('Abre tabela de atividades');
+         }
+      });
+
+      $("#helplocalidade").click(function(ev){
+         if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+         } else {
+           alert('Abre tabela de localidades');
+         }
+      });
+    });
+
+
+// funções
+    function carregaListaPessoas(num) {     
+      $('#pessoas').DataTable(
+          {
+          "responsive": true,
+//          "pageLength": 10,   
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetPessoas"
+          });      
+
+//      $('#produtos').DataTable().page(5).draw('page');
+
+    }
+
+    function montaClassificacao(parametro) {
+      var wparametro,wclassificacao,ehbanco,ehconvenio,ehcliente,ehfornecedor,ehfuncionario,ehrepresentante,ehtransportador,ehmobile,ehoftalmologista,ehmedico;
+      wparametro = parametro;
+
+      if (parametro.substring(0,1)=='1') {
+        ehbanco = 'checked';
+      }
+      if (parametro.substring(1,2)=='1') {
+        ehconvenio = 'checked';
+      }
+      if (parametro.substring(2,3)=='1') {
+        ehcliente = 'checked';
+      }
+
+      if (parametro.substring(3,4)=='1') {
+        ehfornecedor = 'checked';
+      }
+
+      if (parametro.substring(4,5)=='1') {
+        ehfuncionario = 'checked';
+      }
+
+      if (parametro.substring(5,6)=='1') {
+        ehrepresentante = 'checked';
+      }
+
+      if (parametro.substring(6,7)=='1') {
+        ehtransportador = 'checked';
+      }
+
+      if (parametro.substring(7,8)=='1') {
+        ehmobile = 'checked';
+      }
+
+      if (parametro.substring(8,9)=='1') {
+        ehoftalmologista = 'checked';
+      }
+
+      if (parametro.substring(9,10)=='1') {
+        ehmedico = 'checked';
+      }
+
+      wclassificacao = '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckBanco" '+ehbanco+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Banco</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehconvenio+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Convênio</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehcliente+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Cliente</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehfornecedor+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Fornecedor</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehfuncionario+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Funcionário</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehrepresentante+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Representante</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehtransportador+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Transportadora</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehmobile+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Repres Mobile</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehoftalmologista+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Oftalmologista</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ehmedico+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Médico</label>'+
+                       '</div>';
+
+      $("#Total").html(wclassificacao);
+    }
+
+
+    function montaGeral(parametro) {
+      var wparametro,wgeral,ativo,pessoafisica,verificadebito,emiteetiqueta,precadastro,aceitadevolucao,reidi;
+      wparametro = parametro;
+
+      if (parametro.substring(0,1)=='1') {
+        ativo = 'checked';
+      }
+      if (parametro.substring(1,2)=='1') {
+        pessoafisica = 'checked';
+      }
+      if (parametro.substring(2,3)=='1') {
+        verificadebito = 'checked';
+      }
+
+      if (parametro.substring(3,4)=='1') {
+        emiteetiqueta = 'checked';
+      }
+
+      if (parametro.substring(4,5)=='1') {
+        precadastro = 'checked';
+      }
+
+      if (parametro.substring(5,6)=='1') {
+        aceitadevolucao = 'checked';
+      }
+
+      if (parametro.substring(6,7)=='1') {
+        reidi = 'checked';
+      }
+
+      wgeral = '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+ativo+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Ativo</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+pessoafisica+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pessoa Física</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+verificadebito+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Verifica Débitos</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+emiteetiqueta+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Emite Etiqueta</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+precadastro+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pré Cadastro</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+aceitadevolucao+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Aceita Devolução</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" '+reidi+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">REIDI</label>'+
+               '</div>';
+      $("#Geral").html(wgeral);
+    }
+
+    function alteraPessoa(idPessoa) {
+      alert(idPessoa);
+      carregaContribuicao();
+      $("#IWEDITID").val(idPessoa);
+//      document.getElementById('IWEDITID').value = wid;
+//      document.getElementById('IWEDITID').value = idPessoa;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      $("#IWEDITNOME").val('[AlteraPessoa]');
+//      document.getElementById('IWEDITNOME').value = '[AlteraPessoa]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+       document.getElementById("defaultOpen").click();
+    }
+
+    function excluiLocalidade(idLocalidade, nameLocalidade) {
+      var wpagina = $('#localidades').DataTable().page();
+        if (confirm("Deseja excluir localidade: "+nameLocalidade+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = idLocalidade;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiLocalidade]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+    }
+
+    function setPagina(numPage) {
+      $('#pessoas').DataTable().page(numPage).draw('page');
+    }
+
+    function fechaModal() {
+      $("#ModalLocalidade").modal("hide");
+    }
+
+    function carregaContribuicao() {
+      $("#selectcontribuicao").empty();
+      $("#selectcontribuicao").append('<option value="1">1-Contribuinte ICMS</option>');
+      $("#selectcontribuicao").append('<option value="2">2-Contribuinte Isento</option>');
+      $("#selectcontribuicao").append('<option value="9">9-Não Contribuinte ICMS</option>');
+    }
+
+    function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+// botões
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      var elemento  = document.getElementById('IWEDITLOCALIDADENOME');
+      var elemento1 = document.getElementById('IWEDITLOCALIDADECODIBGE');
+
+      if ((elemento.value=='') || (elemento1.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+      } else {        
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+          var wpagina = $('#localidades').DataTable().page();
+          var wselectUF = $("#selectuf :selected");
+          var wselectRegiao = $("#selectregiao :selected");
+
+          document.getElementById('IWEDITNOME').value = '[ConfirmaLocalidade]'+wpagina;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          document.getElementById('IWEDITUF').value = wselectUF.text();
+          AddChangedControl('IWEDITUF');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          document.getElementById('IWEDITREGIAO').value = wselectRegiao.text();
+          AddChangedControl('IWEDITREGIAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();              
+          $("#ModalLocalidade").modal("hide");
+      }
+    })
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style type="text/css">
+      /* Style the tab */
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        /*background-color: #f1f1f1;*/
+        background-color: white;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        color: black;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+       background-color: #ddd;
+       color: white;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        /*background-color: #ccc;*/
+        background-color: navy;
+        color: white;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+
+      .tabcontent2 {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      textarea {
+          font-size: 20px; 
+          font-weight: bold; 
+          color: #00bfff;
+          letter-spacing: 1px;
+          text-align: left;
+          padding: 5px;
+          line-height: 1.5;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+      }
+        label{
+          margin-bottom: -10px;
+          font-weight: bold;
+          font-size: 13px;
+        }
+        .w_load_icon{
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          background: url(/images/w_load.gif) no-repeat;
+        }
+
+        .w_load_body{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(233, 233, 232, 0.5);
+        }
+
+        #loader {
+          position: absolute;
+          left: 50%;
+          top: 10%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader2 {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader3 {
+          position: absolute;
+          left: 50%;
+          top: 85%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+  /* Add animation to "page content" */
+        .animate-bottom {
+          position: relative;
+          -webkit-animation-name: animatebottom;
+          -webkit-animation-duration: 1s;
+          animation-name: animatebottom;
+          animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+
+        .red {
+              background-color: red !important;
+              color: white;
+        }   
+
+        #Lote{
+            background:#1C1C1C;
+            left: -300px; 
+            margin-top: -170px; 
+            height: 200px; 
+            width: 200px; 
+            position: absolute;       
+            border-radius: 5px;          
+            -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+            -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+            box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+          }
+    </style>
+  </head>
+  <body>
+
+  <div class="container">
+    <form>
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-filter-square" viewBox="0 0 16 16">
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            <path d="M6 11.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+          </svg>                        
+          <span>Orçamento</span>
+        </span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONINCLUI"  class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 100px" title="Inclui orçamento">Inclui</button>
+            <button type="button" id="IWBUTTONALTERA" class="btn btn-warning" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Altera">Altera</button>
+            <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Confirma">Confirma</button>
+            <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Cancela">Cancela</button>
+            <button type="button" id="IWBUTTONEXCLUI" class="btn btn-dark" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Exclui">Exclui</button>
+          </div>
+        </div>                               
+
+      </div>  
+
+      <div class="card-body">
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Ficha')" id="defaultOpen" style="font-color: white" >Ficha</button>
+            <button class="tablinks" onclick="openTab(event, 'Lista')">Lista</button>
+          </div>
+
+          <div id="Ficha" class="tabcontent">
+            <div id="cadastroPessoa" style="display: block;">
+              <div class="row">
+                <div class="col col-md-12">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title" style="font-size: 20px">Dados do Orçamento</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Número</span>
+                        {%IWEDITNUMERO%}
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Data Emissão</span>
+                        {%IWEDITDATAEMISSAO%}
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Total Orçamento</span>
+                        {%IWEDITTOTAL%}
+                    </div>              
+                    <div class="col col-md-2">
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Nº Nota Fiscal</span>
+                        {%IWEDITNUMERODOCUMENTO%}
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Data Nota Fiscal</span>
+                        {%IWEDITDATADOCUMENTO%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">Nome Cliente</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCliente();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITNOMECLIENTE%}
+                      </div>
+                    </div>              
+                    <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">Condição Pagamento</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpcondicao" class="fas fa-search" onclick="chamaHelpCondicao();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCONDICAOPAGAMENTO%}
+                      </div>
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">Nome Vendedor</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpvendedor" class="fas fa-search" onclick="chamaHelpVendedor();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITNOMEVENDEDOR%}
+                      </div>
+                    </div>              
+                    <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">Documento Cobrança</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpcobranca" class="fas fa-search" onclick="chamaHelpCobranca();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITDOCUMENTOCOBRANCA%}
+                      </div>
+                    </div>              
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-md-9">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                    <div class="col-9 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title" style="font-size: 20px">Observação</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-12">
+                      <label id="Observacao" for="exemplo">Texto:</label>
+                    </div>              
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title" style="font-size: 20px">CFOP</h3>
+                      </div>                        
+                    </div>  
+                    <div class="table-responsive display" style="margin-top: 0px">
+                      <table class="table table-bordered table-hover table-striped table-sm" id="cfops"  width="100%" cellspacing="0">
+                        <thead class="thead-dark">
+                          <tr>
+                          <th width="40%">CFOP</th>
+                          <th width="60%" style="text-align: right;">Total</th>
+                          </tr>
+                        </thead>
+                      </table>    
+                    </div>                      
+                </div>
+              </div>
+            </div>
+            <div class="tab" style="margin-top: 10px">
+              <button class="tablinks2" onclick="openTab2(event, 'Itens')" id="defaultOpen2" style="font-color: white" >Itens</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Parcelasx')">Parcelas</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Outros')">Outros</button>
+            </div>
+
+            <div id="Itens" class="tabcontent2">
+              <div id="itensOrcamento" style="display: block;">
+                <div class="row">
+                  <div class="col col-md-10">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title" style="font-size: 20px">Ítens</h3>
+                      </div>                        
+                    </div> 
+                  </div>
+                    <div style="float: right">
+                      <div class="btn-group">
+                        <button type="button" id="IWBUTTONINCLUIITEM"  class="btn btn-primary" data-toggle="tooltip" data-placement="top" style="width: 150px; margin-top: 10px" title="Inclui ítem" onclick="location.href='/TrabinWeb/orcamentoitem.html';">Inclui Ítem</button>
+                      </div>
+                    </div>                                                                      
+
+                </div>
+                <div class="table-responsive display" style="margin-top: 10px">
+                  <table class="table table-bordered table-hover table-striped table-sm" id="itens"  width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                      <tr>
+                      <th width="10%">Código</th>
+                      <th width="34%">Descrição do Produto</th>
+                      <th width="4%">CFOP</th>
+                      <th width="7%">Qtde</th>
+                      <th width="9%">Unitário</th>
+                      <th width="8%">% Desc</th>
+                      <th width="8%">$ Desc</th>
+                      <th width="12%">Total</th>
+                      <th width="8%" style="text-align: center;">Ação</th>
+                      </tr>
+                    </thead>
+                  </table>    
+                </div>
+
+              </div>
+            </div>
+
+
+            <div id="Parcelasx" class="tabcontent2">
+              <div id="parcelasOrcamento">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title" style="font-size: 20px">Parcelas</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="table-responsive display" style="margin-top: 10px">
+                  <table class="table table-bordered table-hover table-striped table-sm" id="parcelas"  width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                      <tr>
+                      <th width="1%">Nº</th>
+                      <th width="13%">Vencimento</th>
+                      <th width="9%">Situação</th>
+                      <th width="13%">Operação</th>
+                      <th width="14%">V. Original</th>
+                      <th width="14%">V. Despesa</th>
+                      <th width="14%">V. Desconto</th>
+                      <th width="14%">V. Final</th>
+                      <th width="8%" style="text-align: center;">Ação</th>
+                      </tr>
+                    </thead>
+                  </table>    
+                </div>
+              </div>
+            </div>
+
+            <div id="Outros" class="tabcontent2">
+              <div id="outrosOrcamento">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="row">
+                      <div class="col col-md-8">
+                        <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                          <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                            <h3 class="page-title" style="font-size: 20px">Outros</h3>
+                          </div>                        
+                        </div>                          
+                        <div class="row">
+                          <div class="col">
+                            <span class="text-uppercase page-subtitle">Nome Emitente</span>
+                            {%IWEDITNOMEEMITENTE%}
+                          </div>              
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <span class="text-uppercase page-subtitle">Nome Transportadora</span>
+                            {%IWEDITNOMETRANSPORTADORA%}
+                          </div>              
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <span class="text-uppercase page-subtitle">Nome Responsável</span>
+                            {%IWEDITNOMERESPONSAVEL%}
+                          </div>              
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <span class="text-uppercase page-subtitle">A/C</span>
+                            {%IWEDITAC%}
+                          </div>              
+                        </div>
+                      </div>
+
+                      <div class="col col-md-2">
+                        <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                          <div class="text-center text-sm-left mb-0">
+                            <h3 class="page-title" style="font-size: 20px">Carga</h3>
+                          </div>                        
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <span class="text-uppercase page-subtitle">Data Entrega</span>
+                              {%IWEDITDATAENTREGA%}
+                          </div>              
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <span class="text-uppercase page-subtitle">Hora</span>
+                              {%IWEDITHORAENTREGA%}
+                          </div>              
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <span class="text-uppercase page-subtitle">Nº Ordem</span>
+                              {%IWEDITNUMEROORDEM%}
+                          </div>              
+                        </div>
+                      </div>
+
+                      <div class="col col-md-2">
+                        <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                          <div class="text-center text-sm-left mb-0">
+                            <h3 class="page-title" style="font-size: 20px">Ordem Serviço</h3>
+                          </div>                        
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                              <span class="text-uppercase page-subtitle">Número</span>
+                              {%IWEDITNUMEROORDEMSERVICO%}
+                          </div>              
+                          <div class="col">
+                              <span class="text-uppercase page-subtitle">Validade</span>
+                              {%IWEDITVALIDADEORDEMSERVICO%}
+                          </div>              
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="Lista" class="tabcontent">
+            <div class="table-responsive display" style="margin-top: 10px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="orcamentos"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="2%">Número</th>
+                  <th width="10%">Emissão</th>
+                  <th width="25%">Cliente</th>
+                  <th width="25%">Condição</th>
+                  <th width="20%">Vendedor</th>
+                  <th width="10%" style="text-align: right;">Total</th>
+                  <th width="8%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </div>
+      </div>
+    </div>    
+  </form>
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITIDORCAMENTO%}{%IWEDITIDCLIENTE%}
+                              {%IWEDITIDREPRESENTANTE%}{%IWEDITIDCONDICAO%}{%IWEDITIDCOBRANCA%}{%IWEDITOBSERVACAO%}
+  </div>
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+  <!--Modal Cliente-->
+  <div class="modal" id="ModalCliente">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCliente" style="font-size: 15px">Seleciona Cliente</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="clientes"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="66%">Nome do Cliente</th>
+                  <th width="5%">Código</th>
+                  <th width="8%">CPF</th>
+                  <th width="8%">RG</th>
+                  <th width="8%">CNPJ</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Vendedor-->
+  <div class="modal" id="ModalVendedor">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloVendedor" style="font-size: 15px">Seleciona Vendedor</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="vendedores"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="66%">Nome do Representante</th>
+                  <th width="5%">Código</th>
+                  <th width="8%">CPF</th>
+                  <th width="8%">RG</th>
+                  <th width="8%">CNPJ</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+
+  <!--Modal Cobrança-->
+  <div class="modal" id="ModalCobranca">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCobranca" style="font-size: 15px">Seleciona Cobrança</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="cobrancas"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="87%">Documento Cobrança</th>
+                  <th width="8%">Tipo</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+
+  <!--Modal Condicao-->
+  <div class="modal" id="ModalCondicao">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCondicao" style="font-size: 15px">Seleciona Condição</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="condicoes"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="63%">Descrição Condição</th>
+                  <th width="10%">Tipo</th>
+                  <th width="12%">Nº Pag</th>
+                  <th width="12%">P Médio</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <script>
+    $(document).ready(function() {      
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONALTERA").hide();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONEXCLUI").hide();
+
+
+       //var elemento = document.getElementById('IWEDITPAGELENGTH');
+       alert(window.location.href);
+//       window.location.href="/TrabinWeb/orcamento.html";
+
+//       limpaOrcamento();
+       carregaListaOrcamentos(25);
+       document.getElementById("defaultOpen").click();
+       document.getElementById("defaultOpen2").click();
+       montaObservacao('')
+       $('html,body').scrollTop(0);      
+    });
+
+// funções
+    function fechaModalAtividade() {
+      $("#ModalAtividade").modal("hide");
+    }
+    function fechaModalLocalidade() {
+      $("#ModalLocalidade").modal("hide");
+    }
+
+    function limpaFiltroAtividade() {
+      document.getElementById('IWEDITNOME').value = '[LimpaFiltroAtividade]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaListaOrcamentos(num) {     
+      $('#orcamentos').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "columnDefs": [{"targets": 5, "className": "text-right"}],
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetOrcamentos"
+          });      
+    }
+
+    function carregaListaItens(num) {     
+      $('#itens').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "columnDefs": [{"targets": [3,4,5,6,7], "className": "text-right"}],
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetOrcamentosItens"
+          });      
+    }
+
+
+    function carregaListaCFOPS(num) {     
+      $('#cfops').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "language": {"info": ""},
+          "columnDefs": [{"targets": 1, "className": "text-right"}],
+          "pagingType": "full",
+          "paging":   false,
+          "ordering": false,
+          "searching": false,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetOrcamentosCFOPS"
+          });      
+    }
+
+    function carregaListaParcelas(num) {     
+      $('#parcelas').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "columnDefs": [{"targets": [0,4,5,6,7], "className": "text-right"}],
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetOrcamentosParcelas"
+          });      
+    }
+
+    function chamaHelpCliente() {
+      if ($("#IWEDITDATAEMISSAO").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCliente]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpVendedor() {
+      if ($("#IWEDITDATAEMISSAO").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpVendedor]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpCondicao() {
+      if ($("#IWEDITDATAEMISSAO").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCondicao]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpCobranca() {
+      if ($("#IWEDITDATAEMISSAO").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCobranca]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function limpaOrcamento() {
+      document.getElementById('IWEDITNOME').value = '[LimpaOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                      
+    }
+
+// HELPS
+
+    function carregaListaClientes(num) {     
+      $('#clientes').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetClientesHelp"
+          });      
+    }
+
+    function carregaListaCobrancas(num) {     
+      $('#cobrancas').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCobrancasHelp"
+          });      
+    }
+
+    function carregaListaVendedores(num) {     
+      $('#vendedores').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetRepresentantesHelp"
+          });      
+    }
+
+    function carregaListaCondicoes(num) {     
+      $('#condicoes').DataTable(
+          {
+          "autoWidth": false,
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCondicoesHelp"
+          });      
+    }
+
+    function carregaOrcamento(idOrcamento) {
+//      carregaContribuicao();
+//      carregaEstadoCivil();
+//      carregaGenero();
+      document.getElementById('IWEDITID').value = idOrcamento;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[CarregaOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+       document.getElementById("defaultOpen").click();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONALTERA").show();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONEXCLUI").show();            
+    }
+
+
+    function excluiPessoa(idPessoa, namePessoa) {
+      var wpagina = $('#pessoas').DataTable().page();
+        if (confirm("Deseja excluir pessoa: "+namePessoa+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = idPessoa;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiPessoa]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+    }
+
+
+    function montaObservacao(parametro) {
+      var wobs;
+      wobs = '<textarea rows="5" cols="65" id="obsorcamento" disabled="true">'+parametro+'</textarea>';
+      $("#Observacao").html(wobs);
+    }
+
+
+    function setPagina(numPage) {
+      $('#orcamentos').DataTable().page(numPage).draw('page');
+    }
+
+    function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+      document.getElementById("defaultOpen2").click();
+     $('html,body').scrollTop(0);      
+    }
+
+    function openTab2(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+      var codigo = document.getElementById('IWEDITNUMERO').value;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent2");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks2");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    // $('html,body').scrollTop(0);      
+
+
+      if (cityName=='Parcelasx') {
+         if (codigo=='') {
+            carregaListaParcelas(0);
+         } else {
+            carregaListaParcelas(10);
+        }
+      }
+
+    }
+
+    function carregaResumoHistoricos() {
+      document.getElementById('IWEDITNOME').value = '[ResumoHistorico]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaResumoParcelas() {
+      document.getElementById('IWEDITNOME').value = '[ResumoParcela]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaContribuicao() {
+      $("#selectcontribuicao").empty();
+      $("#selectcontribuicao").append('<option value="1">1-Contribuinte ICMS</option>');
+      $("#selectcontribuicao").append('<option value="2">2-Contribuinte Isento</option>');
+      $("#selectcontribuicao").append('<option value="9">9-Não Contribuinte ICMS</option>');
+    }
+
+    function carregaEstadoCivil() {
+      $("#selectestadocivil").empty();
+      $("#selectestadocivil").append('<option value="Casado(a)">Casado(a)</option>');
+      $("#selectestadocivil").append('<option value="Desquitado(a)">Desquitado(a)</option>');
+      $("#selectestadocivil").append('<option value="Divorciado(a)">Divorciado(a)</option>');
+      $("#selectestadocivil").append('<option value="Outros">Outros</option>');
+      $("#selectestadocivil").append('<option value="Solteiro(a)">Solteiro(a)</option>');
+      $("#selectestadocivil").append('<option value="Viuvo(a)">Viuvo(a)</option>');
+    }
+
+    function carregaGenero() {
+      $("#selectgenero").empty();
+      $("#selectgenero").append('<option value="F">Feminino</option>');
+      $("#selectgenero").append('<option value="M">Masculino</option>');
+    }
+
+    function habilitaEdicao() {
+      $("#IWEDITDATAEMISSAO").prop("disabled",false);
+      $("#IWEDITNOMECLIENTE").prop("disabled",false);
+      $("#IWEDITNOMEVENDEDOR").prop("disabled",false);
+      $("#IWEDITCONDICAOPAGAMENTO").prop("disabled",false);
+      $("#IWEDITDOCUMENTOCOBRANCA").prop("disabled",false);
+      $("#IWMEMOOBSERVACAO").prop("disabled",false);
+      $("#Observacao").prop("disabled",false);
+      $("#obsorcamento").prop("disabled",false);
+
+    }
+
+    function desabilitaEdicao() {
+      $("#IWEDITDATAEMISSAO").prop("disabled",true);
+      $("#IWEDITNOMECLIENTE").prop("disabled",true);
+      $("#IWEDITNOMEVENDEDOR").prop("disabled",true);
+      $("#IWEDITCONDICAOPAGAMENTO").prop("disabled",true);
+      $("#IWEDITDOCUMENTOCOBRANCA").prop("disabled",true);
+      $("#IWMEMOOBSERVACAO").prop("disabled",true);
+      $("#Observacao").prop("disabled",true);
+      $("#obsorcamento").prop("disabled",true);
+    }
+
+    function selecionaCobranca(idCobranca, nomeCobranca) {
+      document.getElementById('IWEDITIDCOBRANCA').value = idCobranca;
+      AddChangedControl('IWEDITIDCOBRANCA');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCobranca]'+nomeCobranca;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCobranca").modal("hide");
+    }
+
+    function selecionaCliente(idCliente, nomeCliente) {
+      document.getElementById('IWEDITIDCLIENTE').value = idCliente;
+      AddChangedControl('IWEDITIDCLIENTE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCliente]'+nomeCliente;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCliente").modal("hide");
+    }
+
+    function selecionaCondicao(idCondicao, nomeCondicao) {
+      document.getElementById('IWEDITIDCONDICAO').value = idCondicao;
+      AddChangedControl('IWEDITIDCONDICAO');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCondicao]'+nomeCondicao;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCondicao").modal("hide");
+    }
+
+    function selecionaRepresentante(idRepresentante, nomeRepresentante) {
+      document.getElementById('IWEDITIDREPRESENTANTE').value = idRepresentante;
+      AddChangedControl('IWEDITIDREPRESENTANTE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaRepresentante]'+nomeRepresentante;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalVendedor").modal("hide");
+    }
+
+// botões
+    $("#IWBUTTONINCLUI").on("click",function(){      
+//      carregaListaCFOPS(0);
+      document.getElementById('IWEDITID').value = 0;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[IncluiOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+
+      habilitaEdicao();
+      $(this).hide();
+      $("#IWBUTTONALTERA").hide();
+      $("#IWBUTTONCONFIRMA").show();
+      $("#IWBUTTONCANCELA").show();
+      $("#IWBUTTONEXCLUI").hide();      
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){      
+      desabilitaEdicao(); 
+      document.getElementById('IWEDITNOME').value = '[CancelaOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+
+      $(this).hide();
+      if (document.getElementById('IWEDITIDORCAMENTO').value == 0) {
+         $("#IWBUTTONALTERA").hide();
+         $("#IWBUTTONEXCLUI").hide();      
+       } else {
+         $("#IWBUTTONALTERA").show();        
+         $("#IWBUTTONEXCLUI").show();      
+       }
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONINCLUI").show();
+    })
+
+    $("#IWBUTTONCONFIRMA").on("click",function(){      
+      var wpagina = $('#orcamentos').DataTable().page();
+
+      var elemento  = document.getElementById('IWEDITNOMECLIENTE');
+      var elemento1 = document.getElementById('IWEDITCONDICAOPAGAMENTO');
+      var elemento2 = document.getElementById('IWEDITNOMEVENDEDOR');
+      var elemento3 = document.getElementById('IWEDITDOCUMENTOCOBRANCA');
+      if ((elemento.value=='') || (elemento1.value=='') || (elemento2.value=='') || (elemento3.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+         if (elemento.value=='') {
+            document.getElementById('IWEDITNOMECLIENTE').focus();
+         } else if (elemento1.value=='') {
+            document.getElementById('IWEDITCONDICAOPAGAMENTO').focus();          
+         } else if (elemento2.value=='') {
+            document.getElementById('IWEDITNOMEVENDEDOR').focus();          
+         } else if (elemento3.value=='') {
+            document.getElementById('IWEDITDOCUMENTOCOBRANCA').focus();          
+         }
+
+      } else {        
+              desabilitaEdicao();
+              $(this).hide();
+              $("#IWBUTTONALTERA").show();
+              $("#IWBUTTONCANCELA").hide();
+              $("#IWBUTTONINCLUI").show();
+              $("#IWBUTTONEXCLUI").show();      
+              $("#loader3").css("display","block");     
+              $("#ModalAcessaAPI").modal('show');
+//              alert($("#obsorcamento").val());
+              document.getElementById('IWEDITOBSERVACAO').value = $("#obsorcamento").val();
+              AddChangedControl('IWEDITOBSERVACAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              document.getElementById('IWEDITNOME').value = '[ConfirmaOrcamento]'+wpagina;
+              AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              $("#IWBUTTONACAO").click(); 
+
+      }             
+    })
+
+    $("#IWBUTTONALTERA").on("click",function(){  
+      //document.getElementById('IWEDITID').value = 0;
+      //AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[AlteraOrcamento]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      // Habilita edits
+      $("#IWBUTTONACAO").click();              
+      habilitaEdicao();
+
+      $(this).hide();
+      $("#IWBUTTONCONFIRMA").show();
+      $("#IWBUTTONCANCELA").show();
+      $("#IWBUTTONINCLUI").hide();
+      $("#IWBUTTONEXCLUI").hide();      
+    })
+
+    $("#IWBUTTONEXCLUI").on("click",function(){      
+      var wid   = document.getElementById('IWEDITIDORCAMENTO').value;
+      var wpagina = $('#orcamentos').DataTable().page();
+
+
+        if (confirm("Deseja excluir orçamento?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = wid;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiOrcamento]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+      $(this).hide();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONALTERA").hide();      
+    })
+
+  </script>
+  </body>
+</html>

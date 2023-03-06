@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+
+      input[type=checkbox] {
+        margin:0 12px 0 0;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;        
+      }
+
+      input[type=radio] {
+        margin:0 12px 0 0;
+        vertical-align: middle;
+        position: relative;
+        top: -1px;        
+      }
+
+      input[type="text"]:disabled {
+       background: #dddddd;
+      }
+
+      .menu{
+        list-style:none; 
+      }
+
+      .menu li a{color:#333; text-decoration:none; padding:5px 10px; display:block;}
+ 
+      .menu li a:hover{
+        background:#333; 
+        color:#fff; 
+        -moz-box-shadow:0 3px 10px 0 #CCC; 
+        -webkit-box-shadow:0 3px 10px 0 #ccc; 
+        text-shadow:0px 0px 5px #fff; 
+      }      
+
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        width: 90px;
+        height: 90px;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Dados da Loja</span>
+            <div style="float: right">
+              <button class="btn-info material-icons" id="IWBUTTONCARREGAAPI" style="width: 50px; height: 30px;" title="Baixa Dados da API">cloud_download
+              </button>
+            </div>
+      </div>  
+      <div class="card-body">          
+        <form>
+          <!-- Identificação-->  
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Identificação</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">name</span>
+              {%IWEditLojaName%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">description</span>
+              {%IWEditLojaDescription%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">type</span>
+              {%IWEditLojaType%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">logo</span>
+              {%IWEditLojaLogo%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">business_id</span>
+              {%IWEditLojaBusinessId%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">contact_email</span>
+              {%IWEditLojaContactEmail%}
+            </div>              
+          </div>
+          <!-- Redes Sociais-->  
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Redes Sociais</h3>
+            </div>                        
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">facebook</span>
+              {%IWEditLojaFacebook%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">twitter</span>
+              {%IWEditLojaTwitter%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">instagram</span>
+              {%IWEditLojaInstagram%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">google_plus</span>
+              {%IWEditLojaGooglePlus%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">pinterest</span>
+              {%IWEditLojaPinterest%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">blog</span>
+              {%IWEditLojaBlog%}
+            </div>              
+          </div>
+          <!-- Logradouro-->  
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Logradouro</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">address</span>
+              {%IWEditLojaAddress%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">country</span>
+              <div class="input-group">
+                {%IWEditLojaCountry%}
+                <div class="input-group-append">
+                  <span class="input-group-text" style="background-color: #009999;" onclick="selecionaPais();">Seleciona</span>                                     
+                </div>
+              </div>
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">email</span>
+              {%IWEditLojaEmail%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">phone</span>
+              {%IWEditLojaPhone%}
+            </div>              
+          </div>
+          <!-- Configurações-->  
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Configurações</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">languages</span>
+              <div class="input-group">
+                {%IWEditLojaLanguages%}
+                <div class="input-group-append">
+                  <span class="input-group-text" style="background-color: #009999;" onclick="selecionaLinguagem();">Seleciona</span>                                     
+                </div>
+              </div>
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">original_domain</span>
+              {%IWEditLojaOriginalDomain%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">main_language</span>
+                <div class="input-group">
+                  {%IWEditLojaMainLanguage%}
+                  <div class="input-group-append">
+                    <span class="input-group-text" style="background-color: #009999;" onclick="selecionaLinguagemPrincipal();">Seleciona</span>                                     
+                  </div>
+                </div>
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">domains</span>
+              <div class="input-group">
+                {%IWEditLojaDomains%}
+                <div class="input-group-append">
+                  <span class="input-group-text" style="background-color: #009999;" onclick="selecionaDominio();">Seleciona</span>                                     
+                </div>
+              </div>
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">plan_name</span>
+              {%IWEditLojaPlanName%}
+            </div>              
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">current_theme</span>
+              {%IWEditLojaCurrentTheme%}
+            </div>              
+          </div>
+          <!--<div class="btn-group" style="margin-top: 20px">
+            <button type="button" id="IWBUTTONALTERA" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Altera">Altera</button>
+            <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success disabled" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+            <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger disabled" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+          </div>-->
+        </form>
+      </div>
+      <div class="card-footer">       
+      </div>
+    </div>
+  </div>
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWBUTTONACAO%}{%IWEditLojaDominio1%}{%IWEDITTIPO%}</div>
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando API Nuvem Shop</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/nuvemshop.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>    
+
+<!--Modal Seleciona Linguagens-->
+  <div class="modal" id="ModalSelecionaLinguagem">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        <span class="text-uppercase page-subtitle" id="tituloSelecionaLinguagem" style="font-size: 15px">Seleciona Idiomas</span>
+        <button type="button" class="close" data-dismiss="modal" id="fechaModalLinguagem">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul class="menu">
+            <li>
+              <label class="form-check-label" style="font-weight: bold; font-size: 20px">
+                <input type="checkbox" id="languagePt" class="form-check-input" value="" disabled="" checked="true">Português (pt)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" style="font-weight: bold; font-size: 20px">
+                <input type="checkbox" id="languageEn" class="form-check-input" value="">Inglês (en)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" style="font-weight: bold; font-size: 20px">
+                <input type="checkbox" id="languageEs" class="form-check-input" value="">Espanhol (es)
+              </label>              
+            </li>
+          </ul>
+        </div>
+        <!--Botões-->
+        <footer class="container-fluid">
+          <div class="btn-group" style="margin: 20px">
+            <button type="button" id="btnConfirmaLinguagem" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+            <button type="button" id="btnCancelaLinguagem" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Seleciona Linguagem Principal-->
+  <div class="modal" id="ModalSelecionaLinguagemPrincipal">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        <span class="text-uppercase page-subtitle" id="tituloSelecionaLinguagemPrincipal" style="font-size: 15px">Seleciona Idioma Principal</span>
+        <button type="button" class="close" data-dismiss="modal" id="fechaModalLinguagemPrincipal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul class="menu">
+            <li>
+              <label class="form-check-label" id="labelRadioPt" for="radio1" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioPt" name="optradio" class="form-check-input" value="pt" checked>Português (pt)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioEn" for="radio2" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioEn" name="optradio" class="form-check-input" value="en">Inglês (en)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioEs" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioEs" name="optradio" class="form-check-input" value="es">Espanhol (es)
+              </label>              
+            </li>
+          </ul>
+        </div>      
+
+        <!--Botões-->
+        <footer class="container-fluid">
+          <div class="btn-group" style="margin: 20px">
+            <button type="button" id="btnConfirmaLinguagemPrincipal" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+            <button type="button" id="btnCancelaLinguagemPrincipal" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Seleciona País-->
+  <div class="modal" id="ModalSelecionaPais">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        <span class="text-uppercase page-subtitle" id="tituloSelecionaPais" style="font-size: 15px">Seleciona País de Origem</span>
+        <button type="button" class="close" data-dismiss="modal" id="fechaModalPais">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul class="menu">
+            <li>
+              <label class="form-check-label" id="labelRadioAR" for="radio1" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioAR" name="optPais" class="form-check-input" value="AR">Argentina (AR)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioBO" for="radio2" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioBO" name="optPais" class="form-check-input" value="BO">Bolívia (BO)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioBR" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioBR" name="optPais" class="form-check-input" value="BR">Brasil (BR)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioCL" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioCL" name="optPais" class="form-check-input" value="CL">Chile (CL)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioCO" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioCO" name="optPais" class="form-check-input" value="CO">Colômbia (CO)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioUS" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioUS" name="optPais" class="form-check-input" value="US">Estados Unidos (US)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioEC" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioEC" name="optPais" class="form-check-input" value="EC">Equador (EC)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioPY" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioPY" name="optPais" class="form-check-input" value="PY">Paraguai (PY)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioPE" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioPE" name="optPais" class="form-check-input" value="PE">Peru (PE)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioUY" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioUY" name="optPais" class="form-check-input" value="UY">Uruguai (UY)
+              </label>              
+            </li>
+            <li>
+              <label class="form-check-label" id="labelRadioVE" for="radio3" style="font-weight: bold; font-size: 20px">
+                <input type="radio" id="radioVE" name="optPais" class="form-check-input" value="VE">Venezuela (VE)
+              </label>              
+            </li>
+          </ul>
+        </div>    
+        <!--Botões-->
+        <footer class="container-fluid">
+          <div class="btn-group" style="margin: 20px">
+            <button type="button" id="btnConfirmaPais" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+            <button type="button" id="btnCancelaPais" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+          </div>
+        </footer>
+
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Seleciona Dominios-->
+  <div class="modal" id="ModalSelecionaDominio">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+        <span class="text-uppercase page-subtitle" id="tituloSelecionaDominio" style="font-size: 15px">Outros Domínios</span>
+        <button type="button" class="close" data-dismiss="modal" id="fechaModalDominio">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12" style="font-weight: bold;">
+              <span class="text-uppercase page-subtitle">domain #1</span>
+              {%IWEditLojaDominio1%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-12" style="font-weight: bold;">
+              <span class="text-uppercase page-subtitle">domain #2</span>
+              {%IWEditLojaDominio2%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-12" style="font-weight: bold;">
+              <span class="text-uppercase page-subtitle">domain #3</span>
+              {%IWEditLojaDominio3%}
+            </div>              
+          </div>
+        </div>    
+
+        <!--Botões-->
+        <footer class="container-fluid">
+          <div class="btn-group" style="margin: 20px">
+            <button type="button" id="btnConfirmaDominio" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma">Confirma</button>
+            <button type="button" id="btnCancelaDominio" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela">Cancela</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>  
+
+
+  <script>
+
+    function selecionaLinguagem() {
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[selecionaLinguagem]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+    }
+
+    function selecionaLinguagemPrincipal() {
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[selecionaLingPrincipal]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+    }
+
+    function selecionaPais() {
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[selecionaPais]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+    }
+
+    function selecionaDominio() {
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[selecionaDominio]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+    }
+
+    $("#IWBUTTONALTERA").on("click",function(){
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    })
+
+// clica botão confirma linguagem
+    $("#btnConfirmaLinguagem").on("click",function(){
+      var wlinguagem = "Português";
+
+      if( $("#languageEn").is(":checked") == true) {
+        wlinguagem = wlinguagem+" / Inglês";
+      }
+      if( $("#languageEs").is(":checked") == true) {
+        wlinguagem = wlinguagem+" / Espanhol";
+      }
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[confirmaLinguagem]'+wlinguagem;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();            
+     })
+
+// clica botão confirma linguagem principal
+    $("#btnConfirmaLinguagemPrincipal").on("click",function(){
+      var wlinguagem = "";
+
+      if( $("#radioPt").is(":checked") == true) {
+        wlinguagem = "Português";
+      }
+      if( $("#radioEn").is(":checked") == true) {
+        wlinguagem = "Inglês";
+      }
+      if( $("#radioEs").is(":checked") == true) {
+        wlinguagem = "Espanhol";
+      }
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[confLinguagemPrincipal]'+wlinguagem;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();            
+     })
+
+// clica botão confirma pais
+    $("#btnConfirmaPais").on("click",function(){
+      var wpais = "";
+
+      if( $("#radioAR").is(":checked") == true) {
+        wpais = "Argentina";
+      }
+      if( $("#radioBO").is(":checked") == true) {
+        wpais = "Bolívia";
+      }
+      if( $("#radioBR").is(":checked") == true) {
+        wpais = "Brasil";
+      }
+      if( $("#radioCL").is(":checked") == true) {
+        wpais = "Chile";
+      }
+      if( $("#radioCO").is(":checked") == true) {
+        wpais = "Colômbia";
+      }
+      if( $("#radioEC").is(":checked") == true) {
+        wpais = "Equador";
+      }
+      if( $("#radioPY").is(":checked") == true) {
+        wpais = "Paraguai";
+      }
+      if( $("#radioUS").is(":checked") == true) {
+        wpais = "Estados Unidos";
+      }
+      if( $("#radioUY").is(":checked") == true) {
+        wpais = "Uruguai";
+      }
+      if( $("#radioVE").is(":checked") == true) {
+        wpais = "Venezuela";
+      }
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[confirmaPais]'+wpais;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();            
+     })
+
+// clica botão confirma dominio
+    $("#btnConfirmaDominio").on("click",function(){
+      document.getElementById('IWEDITID').value = "";
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[confirmaDominio]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();            
+     })
+
+
+// clica botão cancela linguagem
+    $("#btnCancelaLinguagem").on("click",function(){
+      $("#ModalSelecionaLinguagem").modal('hide');
+     })
+
+// clica botão cancela linguagem principal
+    $("#btnCancelaLinguagemPrincipal").on("click",function(){
+      $("#ModalSelecionaLinguagemPrincipal").modal('hide');
+     })
+
+// clica botão cancela pais
+    $("#btnCancelaPais").on("click",function(){
+      $("#ModalSelecionaPais").modal('hide');
+     })
+      
+// clica botão cancela dominio
+    $("#btnCancelaDominio").on("click",function(){
+      $("#ModalSelecionaDominio").modal('hide');
+     })
+
+    $("#IWBUTTONCARREGAAPI").on("click",function(){
+      var elemento = document.getElementById('IWEDITTIPO');
+      if (elemento.value=='A') {
+         $("#loader").css("display","block");
+         $("#ModalAcessaAPI").modal({backdrop: "static"});
+      }
+    })
+
+      
+  </script>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,2700 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <style type="text/css">
+      /* Style the tab */
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+       background-color: #ddd;
+      }
+
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+      }
+
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+
+      .tabcontent2 {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+        td{
+           white-space: nowrap !important;
+        }
+        label{
+          margin-bottom: -10px;
+          font-weight: bold;
+          font-size: 13px;
+        }
+        .w_load_icon{
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          background: url(/images/w_load.gif) no-repeat;
+        }
+
+        .w_load_body{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(233, 233, 232, 0.5);
+        }
+
+        #loader {
+          position: absolute;
+          left: 50%;
+          top: 10%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader2 {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+        #loader3 {
+          position: absolute;
+          left: 50%;
+          top: 85%;
+          z-index: 1;
+          margin: -50px 0 0 -50px;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 90px;
+          height: 90px;
+          -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+        }      
+
+
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+  /* Add animation to "page content" */
+        .animate-bottom {
+          position: relative;
+          -webkit-animation-name: animatebottom;
+          -webkit-animation-duration: 1s;
+          animation-name: animatebottom;
+          animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+          from { bottom:-100px; opacity:0 } 
+          to { bottom:0px; opacity:1 }
+        }
+
+        @keyframes animatebottom { 
+          from{ bottom:-100px; opacity:0 } 
+          to{ bottom:0; opacity:1 }
+        }
+
+        .red {
+              background-color: red !important;
+              color: white;
+        }   
+
+        #Lote{
+            background:#1C1C1C;
+            left: -300px; 
+            margin-top: -170px; 
+            height: 200px; 
+            width: 200px; 
+            position: absolute;       
+            border-radius: 5px;          
+            -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+            -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+            box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+          }
+    </style>
+  </head>
+  <body>
+
+  <div class="container">
+    <form>
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>
+          <span>Pessoas</span>
+        </span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONINCLUI"  class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 100px" title="Inclui pessoa">Inclui</button>
+            <button type="button" id="IWBUTTONALTERA" class="btn btn-warning" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Altera">Altera</button>
+            <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Confirma">Confirma</button>
+            <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Cancela">Cancela</button>
+            <button type="button" id="IWBUTTONEXCLUI" class="btn btn-dark" data-toggle="tooltip"   data-placement="top" style="width: 100px; margin-left: 10px" title="Exclui">Exclui</button>
+          </div>
+        </div>                               
+
+      </div>  
+
+      <div class="card-body">
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Ficha')" id="defaultOpen" style="font-color: white" >Ficha</button>
+            <button class="tablinks" onclick="openTab(event, 'Lista')">Lista</button>
+          </div>
+
+          <div id="Ficha" class="tabcontent">
+            <div id="cadastroPessoa" style="display: block;">
+              <div class="row">
+                <div class="col col-md-9">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Dados da Pessoa</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Código</span>
+                        {%IWEDITCODIGOPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Nome</span>
+                        {%IWEDITNOMEPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">Contato</span>
+                        {%IWEDITCONTATOPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Nome Fantasia</span>
+                        {%IWEDITNOMEFANTASIAPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">Observação</span>
+                        {%IWEDITOBSERVACAOPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-5">
+                        <span class="text-uppercase page-subtitle">Atividade</span>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <i id="helpatividade" class="fas fa-search" onclick="chamaHelpAtividade('pessoa');"></i>
+                            </span>                                     
+                          </div>
+                          {%IWEDITATIVIDADEPESSOA%}
+                        </div>
+                    </div>              
+                    <div class="col col-md-5">
+                        <span class="text-uppercase page-subtitle">Pasta</span>
+                        {%IWEDITPASTAPESSOA%}
+                    </div>              
+                    <div class="col col-md-2">
+                        <span class="text-uppercase page-subtitle">Cod Banco</span>
+                        {%IWEDITCODBANCOPESSOA%}
+                    </div>              
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                    <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Geral</h3>
+                    </div>                        
+                  </div>    
+                  <label id="Geral" for="exemplo">Texto:</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-md-9">
+                  <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                    <div class="col-9 col-sm-4 text-center text-sm-left mb-0">
+                      <h3 class="page-title">Documentos</h3>
+                    </div>                        
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">CPF</span>
+                        {%IWEDITCPFPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">RG</span>
+                        {%IWEDITRGPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">IM</span>
+                        {%IWEDITIMPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">CNPJ</span>
+                        {%IWEDITCNPJPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">IE</span>
+                      {%IWEDITIEPESSOA%}
+                    </div>              
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">SUFRAMA</span>
+                        {%IWEDITSUFRAMAPESSOA%}
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-4">
+                        <span class="text-uppercase page-subtitle">IE SUBSTITUTO</span>
+                        {%IWEDITIESUBSTITUTOPESSOA%}
+                    </div>              
+                    <div class="col col-md-8">
+                        <span class="text-uppercase page-subtitle">TIPO CONTRIBUIÇÃO ICMS</span><br>
+                        <select id="selectcontribuicao" style="width: 497px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true" disabled="true">
+                        </select>
+                    </div>              
+                  </div>
+                  <div class="row">
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">SITE</span>
+                        {%IWEDITSITEPESSOA%}
+                    </div>              
+                    <div class="col col-md-6">
+                        <span class="text-uppercase page-subtitle">EMAIL</span>
+                        {%IWEDITEMAILPESSOA%}
+                    </div>              
+                  </div>
+                </div>
+                <div class="col col-md-3">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Classificação</h3>
+                      </div>                        
+                    </div>    
+                    <label id="Total" for="exemplo">Texto:</label>
+                </div>
+              </div>
+
+                <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                  <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                    <h3 class="page-title">Endereço</h3>
+                  </div>                        
+                </div>
+                <div class="row">
+                  <div class="col col-md-8">
+                      <span class="text-uppercase page-subtitle">LOGRADOURO</span>
+                      {%IWEDITLOGRADOUROPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">COMPLEMENTO</span>
+                      {%IWEDITCOMPLEMENTOPESSOA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">BAIRRO</span>
+                      {%IWEDITBAIRROPESSOA%}
+                  </div>              
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">CIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helplocalidade" class="fas fa-search" onclick="chamaHelpLocalidade('pessoa');"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCIDADEPESSOA%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-2">
+                      <span class="text-uppercase page-subtitle">CEP</span>
+                      {%IWEDITCEPPESSOA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">FONE</span>
+                      {%IWEDITFONEPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">CELULAR/FAX</span>
+                      {%IWEDITCELULARPESSOA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">CAIXA POSTAL</span>
+                      {%IWEDITCAIXAPOSTALPESSOA%}
+                  </div>              
+                </div>
+            </div>
+            <div class="tab" style="margin-top: 20px">
+              <button class="tablinks2" onclick="openTab2(event, 'Diversos')" id="defaultOpen2" style="font-color: white" >Diversos</button>
+              <button class="tablinks2" onclick="openTab2(event, 'FisicaJuridica')">Física/Jurídica</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Historico')">Histórico</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Parcelas')">Parcelas</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Observacoes')">Observações</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Contratos')">Contratos</button>
+              <button class="tablinks2" onclick="openTab2(event, 'SPC')">SPC</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Contatos')">Contatos</button>
+              <button class="tablinks2" onclick="openTab2(event, 'Devolucoes')">Devoluções</button>
+            </div>
+            <div id="Diversos" class="tabcontent2">
+              <div id="diversosPessoa" style="display: block;">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Cobrança</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-8">
+                      <span class="text-uppercase page-subtitle">ENDEREÇO</span>
+                      {%IWEDITENDERECOCOBRANCA%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">COMPLEMENTO</span>
+                      {%IWEDITCOMPLEMENTOCOBRANCA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">BAIRRO</span>
+                      {%IWEDITBAIRROCOBRANCA%}
+                  </div>              
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">CIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helplocalidadecobranca" class="fas fa-search" onclick="chamaHelpLocalidade('cobranca');"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCIDADECOBRANCA%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-2">
+                      <span class="text-uppercase page-subtitle">CEP</span>
+                      {%IWEDITCEPCOBRANCA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">FONE</span>
+                      {%IWEDITFONECOBRANCA%}
+                  </div>              
+                  <div class="col col-md-8">
+                      <span class="text-uppercase page-subtitle">EMAIL</span>
+                      {%IWEDITEMAILCOBRANCA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-9 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Diversos</h3>
+                      </div>                        
+                    </div>
+                    <div class="row">
+                      <div class="col col-md-8">
+                          <span class="text-uppercase page-subtitle">BANCO</span>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i id="helpbanco" class="fas fa-search" onclick="chamaHelpBanco();"></i>
+                              </span>                                     
+                            </div>
+                            {%IWEDITBANCODIVERSOS%}
+                          </div>
+                      </div>              
+                      <div class="col col-md-4">
+                          <span class="text-uppercase page-subtitle">CONTA</span>
+                          {%IWEDITCONTADIVERSOS%}
+                      </div>                                    
+                    </div>
+                    <div class="row">
+                      <div class="col col-md-8">
+                          <span class="text-uppercase page-subtitle">DOCUMENTO COBRANÇA</span>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i id="helpcobranca" class="fas fa-search" onclick="chamaHelpCobranca();"></i>
+                              </span>                                     
+                            </div>
+                            {%IWEDITCOBRANCADIVERSOS%}
+                          </div>
+                      </div>                          
+                      <div class="col col-md-4">
+                          <span class="text-uppercase page-subtitle">COMISSÃO</span>
+                          {%IWEDITCOMISSAODIVERSOS%}
+                      </div>                                    
+                    </div>
+                  </div>
+                  <div class="col col-md-3">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div>
+                        <h3 class="page-title">Outros</h3>
+                      </div>                        
+                    </div>
+                    <label id="Outros" for="exemplo">Texto:</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">COBRAR DE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpcliente" class="fas fa-search" onclick="chamaHelpCliente();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCOBRARDEDIVERSOS%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">TABELA</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helptabela" class="fas fa-search" onclick="chamaHelpTabela();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITTABELADIVERSOS%}
+                      </div>
+                  </div>                             
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">CREDITO</span>
+                      {%IWEDITCREDITODIVERSOS%}
+                  </div>                                    
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">CONDIÇÃO PAGAMENTO</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpcondicao" class="fas fa-search" onclick="chamaHelpCondicao();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCONDICAODIVERSOS%}
+                      </div>
+                  </div>                             
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">PRAZO</span>
+                      {%IWEDITPRAZODIVERSOS%}
+                  </div>                                    
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">REFERENCIA COMERCIAL 1</span>
+                      {%IWEDITREFERENCIA1DIVERSOS%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">LIMITE FATURAR</span>
+                      {%IWEDITLIMITEFATURARDIVERSOS%}
+                  </div>                                    
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">REFERENCIA COMERCIAL 2</span>
+                      {%IWEDITREFERENCIA2DIVERSOS%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">LIMITE PARA COMPRA</span>
+                      {%IWEDITLIMITECOMPRADIVERSOS%}
+                  </div>                                    
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">REPRESENTANTE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helprepresentante" class="fas fa-search" onclick="chamaHelpRepresentante();"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITREPRESENTANTEDIVERSOS%}
+                      </div>
+                  </div>                             
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">DATA CADASTRAMENTO</span>
+                      {%IWEDITCADASTRAMENTODIVERSOS%}
+                  </div>              
+                </div>
+
+              </div>
+            </div>
+
+
+            <div id="FisicaJuridica" class="tabcontent2">
+              <div id="fisicaPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Pessoa Física</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">DATA NASCIMENTO</span>
+                      {%IWEDITDATANASCIMENTO%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">ESTADO CIVIL</span><br>
+                      <select id="selectestadocivil" style="width: 225px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true" disabled="true">
+                      </select>
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">GÊNERO</span><br>
+                      <select id="selectgenero" style="width: 225px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true" disabled="true">
+                      </select>
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">SALÁRIO</span>
+                      {%IWEDITSALARIO%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-12">
+                      <span class="text-uppercase page-subtitle">NATURALIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpnaturalidade" class="fas fa-search" onclick="chamaHelpLocalidade('naturalidade');"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITNATURALIDADE%}
+                      </div>
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">NOME DO PAI</span>
+                      {%IWEDITNOMEPAI%}
+                  </div>              
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">NOME DA MÃE</span>
+                      {%IWEDITNOMEMAE%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-12">
+                      <span class="text-uppercase page-subtitle">NOME EMPRESA</span>
+                      {%IWEDITNOMEEMPRESA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">ENDEREÇO EMPRESA</span>
+                      {%IWEDITENDERECOEMPRESA%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">CEP EMPRESA</span>
+                      {%IWEDITCEPEMPRESA%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">BAIRRO EMPRESA</span>
+                      {%IWEDITBAIRROEMPRESA%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">FONE EMPRESA</span>
+                      {%IWEDITFONEEMPRESA%}
+                  </div>              
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Pessoa Jurídica</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">DIRETOR 1</span>
+                      {%IWEDITNOMEDIRETOR1EMPRESA%}
+                  </div>              
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">DIRETOR 2</span>
+                      {%IWEDITNOMEDIRETOR2EMPRESA%}
+                  </div>              
+                  <div class="col col-md-2">
+                      <span class="text-uppercase page-subtitle">FUNDAÇÃO</span>
+                      {%IWEDITDATAFUNDACAOEMPRESA%}
+                  </div>              
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Fiador</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">NOME</span>
+                      {%IWEDITNOMEFIADOR%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">CPF</span>
+                      {%IWEDITCPFFIADOR%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">RG</span>
+                      {%IWEDITRGFIADOR%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">ENDEREÇO</span>
+                      {%IWEDITENDERECOFIADOR%}
+                  </div>              
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">BAIRRO</span>
+                      {%IWEDITBAIRROFIADOR%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-6">
+                      <span class="text-uppercase page-subtitle">CIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpfiador" class="fas fa-search" onclick="chamaHelpLocalidade('fiador');"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCIDADEFIADOR%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">CEP</span>
+                      {%IWEDITCEPFIADOR%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">FONE</span>
+                      {%IWEDITFONEFIADOR%}
+                  </div>              
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Cônjuge</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-9">
+                      <span class="text-uppercase page-subtitle">NOME</span>
+                      {%IWEDITNOMECONJUGE%}
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">DATA NASCIMENTO</span>
+                      {%IWEDITDATANASCIMENTOCONJUGE%}
+                  </div>              
+                </div>
+                <div class="row">
+                  <div class="col col-md-5">
+                      <span class="text-uppercase page-subtitle">EMPRESA</span>
+                      {%IWEDITEMPRESACONJUGE%}
+                  </div>              
+                  <div class="col col-md-4">
+                      <span class="text-uppercase page-subtitle">CIDADE</span>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i id="helpfiador" class="fas fa-search" onclick="chamaHelpAtividade('conjuge');"></i>
+                          </span>                                     
+                        </div>
+                        {%IWEDITCARGOCONJUGE%}
+                      </div>
+                  </div>              
+                  <div class="col col-md-3">
+                      <span class="text-uppercase page-subtitle">SALÁRIO</span>
+                      {%IWEDITSALARIOCONJUGE%}
+                  </div>              
+                </div>
+
+              </div>
+            </div>
+
+
+            <div id="Historico" class="tabcontent2">
+              <div id="historicoPessoa">
+                <div class="row">
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 00px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Primeira Compra</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">DATA</span>
+                          {%IWEDITDATAPRIMEIRACOMPRA%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALORPRIMEIRACOMPRA%}
+                      </div>              
+                    </div>
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Última Compra</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">DATA</span>
+                          {%IWEDITDATAULTIMACOMPRA%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALORULTIMACOMPRA%}
+                      </div>              
+                    </div>                                       
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Maior Compra</h3>
+                      </div>                        
+                    </div>                    
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">DATA</span>
+                          {%IWEDITDATAMAIORCOMPRA%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALORMAIORCOMPRA%}
+                      </div>              
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Compras Em Aberto</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VENCIDOS</span>
+                          {%IWEDITVENCIDOSEMABERTO%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">A VENCER</span>
+                          {%IWEDITAVENCEREMABERTO%}
+                      </div>              
+                    </div>
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Atrasos</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">MÉDIO</span>
+                          {%IWEDITATRASOMEDIO%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">MAIOR</span>
+                          {%IWEDITMAIORATRASO%}
+                      </div>              
+                    </div>                                       
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Total Compras</h3>
+                      </div>                        
+                    </div>                    
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">Nº COMPRAS</span>
+                          {%IWEDITNUMEROCOMPRAS%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITTOTALCOMPRAS%}
+                      </div>              
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Histórico</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+
+                <div class="table-responsive display" style="margin-top: 10px">
+                  <table class="table table-bordered table-hover table-striped table-sm" id="historicos"  width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                      <tr>
+                      <th width="12%">Emissão</th>
+                      <th width="10%">Pedido</th>
+                      <th width="15%">Documento</th>
+                      <th width="3%">Pref</th>
+                      <th width="3%">Op</th>
+                      <th width="10%">OS</th>
+                      <th width="27%">Condição Pagamento</th>
+                      <th width="12%">Total</th>
+                      <th width="8%" style="text-align: center;">Ação</th>
+                      </tr>
+                    </thead>
+                  </table>    
+                </div>
+              </div>
+            </div>
+
+
+            <div id="Parcelas" class="tabcontent2">
+              <div id="parcelasPessoa">
+                <div class="row">
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 00px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Em Aberto</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">QTDE</span>
+                          {%IWEDITQTDEMABERTO%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALOREMABERTO%}
+                      </div>              
+                    </div>
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Cancelado</h3>
+                      </div>                        
+                    </div> 
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">QTDE</span>
+                          {%IWEDITQTDCANCELADO%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALORCANCELADO%}
+                      </div>              
+                    </div>                                       
+                  </div>
+                  <div class="col col-md-4">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 0px">
+                      <div class="col-12 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Quitado</h3>
+                      </div>                        
+                    </div>                    
+                    <div class="row">
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">QTDE</span>
+                          {%IWEDITQTDQUITADO%}
+                      </div>              
+                      <div class="col col-md-6">
+                          <span class="text-uppercase page-subtitle">VALOR</span>
+                          {%IWEDITVALORQUITADO%}
+                      </div>              
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Parcelas</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+
+                <div class="table-responsive display" style="margin-top: 10px">
+                  <table class="table table-bordered table-hover table-striped table-sm" id="parcelas"  width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                      <tr>
+                      <th width="1%">T</th>
+                      <th width="10%">Documento</th>
+                      <th width="3%">Nº</th>
+                      <th width="3%">O/P</th>
+                      <th width="3%">Sit</th>
+                      <th width="24%">Condição Pagamento</th>
+                      <th width="12%">Emissão</th>
+                      <th width="12%">Vencimento</th>
+                      <th width="12%">Operação</th>
+                      <th width="12%">Valor Final</th>
+                      <th width="8%" style="text-align: center;">Ação</th>
+                      </tr>
+                    </thead>
+                  </table>    
+                </div>
+              </div>
+            </div>
+
+
+            <div id="Observacoes" class="tabcontent2">
+              <div id="observacoesPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Observações</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="Contratos" class="tabcontent2">
+              <div id="contratosPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Contratos</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="SPC" class="tabcontent2">
+              <div id="spcPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">SPC</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="Contatos" class="tabcontent2">
+              <div id="contatosPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Contatos</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="Devolucoes" class="tabcontent2">
+              <div id="devolucoesPessoa">
+                <div class="row">
+                  <div class="col col-md-12">
+                    <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 10px">
+                      <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                        <h3 class="page-title">Devoluções</h3>
+                      </div>                        
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="Lista" class="tabcontent">
+            <div class="table-responsive display" style="margin-top: 10px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="pessoas"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="5%">Código</th>
+                  <th width="37%">Nome da Pessoa</th>
+                  <th width="15%">CPF/CNPJ</th>
+                  <th width="15%">RG/IE</th>
+                  <th width="15%">Cidade</th>
+                  <th width="5%">Ativo</th>
+                  <th width="8%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </div>
+      </div>
+    </div>    
+  </form>
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITATIVO%}{%IWEDITPESSOAFISICA%}{%IWEDITVERIFICADEBITOS%}
+                              {%IWEDITEMITEETIQUETA%}{%IWEDITPRECADASTRO%}{%IWEDITACEITADEVOLUCAO%}{%IWEDITREIDI%}{%IWEDITCONTRIBUICAO%}{%IWEDITESTADOCIVIL%}{%IWEDITGENERO%}
+                              {%IWEDITBANCO%}{%IWEDITCONVENIO%}{%IWEDITCLIENTE%}{%IWEDITFORNECEDOR%}{%IWEDITFUNCIONARIO%}{%IWEDITREPRESENTANTE%}
+                              {%IWEDITTRANSPORTADORA%}{%IWEDITMOBILE%}{%IWEDITOFTALMO%}{%IWEDITMEDICO%}{%IWEDITIDATIVIDADE%}{%IWEDITIDLOCALIDADE%}{%IWEDITIDPESSOA%}{%IWEDITIDBANCO%}
+                              {%IWEDITIDCOBRANCA%}{%IWEDITIDCLIENTE%}{%IWEDITIDTABELA%}{%IWEDITIDCONDICAO%}{%IWEDITIDREPRESENTANTE%}
+                              {%IWEDITRETENCOES%}{%IWEDITREMESSAS%}{%IWEDITREVENDEDOR%}
+  </div>
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+<!--Modal Atividade-->
+  <div class="modal" id="ModalAtividade">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloAtividade" style="font-size: 15px">Seleciona Atividade</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalAtividadex" onclick="fechaModalAtividade();">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="card-body">
+            <div class="table-responsive" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="atividades" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="95%">Descrição da Atividade</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+<!--Modal Localidade-->
+  <div class="modal" id="ModalLocalidade">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloLocalidade" style="font-size: 15px">Seleciona Localidade</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="localidades"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="68%">Nome da Localidade</th>
+                  <th width="2%">UF</th>
+                  <th width="10%">Região</th>
+                  <th width="15%">Cod IBGE</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Banco-->
+  <div class="modal" id="ModalBanco">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloBanco" style="font-size: 15px">Seleciona Banco</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="bancos"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="90%">Nome do Banco</th>
+                  <th width="5%">Digito</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Cliente-->
+  <div class="modal" id="ModalCliente">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCliente" style="font-size: 15px">Seleciona Cliente</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="clientes"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="66%">Nome do Cliente</th>
+                  <th width="5%">Código</th>
+                  <th width="8%">CPF</th>
+                  <th width="8%">RG</th>
+                  <th width="8%">CNPJ</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Representante-->
+  <div class="modal" id="ModalRepresentante">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloRepresentante" style="font-size: 15px">Seleciona Representante</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="representantes"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="66%">Nome do Representante</th>
+                  <th width="5%">Código</th>
+                  <th width="8%">CPF</th>
+                  <th width="8%">RG</th>
+                  <th width="8%">CNPJ</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+
+  <!--Modal Cobrança-->
+  <div class="modal" id="ModalCobranca">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCobranca" style="font-size: 15px">Seleciona Cobrança</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="cobrancas"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="87%">Documento Cobrança</th>
+                  <th width="8%">Tipo</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Tabela-->
+  <div class="modal" id="ModalTabela">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloTabela" style="font-size: 15px">Seleciona Tabela</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="tabelas"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="75%">Nome Tabela</th>
+                  <th width="10%">Início</th>
+                  <th width="10%">Final</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <!--Modal Condicao-->
+  <div class="modal" id="ModalCondicao">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloCondicao" style="font-size: 15px">Seleciona Condição</span>
+          <!--<button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidadex" onclick="fechaModalLocalidade();">&times;</button>-->
+        </div>
+
+        <!-- Modal body -->
+
+        <div class="card-body">
+          <form>          
+            <div class="table-responsive display" style="margin-top: -20px">
+              <table class="table table-bordered table-hover table-striped table-sm" id="condicoes"  width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                  <tr>
+                  <th width="63%">Descrição Condição</th>
+                  <th width="10%">Tipo</th>
+                  <th width="12%">Nº Pag</th>
+                  <th width="12%">P Médio</th>
+                  <th width="5%" style="text-align: center;">Ação</th>
+                  </tr>
+                </thead>
+              </table>    
+            </div>
+            <div id="loader2" style="display: none;"></div>
+          </form>
+        </div>        
+        <!-- Modal footer -->
+      </div>
+    </div>
+  </div>  
+
+  <script>
+    $(document).ready(function() {      
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONALTERA").hide();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONEXCLUI").hide();
+
+       //var elemento = document.getElementById('IWEDITPAGELENGTH');
+       carregaListaPessoas(25);
+       document.getElementById("defaultOpen").click();
+       document.getElementById("defaultOpen2").click();
+       montaGeral('0000000');
+       montaClassificacao('0000000000');
+       montaOutros('000')
+       $('html,body').scrollTop(0);      
+    });
+
+// funções
+    function fechaModalAtividade() {
+      $("#ModalAtividade").modal("hide");
+    }
+    function fechaModalLocalidade() {
+      $("#ModalLocalidade").modal("hide");
+    }
+
+    function limpaFiltroAtividade() {
+      document.getElementById('IWEDITNOME').value = '[LimpaFiltroAtividade]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaListaPessoas(num) {     
+      $('#pessoas').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetPessoas"
+          });      
+    }
+
+    function chamaHelpLocalidade(tipo) {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpLocalidade]'+tipo;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpAtividade(tipo) {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpAtividade]'+tipo;
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpBanco() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpBanco]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpCobranca() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCobranca]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpCliente() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCliente]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpTabela() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpTabela]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpCondicao() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpCondicao]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+    function chamaHelpRepresentante() {
+      if ($("#flexSwitchCheckBanco").is('[disabled]')) {
+       } else {
+        document.getElementById('IWEDITNOME').value = '[HelpRepresentante]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();                      
+       }
+    }
+
+
+    function carregaListaAtividades(num) {     
+      $('#atividades').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetAtividadesHelp"
+          });      
+    }
+
+    function carregaListaLocalidades(num) {     
+      $('#localidades').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetLocalidadesHelp"
+          });      
+    }
+
+    function carregaListaBancos(num) {     
+      $('#bancos').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetBancosHelp"
+          });      
+    }
+
+    function carregaListaCobrancas(num) {     
+      $('#cobrancas').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCobrancasHelp"
+          });      
+    }
+
+    function carregaListaClientes(num) {     
+      $('#clientes').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetClientesHelp"
+          });      
+    }
+
+    function carregaListaRepresentantes(num) {     
+      $('#representantes').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetRepresentantesHelp"
+          });      
+    }
+
+    function carregaListaTabelas(num) {     
+      $('#tabelas').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetTabelasHelp"
+          });      
+    }
+
+    function carregaListaCondicoes(num) {     
+      $('#condicoes').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCondicoesHelp"
+          });      
+    }
+
+    function carregaListaHistoricos(num) {     
+      $('#historicos').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetPessoasHistoricos"
+          });      
+    }
+
+    function carregaListaParcelas(num) {     
+      $('#parcelas').DataTable(
+          {
+          "responsive": true,
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetPessoasParcelas"
+          });      
+    }
+
+    function carregaFichaPessoa(idPessoa) {
+      carregaContribuicao();
+      carregaEstadoCivil();
+      carregaGenero();
+      document.getElementById('IWEDITID').value = idPessoa;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[CarregaFichaPessoa]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+       document.getElementById("defaultOpen").click();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONALTERA").show();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONEXCLUI").show();            
+    }
+
+
+    function excluiPessoa(idPessoa, namePessoa) {
+      var wpagina = $('#pessoas').DataTable().page();
+        if (confirm("Deseja excluir pessoa: "+namePessoa+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = idPessoa;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiPessoa]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+    }
+
+    function montaOutros(parametro) {
+      var wparametro,woutros,wretencoes,wgeraremessas,wehrevendedor;
+      wparametro = parametro;
+
+      if (parametro.substring(0,1)=='1') {
+        wretencoes = 'checked';
+      }
+      if (parametro.substring(1,2)=='1') {
+        wgeraremessas = 'checked';
+      }
+      if (parametro.substring(2,3)=='1') {
+        wehrevendedor = 'checked';
+      }
+
+      woutros = '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRetencoes" '+wretencoes+' disabled="true">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Habilitar Retençoes</label>'+
+                '</div>'+
+                '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRemessas" '+wgeraremessas+' disabled="true">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Nao Gerar Remessas</label>'+
+                '</div>'+
+                '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRevendedor" '+wehrevendedor+' disabled="true">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Revendedor</label>'+
+                '</div>';
+      $("#Outros").html(woutros);
+    }
+
+    function limpaOutros() {
+      var woutros;
+
+      woutros = '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRetencoes">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Habilitar Retençoes</label>'+
+                '</div>'+
+                '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRemessas">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Nao Gerar Remessas</label>'+
+                '</div>'+
+                '<div class="form-check form-switch">'+
+                '   <input class="form-check-input" type="checkbox" id="flexSwitchCheckRevendedor">'+
+                '   <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Revendedor</label>'+
+                '</div>';
+
+      $("#Outros").html(woutros);
+    }
+
+
+    function montaClassificacao(parametro) {
+      var wparametro,wclassificacao,ehbanco,ehconvenio,ehcliente,ehfornecedor,ehfuncionario,ehrepresentante,ehtransportador,ehmobile,ehoftalmologista,ehmedico;
+      wparametro = parametro;
+
+      if (parametro.substring(0,1)=='1') {
+        ehbanco = 'checked';
+      }
+      if (parametro.substring(1,2)=='1') {
+        ehconvenio = 'checked';
+      }
+      if (parametro.substring(2,3)=='1') {
+        ehcliente = 'checked';
+      }
+
+      if (parametro.substring(3,4)=='1') {
+        ehfornecedor = 'checked';
+      }
+
+      if (parametro.substring(4,5)=='1') {
+        ehfuncionario = 'checked';
+      }
+
+      if (parametro.substring(5,6)=='1') {
+        ehrepresentante = 'checked';
+      }
+
+      if (parametro.substring(6,7)=='1') {
+        ehtransportador = 'checked';
+      }
+
+      if (parametro.substring(7,8)=='1') {
+        ehmobile = 'checked';
+      }
+
+      if (parametro.substring(8,9)=='1') {
+        ehoftalmologista = 'checked';
+      }
+
+      if (parametro.substring(9,10)=='1') {
+        ehmedico = 'checked';
+      }
+
+      wclassificacao = '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckBanco" '+ehbanco+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Banco</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckConvenio" '+ehconvenio+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Convênio</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckCliente" '+ehcliente+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Cliente</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckFornecedor" '+ehfornecedor+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Fornecedor</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckFuncionario" '+ehfuncionario+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Funcionário</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckRepresentante" '+ehrepresentante+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Representante</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckTransportador" '+ehtransportador+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Transportadora</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckMobile" '+ehmobile+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Repres Mobile</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckOftalmo" '+ehoftalmologista+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Oftalmologista</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckMedico" '+ehmedico+' disabled="true">'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Médico</label>'+
+                       '</div>';
+
+      $("#Total").html(wclassificacao);
+    }
+
+
+    function limpaClassificacao() {
+      var wclassificacao;
+
+      wclassificacao = '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckBanco" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckDefault" style="font-size: 20px; font-weight: bold; color: #00bfff">Banco</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckConvenio" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Convênio</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckCliente" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Cliente</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckFornecedor" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Fornecedor</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckFuncionario" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Funcionário</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckRepresentante" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Representante</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckTransportador" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Transportadora</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckMobile" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Repres Mobile</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckOftalmo" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Oftalmologista</label>'+
+                       '</div>'+
+                       '<div class="form-check form-switch">'+
+                       ' <input class="form-check-input" type="checkbox" id="flexSwitchCheckMedico" >'+
+                       ' <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Médico</label>'+
+                       '</div>';
+
+      $("#Total").html(wclassificacao);
+    }
+
+
+    function montaGeral(parametro) {
+      var wparametro,wgeral,ativo,pessoafisica,verificadebito,emiteetiqueta,precadastro,aceitadevolucao,reidi;
+      wparametro = parametro;
+
+      if (parametro.substring(0,1)=='1') {
+        ativo = 'checked';
+      }
+      if (parametro.substring(1,2)=='1') {
+        pessoafisica = 'checked';
+      }
+      if (parametro.substring(2,3)=='1') {
+        verificadebito = 'checked';
+      }
+
+      if (parametro.substring(3,4)=='1') {
+        emiteetiqueta = 'checked';
+      }
+
+      if (parametro.substring(4,5)=='1') {
+        precadastro = 'checked';
+      }
+
+      if (parametro.substring(5,6)=='1') {
+        aceitadevolucao = 'checked';
+      }
+
+      if (parametro.substring(6,7)=='1') {
+        reidi = 'checked';
+      }
+
+      wgeral = '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckAtivo" '+ativo+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Ativo</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckFisica" '+pessoafisica+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pessoa Física</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckVerifica" '+verificadebito+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Verifica Débitos</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckEtiqueta" '+emiteetiqueta+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Emite Etiqueta</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckPreCadastro" '+precadastro+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pré Cadastro</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDevolucao" '+aceitadevolucao+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Aceita Devolução</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckReidi" '+reidi+' disabled="true">'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">REIDI</label>'+
+               '</div>';
+      $("#Geral").html(wgeral);
+    }
+
+    function limpaGeral() {
+      var wgeral;
+      
+      wgeral = '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckAtivo" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Ativo</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckFisica" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pessoa Física</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckVerifica" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Verifica Débitos</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckEtiqueta" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Emite Etiqueta</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckPreCadastro" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Pré Cadastro</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDevolucao" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">Aceita Devolução</label>'+
+               '</div>'+
+               '<div class="form-check form-switch">'+
+               '  <input class="form-check-input" type="checkbox" id="flexSwitchCheckReidi" >'+
+               '  <label class="form-check-label" for="flexSwitchCheckChecked" style="font-size: 20px; font-weight: bold; color: #00bfff">REIDI</label>'+
+               '</div>';
+      $("#Geral").html(wgeral);
+    }
+
+
+    function setPagina(numPage) {
+      $('#pessoas').DataTable().page(numPage).draw('page');
+    }
+
+    function openTab(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+      document.getElementById("defaultOpen2").click();
+     $('html,body').scrollTop(0);      
+    }
+
+    function openTab2(evt, cityName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent2");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks2");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    // $('html,body').scrollTop(0);      
+      if (cityName=='Historico') {
+          carregaResumoHistoricos(); 
+          carregaListaHistoricos(10);
+      }
+
+      if (cityName=='Parcelas') {
+          carregaResumoParcelas(); 
+          carregaListaParcelas(10);
+      }
+
+    }
+
+    function carregaResumoHistoricos() {
+      document.getElementById('IWEDITNOME').value = '[ResumoHistorico]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaResumoParcelas() {
+      document.getElementById('IWEDITNOME').value = '[ResumoParcela]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();                    
+    }
+
+    function carregaContribuicao() {
+      $("#selectcontribuicao").empty();
+      $("#selectcontribuicao").append('<option value="1">1-Contribuinte ICMS</option>');
+      $("#selectcontribuicao").append('<option value="2">2-Contribuinte Isento</option>');
+      $("#selectcontribuicao").append('<option value="9">9-Não Contribuinte ICMS</option>');
+    }
+
+    function carregaEstadoCivil() {
+      $("#selectestadocivil").empty();
+      $("#selectestadocivil").append('<option value="Casado(a)">Casado(a)</option>');
+      $("#selectestadocivil").append('<option value="Desquitado(a)">Desquitado(a)</option>');
+      $("#selectestadocivil").append('<option value="Divorciado(a)">Divorciado(a)</option>');
+      $("#selectestadocivil").append('<option value="Outros">Outros</option>');
+      $("#selectestadocivil").append('<option value="Solteiro(a)">Solteiro(a)</option>');
+      $("#selectestadocivil").append('<option value="Viuvo(a)">Viuvo(a)</option>');
+    }
+
+    function carregaGenero() {
+      $("#selectgenero").empty();
+      $("#selectgenero").append('<option value="F">Feminino</option>');
+      $("#selectgenero").append('<option value="M">Masculino</option>');
+    }
+
+    function habilitaEdicao() {
+      $("#IWEDITCODIGOPESSOA").prop("disabled",false);
+      $("#IWEDITNOMEPESSOA").prop("disabled",false);
+      $("#IWEDITCONTATOPESSOA").prop("disabled",false);
+      $("#IWEDITOBSERVACAOPESSOA").prop("disabled",false);
+      $("#IWEDITNOMEFANTASIAPESSOA").prop("disabled",false);
+      $("#IWEDITPASTAPESSOA").prop("disabled",false);
+      $("#IWEDITATIVIDADEPESSOA").prop("disabled",false);
+      $("#IWEDITCODBANCOPESSOA").prop("disabled",false);
+      $("#IWEDITCPFPESSOA").prop("disabled",false);
+      $("#IWEDITRGPESSOA").prop("disabled",false);
+      $("#IWEDITCNPJPESSOA").prop("disabled",false);
+      $("#IWEDITIEPESSOA").prop("disabled",false);
+      $("#IWEDITIMPESSOA").prop("disabled",false);
+      $("#IWEDITSUFRAMAPESSOA").prop("disabled",false);
+      $("#IWEDITIESUBSTITUTOPESSOA").prop("disabled",false);
+      $("#IWEDITSITEPESSOA").prop("disabled",false);
+      $("#IWEDITEMAILPESSOA").prop("disabled",false);
+      $("#IWEDITLOGRADOUROPESSOA").prop("disabled",false);      
+      $("#IWEDITCOMPLEMENTOPESSOA").prop("disabled",false);
+      $("#IWEDITCIDADEPESSOA").prop("disabled",false);
+      $("#IWEDITBAIRROPESSOA").prop("disabled",false);
+      $("#IWEDITCEPPESSOA").prop("disabled",false);
+      $("#IWEDITFONEPESSOA").prop("disabled",false);
+      $("#IWEDITCELULARPESSOA").prop("disabled",false);
+      $("#IWEDITCAIXAPOSTALPESSOA").prop("disabled",false);
+
+      $("#flexSwitchCheckAtivo").prop("disabled",false);
+      $("#flexSwitchCheckFisica").prop("disabled",false);
+      $("#flexSwitchCheckReidi").prop("disabled",false);
+      $("#flexSwitchCheckDevolucao").prop("disabled",false);
+      $("#flexSwitchCheckEtiqueta").prop("disabled",false);
+      $("#flexSwitchCheckPreCadastro").prop("disabled",false);
+      $("#flexSwitchCheckVerifica").prop("disabled",false);
+
+      $("#flexSwitchCheckBanco").prop("disabled",false);
+      $("#flexSwitchCheckCliente").prop("disabled",false);
+      $("#flexSwitchCheckConvenio").prop("disabled",false);
+      $("#flexSwitchCheckFornecedor").prop("disabled",false);
+      $("#flexSwitchCheckFuncionario").prop("disabled",false);
+      $("#flexSwitchCheckMedico").prop("disabled",false);
+      $("#flexSwitchCheckMobile").prop("disabled",false);
+      $("#flexSwitchCheckOftalmo").prop("disabled",false);
+      $("#flexSwitchCheckRepresentante").prop("disabled",false);
+      $("#flexSwitchCheckTransportador").prop("disabled",false);
+
+      $("#flexSwitchCheckRetencoes").prop("disabled",false);
+      $("#flexSwitchCheckRemessas").prop("disabled",false);
+      $("#flexSwitchCheckRevendedor").prop("disabled",false);
+
+      $("#selectcontribuicao").prop("disabled",false);
+      $("#selectestadocivil").prop("disabled",false);
+      $("#selectgenero").prop("disabled",false);
+
+      $("#IWEDITENDERECOCOBRANCA").prop("disabled",false);
+      $("#IWEDITCOMPLEMENTOCOBRANCA").prop("disabled",false);
+      $("#IWEDITCIDADECOBRANCA").prop("disabled",false);
+      $("#IWEDITBAIRROCOBRANCA").prop("disabled",false);
+      $("#IWEDITCEPCOBRANCA").prop("disabled",false);
+      $("#IWEDITFONECOBRANCA").prop("disabled",false);
+      $("#IWEDITEMAILCOBRANCA").prop("disabled",false);
+
+      $("#IWEDITBANCODIVERSOS").prop("disabled",false);
+      $("#IWEDITCONTADIVERSOS").prop("disabled",false);
+      $("#IWEDITCOBRANCADIVERSOS").prop("disabled",false);
+      $("#IWEDITCOBRARDEDIVERSOS").prop("disabled",false);
+      $("#IWEDITCOMISSAODIVERSOS").prop("disabled",false);
+      $("#IWEDITTABELADIVERSOS").prop("disabled",false);
+      $("#IWEDITCREDITODIVERSOS").prop("disabled",false);
+      $("#IWEDITCONDICAODIVERSOS").prop("disabled",false);
+      $("#IWEDITPRAZODIVERSOS").prop("disabled",false);
+      $("#IWEDITREFERENCIA1DIVERSOS").prop("disabled",false);
+      $("#IWEDITREFERENCIA2DIVERSOS").prop("disabled",false);
+      $("#IWEDITLIMITECOMPRADIVERSOS").prop("disabled",false);
+      $("#IWEDITLIMITEFATURARDIVERSOS").prop("disabled",false);
+      $("#IWEDITREPRESENTANTEDIVERSOS").prop("disabled",false);
+
+      $("#IWEDITDATANASCIMENTO").prop("disabled",false);
+      $("#IWEDITSALARIO").prop("disabled",false);
+      $("#IWEDITNATURALIDADE").prop("disabled",false);
+      $("#IWEDITNOMEPAI").prop("disabled",false);
+      $("#IWEDITNOMEMAE").prop("disabled",false);
+      $("#IWEDITNOMEEMPRESA").prop("disabled",false);
+      $("#IWEDITENDERECOEMPRESA").prop("disabled",false);
+      $("#IWEDITCEPEMPRESA").prop("disabled",false);
+      $("#IWEDITBAIRROEMPRESA").prop("disabled",false);
+      $("#IWEDITFONEEMPRESA").prop("disabled",false);
+      $("#IWEDITNOMEDIRETOR1EMPRESA").prop("disabled",false);
+      $("#IWEDITNOMEDIRETOR2EMPRESA").prop("disabled",false);
+      $("#IWEDITDATAFUNDACAOEMPRESA").prop("disabled",false);
+
+      $("#IWEDITNOMEFIADOR").prop("disabled",false);
+      $("#IWEDITCPFFIADOR").prop("disabled",false);
+      $("#IWEDITRGFIADOR").prop("disabled",false);
+      $("#IWEDITENDERECOFIADOR").prop("disabled",false);
+      $("#IWEDITBAIRROFIADOR").prop("disabled",false);
+      $("#IWEDITCIDADEFIADOR").prop("disabled",false);
+      $("#IWEDITCEPFIADOR").prop("disabled",false);
+      $("#IWEDITFONEFIADOR").prop("disabled",false);
+
+      $("#IWEDITNOMECONJUGE").prop("disabled",false);
+      $("#IWEDITDATANASCIMENTOCONJUGE").prop("disabled",false);
+      $("#IWEDITEMPRESACONJUGE").prop("disabled",false);
+      $("#IWEDITCARGOCONJUGE").prop("disabled",false);
+      $("#IWEDITSALARIOCONJUGE").prop("disabled",false);
+
+    }
+
+    function desabilitaEdicao() {
+      $("#IWEDITCODIGOPESSOA").prop("disabled",true);
+      $("#IWEDITNOMEPESSOA").prop("disabled",true);
+      $("#IWEDITCONTATOPESSOA").prop("disabled",true);
+      $("#IWEDITOBSERVACAOPESSOA").prop("disabled",true);
+      $("#IWEDITNOMEFANTASIAPESSOA").prop("disabled",true);
+      $("#IWEDITPASTAPESSOA").prop("disabled",true);
+      $("#IWEDITATIVIDADEPESSOA").prop("disabled",true);
+      $("#IWEDITCODBANCOPESSOA").prop("disabled",true);
+      $("#IWEDITCPFPESSOA").prop("disabled",true);
+      $("#IWEDITRGPESSOA").prop("disabled",true);
+      $("#IWEDITCNPJPESSOA").prop("disabled",true);
+      $("#IWEDITIEPESSOA").prop("disabled",true);
+      $("#IWEDITIMPESSOA").prop("disabled",true);
+      $("#IWEDITSUFRAMAPESSOA").prop("disabled",true);
+      $("#IWEDITIESUBSTITUTOPESSOA").prop("disabled",true);
+      $("#IWEDITSITEPESSOA").prop("disabled",true);
+      $("#IWEDITEMAILPESSOA").prop("disabled",true);
+      $("#IWEDITLOGRADOUROPESSOA").prop("disabled",true);      
+      $("#IWEDITCOMPLEMENTOPESSOA").prop("disabled",true);
+      $("#IWEDITCIDADEPESSOA").prop("disabled",true);
+      $("#IWEDITBAIRROPESSOA").prop("disabled",true);
+      $("#IWEDITCEPPESSOA").prop("disabled",true);
+      $("#IWEDITFONEPESSOA").prop("disabled",true);
+      $("#IWEDITCELULARPESSOA").prop("disabled",true);
+      $("#IWEDITCAIXAPOSTALPESSOA").prop("disabled",true);
+
+      $("#flexSwitchCheckAtivo").prop("disabled",true);
+      $("#flexSwitchCheckFisica").prop("disabled",true);
+      $("#flexSwitchCheckReidi").prop("disabled",true);
+      $("#flexSwitchCheckDevolucao").prop("disabled",true);
+      $("#flexSwitchCheckEtiqueta").prop("disabled",true);
+      $("#flexSwitchCheckPreCadastro").prop("disabled",true);
+      $("#flexSwitchCheckVerifica").prop("disabled",true);
+
+      $("#flexSwitchCheckBanco").prop("disabled",true);
+      $("#flexSwitchCheckCliente").prop("disabled",true);
+      $("#flexSwitchCheckConvenio").prop("disabled",true);
+      $("#flexSwitchCheckFornecedor").prop("disabled",true);
+      $("#flexSwitchCheckFuncionario").prop("disabled",true);
+      $("#flexSwitchCheckMedico").prop("disabled",true);
+      $("#flexSwitchCheckMobile").prop("disabled",true);
+      $("#flexSwitchCheckOftalmo").prop("disabled",true);
+      $("#flexSwitchCheckRepresentante").prop("disabled",true);
+      $("#flexSwitchCheckTransportador").prop("disabled",true);
+
+      $("#flexSwitchCheckRetencoes").prop("disabled",false);
+      $("#flexSwitchCheckRemessas").prop("disabled",false);
+      $("#flexSwitchCheckRevendedor").prop("disabled",false);
+
+      $("#selectcontribuicao").prop("disabled",true);
+      $("#selectestadocivil").prop("disabled",true);
+      $("#selectgenero").prop("disabled",true);
+
+      $("#IWEDITENDERECOCOBRANCA").prop("disabled",true);
+      $("#IWEDITCOMPLEMENTOCOBRANCA").prop("disabled",true);
+      $("#IWEDITCIDADECOBRANCA").prop("disabled",true);
+      $("#IWEDITBAIRROCOBRANCA").prop("disabled",true);
+      $("#IWEDITCEPCOBRANCA").prop("disabled",true);
+      $("#IWEDITFONECOBRANCA").prop("disabled",true);
+      $("#IWEDITEMAILCOBRANCA").prop("disabled",true);
+
+      $("#IWEDITBANCODIVERSOS").prop("disabled",true);
+      $("#IWEDITCONTADIVERSOS").prop("disabled",true);
+      $("#IWEDITCOBRANCADIVERSOS").prop("disabled",true);
+      $("#IWEDITCOMISSAODIVERSOS").prop("disabled",true);
+      $("#IWEDITCOBRARDEDIVERSOS").prop("disabled",true);
+      $("#IWEDITTABELADIVERSOS").prop("disabled",true);
+      $("#IWEDITCREDITODIVERSOS").prop("disabled",true);
+      $("#IWEDITCONDICAODIVERSOS").prop("disabled",true);
+      $("#IWEDITPRAZODIVERSOS").prop("disabled",true);
+      $("#IWEDITREFERENCIA1DIVERSOS").prop("disabled",true);
+      $("#IWEDITREFERENCIA2DIVERSOS").prop("disabled",true);
+      $("#IWEDITLIMITECOMPRADIVERSOS").prop("disabled",true);
+      $("#IWEDITLIMITEFATURARDIVERSOS").prop("disabled",true);
+      $("#IWEDITREPRESENTANTEDIVERSOS").prop("disabled",true);
+
+      $("#IWEDITDATANASCIMENTO").prop("disabled",true);
+      $("#IWEDITSALARIO").prop("disabled",true);
+      $("#IWEDITNATURALIDADE").prop("disabled",true);
+      $("#IWEDITNOMEPAI").prop("disabled",true);
+      $("#IWEDITNOMEMAE").prop("disabled",true);
+      $("#IWEDITNOMEEMPRESA").prop("disabled",true);
+      $("#IWEDITENDERECOEMPRESA").prop("disabled",true);
+      $("#IWEDITCEPEMPRESA").prop("disabled",true);
+      $("#IWEDITBAIRROEMPRESA").prop("disabled",true);
+      $("#IWEDITFONEEMPRESA").prop("disabled",true);
+      $("#IWEDITNOMEDIRETOR1EMPRESA").prop("disabled",true);
+      $("#IWEDITNOMEDIRETOR2EMPRESA").prop("disabled",true);
+      $("#IWEDITDATAFUNDACAOEMPRESA").prop("disabled",true);
+
+      $("#IWEDITNOMEFIADOR").prop("disabled",true);
+      $("#IWEDITCPFFIADOR").prop("disabled",true);
+      $("#IWEDITRGFIADOR").prop("disabled",true);
+      $("#IWEDITENDERECOFIADOR").prop("disabled",true);
+      $("#IWEDITBAIRROFIADOR").prop("disabled",true);
+      $("#IWEDITCIDADEFIADOR").prop("disabled",true);
+      $("#IWEDITCEPFIADOR").prop("disabled",true);
+      $("#IWEDITFONEFIADOR").prop("disabled",true);
+
+      $("#IWEDITNOMECONJUGE").prop("disabled",true);
+      $("#IWEDITDATANASCIMENTOCONJUGE").prop("disabled",true);
+      $("#IWEDITEMPRESACONJUGE").prop("disabled",true);
+      $("#IWEDITCARGOCONJUGE").prop("disabled",true);
+      $("#IWEDITSALARIOCONJUGE").prop("disabled",true);
+    }
+
+    function selecionaAtividade(idAtividade, nomeAtividade) {
+      document.getElementById('IWEDITIDATIVIDADE').value = idAtividade;
+      AddChangedControl('IWEDITIDATIVIDADE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaAtividade]'+nomeAtividade;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalAtividade").modal("hide");
+    }
+
+    function selecionaLocalidade(idLocalidade, nomeLocalidade) {
+      document.getElementById('IWEDITIDLOCALIDADE').value = idLocalidade;
+      AddChangedControl('IWEDITIDLOCALIDADE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaLocalidade]'+nomeLocalidade;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalLocalidade").modal("hide");
+    }
+
+    function selecionaBanco(idBanco, nomeBanco) {
+      document.getElementById('IWEDITIDBANCO').value = idBanco;
+      AddChangedControl('IWEDITIDBANCO');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaBanco]'+nomeBanco;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalBanco").modal("hide");
+    }
+
+    function selecionaCobranca(idCobranca, nomeCobranca) {
+      document.getElementById('IWEDITIDCOBRANCA').value = idCobranca;
+      AddChangedControl('IWEDITIDCOBRANCA');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCobranca]'+nomeCobranca;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCobranca").modal("hide");
+    }
+
+    function selecionaCliente(idCliente, nomeCliente) {
+      document.getElementById('IWEDITIDCLIENTE').value = idCliente;
+      AddChangedControl('IWEDITIDCLIENTE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCliente]'+nomeCliente;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCliente").modal("hide");
+    }
+
+    function selecionaTabela(idTabela, nomeTabela) {
+      document.getElementById('IWEDITIDTABELA').value = idTabela;
+      AddChangedControl('IWEDITIDTABELA');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaTabela]'+nomeTabela;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalTabela").modal("hide");
+    }
+
+    function selecionaCondicao(idCondicao, nomeCondicao) {
+      document.getElementById('IWEDITIDCONDICAO').value = idCondicao;
+      AddChangedControl('IWEDITIDCONDICAO');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCondicao]'+nomeCondicao;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalCondicao").modal("hide");
+    }
+
+    function selecionaRepresentante(idRepresentante, nomeRepresentante) {
+      document.getElementById('IWEDITIDREPRESENTANTE').value = idRepresentante;
+      AddChangedControl('IWEDITIDREPRESENTANTE');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaRepresentante]'+nomeRepresentante;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalRepresentante").modal("hide");
+    }
+
+// botões
+    $("#IWBUTTONINCLUI").on("click",function(){      
+      habilitaEdicao();
+      carregaContribuicao();
+      carregaEstadoCivil();
+      carregaGenero();
+      document.getElementById('IWEDITID').value = 0;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[IncluiPessoa]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+
+      $(this).hide();
+      $("#IWBUTTONALTERA").hide();
+      $("#IWBUTTONCONFIRMA").show();
+      $("#IWBUTTONCANCELA").show();
+      $("#IWBUTTONEXCLUI").hide();      
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){      
+      desabilitaEdicao(); 
+      document.getElementById('IWEDITNOME').value = '[CancelaPessoa]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+
+      $(this).hide();
+      if (document.getElementById('IWEDITIDPESSOA').value == 0) {
+         $("#IWBUTTONALTERA").hide();
+         $("#IWBUTTONEXCLUI").hide();      
+       } else {
+         $("#IWBUTTONALTERA").show();        
+         $("#IWBUTTONEXCLUI").show();      
+       }
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONINCLUI").show();
+    })
+
+    $("#IWBUTTONCONFIRMA").on("click",function(){      
+      var wpagina = $('#pessoas').DataTable().page();
+      var wselectContribuicao = $("#selectcontribuicao :selected");
+      var wselectEstadoCivil  = $("#selectestadocivil :selected");
+      var wselectGenero       = $("#selectgenero :selected");
+
+      var elemento  = document.getElementById('IWEDITCODIGOPESSOA');
+      var elemento1 = document.getElementById('IWEDITNOMEPESSOA');
+      var elemento2 = document.getElementById('IWEDITATIVIDADEPESSOA');
+      var elemento3 = document.getElementById('IWEDITCIDADEPESSOA');
+      if ((elemento.value=='') || (elemento1.value=='') || (elemento2.value=='') || (elemento3.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+         if (elemento.value=='') {
+            document.getElementById('IWEDITCODIGOPESSOA').focus();
+         } else if (elemento1.value=='') {
+            document.getElementById('IWEDITNOMEPESSOA').focus();          
+         } else if (elemento2.value=='') {
+            document.getElementById('IWEDITATIVIDADEPESSOA').focus();          
+         } else if (elemento3.value=='') {
+            document.getElementById('IWEDITCIDADEPESSOA').focus();          
+         }
+
+      } else {        
+
+
+          if ($("#flexSwitchCheckBanco").prop('checked')         ||
+              $("#flexSwitchCheckCliente").prop('checked')       ||
+              $("#flexSwitchCheckConvenio").prop('checked')      ||
+              $("#flexSwitchCheckFornecedor").prop('checked')    ||
+              $("#flexSwitchCheckFuncionario").prop('checked')   ||
+              $("#flexSwitchCheckRepresentante").prop('checked') ||
+              $("#flexSwitchCheckTransportador").prop('checked') ||
+              $("#flexSwitchCheckMobile").prop('checked')        ||
+              $("#flexSwitchCheckOftalmo").prop('checked')       ||
+              $("#flexSwitchCheckMedico").prop('checked'))        {
+
+              desabilitaEdicao();
+              $(this).hide();
+              $("#IWBUTTONALTERA").show();
+              $("#IWBUTTONCANCELA").hide();
+              $("#IWBUTTONINCLUI").show();
+              $("#IWBUTTONEXCLUI").show();      
+              $("#loader3").css("display","block");     
+              $("#ModalAcessaAPI").modal('show');
+
+              document.getElementById('IWEDITCONTRIBUICAO').value = wselectContribuicao.val();
+              AddChangedControl('IWEDITCONTRIBUICAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              document.getElementById('IWEDITESTADOCIVIL').value  = wselectEstadoCivil.val();
+              AddChangedControl('IWEDITESTADOCIVIL');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              document.getElementById('IWEDITGENERO').value       = wselectGenero.val();
+              AddChangedControl('IWEDITGENERO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+
+              if ($("#flexSwitchCheckAtivo").prop('checked')) {
+                  document.getElementById('IWEDITATIVO').value = 'SIM';
+                  AddChangedControl('IWEDITATIVO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITATIVO').value = 'NÃO';
+                  AddChangedControl('IWEDITATIVO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckFisica").prop('checked')) {
+                  document.getElementById('IWEDITPESSOAFISICA').value = 'SIM';
+                  AddChangedControl('IWEDITPESSOAFISICA');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITPESSOAFISICA').value = 'NÃO';
+                  AddChangedControl('IWEDITPESSOAFISICA');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckVerifica").prop('checked')) {
+                  document.getElementById('IWEDITVERIFICADEBITOS').value = 'SIM';
+                  AddChangedControl('IWEDITVERIFICADEBITOS');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITVERIFICADEBITOS').value = 'NÃO';
+                  AddChangedControl('IWEDITVERIFICADEBITOS');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckEtiqueta").prop('checked')) {
+                  document.getElementById('IWEDITEMITEETIQUETA').value = 'SIM';
+                  AddChangedControl('IWEDITEMITEETIQUETA');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITEMITEETIQUETA').value = 'NÃO';
+                  AddChangedControl('IWEDITEMITEETIQUETA');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckPreCadastro").prop('checked')) {
+                  document.getElementById('IWEDITPRECADASTRO').value = 'SIM';
+                  AddChangedControl('IWEDITPRECADASTRO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITPRECADASTRO').value = 'NÃO';
+                  AddChangedControl('IWEDITPRECADASTRO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckDevolucao").prop('checked')) {
+                  document.getElementById('IWEDITACEITADEVOLUCAO').value = 'SIM';
+                  AddChangedControl('IWEDITACEITADEVOLUCAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITACEITADEVOLUCAO').value = 'NÃO';
+                  AddChangedControl('IWEDITACEITADEVOLUCAO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckReidi").prop('checked')) {
+                  document.getElementById('IWEDITREIDI').value = 'SIM';
+                  AddChangedControl('IWEDITREIDI');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITREIDI').value = 'NÃO';
+                  AddChangedControl('IWEDITREIDI');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+
+
+              if ($("#flexSwitchCheckBanco").prop('checked')) {
+                  document.getElementById('IWEDITBANCO').value = 'SIM';
+                  AddChangedControl('IWEDITBANCO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITBANCO').value = 'NÃO';
+                  AddChangedControl('IWEDITBANCO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckCliente").prop('checked')) {
+                  document.getElementById('IWEDITCLIENTE').value = 'SIM';
+                  AddChangedControl('IWEDITCLIENTE');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITCLIENTE').value = 'NÃO';
+                  AddChangedControl('IWEDITCLIENTE');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckConvenio").prop('checked')) {
+                  document.getElementById('IWEDITCONVENIO').value = 'SIM';
+                  AddChangedControl('IWEDITCONVENIO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITCONVENIO').value = 'NÃO';
+                  AddChangedControl('IWEDITCONVENIO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckFornecedor").prop('checked')) {
+                  document.getElementById('IWEDITFORNECEDOR').value = 'SIM';
+                  AddChangedControl('IWEDITFORNECEDOR');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITFORNECEDOR').value = 'NÃO';
+                  AddChangedControl('IWEDITFORNECEDOR');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckFuncionario").prop('checked')) {
+                  document.getElementById('IWEDITFUNCIONARIO').value = 'SIM';
+                  AddChangedControl('IWEDITFUNCIONARIO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITFUNCIONARIO').value = 'NÃO';
+                  AddChangedControl('IWEDITFUNCIONARIO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckRepresentante").prop('checked')) {
+                  document.getElementById('IWEDITREPRESENTANTE').value = 'SIM';
+                  AddChangedControl('IWEDITREPRESENTANTE');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITREPRESENTANTE').value = 'NÃO';
+                  AddChangedControl('IWEDITREPRESENTANTE');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckTransportador").prop('checked')) {
+                  document.getElementById('IWEDITTRANSPORTADORA').value = 'SIM';
+                  AddChangedControl('IWEDITTRANSPORTADORA');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITTRANSPORTADORA').value = 'NÃO';
+                  AddChangedControl('IWEDITTRANSPORTADORA');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckMobile").prop('checked')) {
+                  document.getElementById('IWEDITMOBILE').value = 'SIM';
+                  AddChangedControl('IWEDITMOBILE');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITMOBILE').value = 'NÃO';
+                  AddChangedControl('IWEDITMOBILE');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckOftalmo").prop('checked')) {
+                  document.getElementById('IWEDITOFTALMO').value = 'SIM';
+                  AddChangedControl('IWEDITOFTALMO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITOFTALMO').value = 'NÃO';
+                  AddChangedControl('IWEDITOFTALMO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckMedico").prop('checked')) {
+                  document.getElementById('IWEDITMEDICO').value = 'SIM';
+                  AddChangedControl('IWEDITMEDICO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITMEDICO').value = 'NÃO';
+                  AddChangedControl('IWEDITMEDICO');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+
+              if ($("#flexSwitchCheckRetencoes").prop('checked')) {
+                  document.getElementById('IWEDITRETENCOES').value = 'SIM';
+                  AddChangedControl('IWEDITRETENCOES');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITRETENCOES').value = 'NÃO';
+                  AddChangedControl('IWEDITRETENCOES');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckRemessas").prop('checked')) {
+                  document.getElementById('IWEDITREMESSAS').value = 'SIM';
+                  AddChangedControl('IWEDITREMESSAS');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITREMESSAS').value = 'NÃO';
+                  AddChangedControl('IWEDITREMESSAS');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+              if ($("#flexSwitchCheckRevendedor").prop('checked')) {
+                  document.getElementById('IWEDITREVENDEDOR').value = 'SIM';
+                  AddChangedControl('IWEDITREVENDEDOR');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              } else {
+                  document.getElementById('IWEDITREVENDEDOR').value = 'NÃO';
+                  AddChangedControl('IWEDITREVENDEDOR');   // colocar essa linha sempre que usar o onAsyncClick ois               
+              }
+
+
+              document.getElementById('IWEDITNOME').value = '[ConfirmaPessoa]'+wpagina;
+              AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+              $("#IWBUTTONACAO").click(); 
+             } else {
+              alert('Nenhuma Classificação definida');
+             }
+
+      }             
+    })
+
+    $("#IWBUTTONALTERA").on("click",function(){  
+      //document.getElementById('IWEDITID').value = 0;
+      //AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[AlteraPessoa]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      // Habilita edits
+      $("#IWBUTTONACAO").click();              
+      habilitaEdicao();
+
+      $(this).hide();
+      $("#IWBUTTONCONFIRMA").show();
+      $("#IWBUTTONCANCELA").show();
+      $("#IWBUTTONINCLUI").hide();
+      $("#IWBUTTONEXCLUI").hide();      
+    })
+
+    $("#IWBUTTONEXCLUI").on("click",function(){      
+      var wnome = document.getElementById('IWEDITNOMEPESSOA').value;
+      var wid   = document.getElementById('IWEDITIDPESSOA').value;
+      var wpagina = $('#pessoas').DataTable().page();
+
+
+        if (confirm("Deseja excluir pessoa: "+wnome+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = wid;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiPessoa]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+      $(this).hide();
+      $("#IWBUTTONCONFIRMA").hide();
+      $("#IWBUTTONCANCELA").hide();
+      $("#IWBUTTONINCLUI").show();
+      $("#IWBUTTONALTERA").hide();      
+    })
+
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html class="no-js h-100" lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Integrador Nuvem Shop</title>
+    <meta name="description" content="A high-quality &amp; free Bootstrap admin dashboard template pack that comes with lots of templates and components.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">-->
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="/styles/shards-dashboards.1.1.0.min.css">
+    <link rel="stylesheet" href="/styles/extras.1.1.0.min.css">
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>    
+
+  </head>
+  <body class="h-100">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Main Sidebar -->
+        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
+
+          <div class="main-navbar">
+            <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
+              <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
+                <div class="d-table m-auto">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 80px;" 
+                  src="/images/avatars/trabinlogo.jpg" alt="">
+                  <!--<img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 235px; margin-top: -25px; margin-left: 1px" src="/images/integradorNS.png" alt="">-->
+                </div>
+              </a>
+              <a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+                <i class="material-icons">&#xE5C4;</i>
+              </a>
+            </nav>
+          </div>
+
+          <div class="nav-wrapper">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/index.html">
+<!--                <a class="nav-link " href="/IntegradorNS/loja.html">-->
+                  <i class="material-icons">person</i>
+                  <span>Dados da Loja</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/categoria.html">
+                  <i class="material-icons">vertical_split</i>
+                  <span>Categorias</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/produto.html">
+<!--                <a class="nav-link " href="/IntegradorNS/index.html">-->
+                  <i class="material-icons">note_add</i>
+                  <span>Produtos</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/cliente.html">
+                  <i class="material-icons">view_module</i>
+                  <span>Clientes</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/pedido.html">
+                  <i class="material-icons">table_chart</i>
+                  <span>Pedidos</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/IntegradorNS/configuracao.html">
+                  <i class="material-icons">error</i>
+                  <span>Configurações</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+        <!-- End Main Sidebar -->
+        <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
+          <div class="main-navbar sticky-top bg-white">
+            <!-- Main Navbar -->
+            <nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
+              <div class="ml-auto">
+                <h4 style="margin-top: 10px; margin-left: 10px;">Integrador Nuvem Shop - {%IWLabelEmpresa%}</h4>
+              </div>
+              <ul class="navbar-nav border-left flex-row ml-auto mr-md-1">
+                <li class="nav-item border-right dropdown">
+                  <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link-icon__wrapper">
+                      <i class="material-icons">&#xE7FD;</i>
+                    </div>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-small dropdown-menu-right">
+                    <a class="dropdown-item" href="#">
+                      <i class="material-icons">&#xE7FD;</i> Logs</a>
+                    <a class="dropdown-item" href="/IntegradorNS/configuracao.html">
+                      <i class="material-icons">vertical_split</i> Configuração</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="/IntegradorNS/login.html">
+                      <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                  </div>
+                </li>
+              </ul>
+              <nav class="nav">
+                <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                  <i class="material-icons">&#xE5D2;</i>
+                </a>
+              </nav>
+            </nav>
+          </div>
+          <!-- / .main-navbar -->
+          <div class="main-content-container container-fluid">
+            <!-- Page Header -->
+            <div class="page-header row no-gutters py-4">
+
+              $body
+
+            </div>
+          </div>
+          <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+              </li>
+            </ul>
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 2019
+              <a href="http://www.trabin.com.br" rel="nofollow" target="_blank">Trabin Software & Consulting</a>
+            </span>
+          </footer>
+        </main>
+      </div>
+    </div>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+    <script src="/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="/js/sb-admin.min.js"></script>
+    <script src="/js/demo/datatables-demo.js"></script>
+    <script src="/js/demo/chart-area-demo.js"></script>
+    <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="/dist/js/adminlte.min.js"></script>
+    <script src="/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/bower_components/Chart.js/Chart.js"></script>
+    <script src="/bower_components/raphael/raphael.min.js"></script>
+    <script src="/bower_components/morris.js/morris.min.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="/bower_components/moment/min/moment.min.js"></script>
+    <script src="/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>          
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>          
+    <script src="../wwwroot/sweetAlert/sweetalert.min.js"></script> 
+    <script src="/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+    <script src='/bower_components/fullcalendar/dist/locale/pt-br.js'></script>
+    <script src="/js/jquery.Wload.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
+    <script src="scripts/extras.1.1.0.min.js"></script>
+
+    <script type="text/javascript">
+      $(".nav-link").on("click",function(){
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+      })
+    </script>
+  </body>
+</html>

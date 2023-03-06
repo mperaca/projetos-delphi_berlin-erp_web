@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      #loader3 {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+      .red {
+            background-color: red !important;
+            color: white;
+      }   
+
+      #Lote{
+          background:#1C1C1C;
+          left: -300px; 
+          margin-top: -170px; 
+          height: 200px; 
+          width: 200px; 
+          position: absolute;       
+          border-radius: 5px;          
+          -webkit-box-shadow: 9px 7px 5px rgba(50, 50, 50, 0.77);
+          -moz-box-shadow:    9px 7px 5px rgba(50, 50, 50, 0.77);
+          box-shadow:         9px 7px 5px rgba(50, 50, 50, 0.77);
+        }
+  </style>  
+  </head>
+  <body>
+  <!--<div class="container-fluid">-->
+  <div class="container">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header" style="background: navy; height: 70px">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">
+          <svg xmlns="http://www.w3.org/2000/svg" width="70" height="35" fill="currentColor" class="bi bi-mailbox2" viewBox="0 -2 16 16">
+            <path d="M9 8.5h2.793l.853.854A.5.5 0 0 0 13 9.5h1a.5.5 0 0 0 .5-.5V8a.5.5 0 0 0-.5-.5H9v1z"/>
+            <path d="M12 3H4a4 4 0 0 0-4 4v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7a4 4 0 0 0-4-4zM8 7a3.99 3.99 0 0 0-1.354-3H12a3 3 0 0 1 3 3v6H8V7zm-3.415.157C4.42 7.087 4.218 7 4 7c-.218 0-.42.086-.585.157C3.164 7.264 3 7.334 3 7a1 1 0 0 1 2 0c0 .334-.164.264-.415.157z"/>
+          </svg>                        
+          <span>Localidades</span>
+        </span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button type="button" id="IWBUTTONINCLUI" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" style="width: 130px" title="Inclui nova localidade">Inclui</button>
+          </div>
+        </div>                
+              </div>  
+      <div class="card-body">
+        <form>          
+<!--          <img style="width: 30%; margin-top: 35px" class="mx-auto d-block" src="/fotos/7_1.jpg">-->
+
+          <!--{%IWMemo1%}-->
+          <div class="table-responsive display" style="margin-top: -20px">
+            <table class="table table-bordered table-hover table-striped table-sm" id="localidades"  width="100%" cellspacing="0">
+              <thead class="thead-dark">
+                <tr>
+                <th width="68%">Nome da Localidade</th>
+                <th width="2%">UF</th>
+                <th width="10%">Região</th>
+                <th width="10%">Cod IBGE</th>
+                <th width="10%" style="text-align: center;">Ação</th>
+                </tr>
+              </thead>
+            </table>    
+          </div>
+          <div id="loader2" style="display: none;"></div>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWEDITINTERNO%}{%IWBUTTONACAO%}{%IWEDITPAGELENGTH%}{%IWEDITUF%}{%IWEDITREGIAO%}</div>
+
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI" data-refresh="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando TrabinAPI</h4>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/avatars/trabinlogo.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader3" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>  
+
+<!--Modal Localidade-->
+  <div class="modal" id="ModalLocalidade">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <!--<div class="modal-header bg-light" style="background: navy">-->
+        <div class="modal-header" style="background: navy">
+          <span class="text-uppercase page-subtitle" id="tituloLocalidade" style="font-size: 15px">Localidade</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalLocalidade" onclick="fechaModal();">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!--Cadastro do Produto-->
+          <div id="cadastroProduto" style="display: block;">
+              <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: -20px">
+                <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                  <h3 class="page-title">Geral</h3>
+                </div>                        
+              </div>
+              <div class="row">
+                  <div class="col col-md-12">
+                    <span class="text-uppercase page-subtitle">Descrição Localidade</span>
+                    {%IWEDITLOCALIDADENOME%}
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <span class="text-uppercase page-subtitle">UF</span><br>
+                  <select id="selectuf" style="width: 150px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true">
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <span class="text-uppercase page-subtitle">Região</span><br>
+                  <select id="selectregiao" style="width: 150px; height: 45px; font-weight: bold; font-size: 20px; color: #00bfff" required="true">
+                  </select>
+                </div>
+                <div class="col col-md-6">
+                  <span class="text-uppercase page-subtitle">Código IBGE</span>
+                  {%IWEDITLOCALIDADECODIBGE%}
+                </div>              
+              </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" id="IWBUTTONCONFIRMA" class="btn btn-success">Confirma</button>
+          <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger">Cancela</button>      
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+  <script>
+
+    $(document).ready(function() {      
+       //var elemento = document.getElementById('IWEDITPAGELENGTH');
+       carregaListaLocalidades(10);
+    });
+
+// funções
+    function carregaListaLocalidades(num) {     
+      $('#localidades').DataTable(
+          {
+          "responsive": true,
+//          "pageLength": 10,   
+          "pageLength": num,   
+          "page": 5,
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetLocalidades"
+          });      
+
+//      $('#produtos').DataTable().page(5).draw('page');
+
+//      setPagina(5);
+
+    }
+
+    function alteraLocalidade(idLocalidade) {
+      carregaEstados();
+      carregaRegioes();
+      $("#tituloLocalidade").text('Altera Localidade');
+      document.getElementById('IWEDITID').value = idLocalidade;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[AlteraLocalidade]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+      $("#ModalLocalidade").modal("show");
+    }
+
+    function excluiLocalidade(idLocalidade, nameLocalidade) {
+      var wpagina = $('#localidades').DataTable().page();
+        if (confirm("Deseja excluir localidade: "+nameLocalidade+"?")) {
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+
+            document.getElementById('IWEDITID').value = idLocalidade;
+            AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+            document.getElementById('IWEDITNOME').value = '[ExcluiLocalidade]'+wpagina;
+            AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+            $("#IWBUTTONACAO").click(); 
+        }
+    }
+
+    function setPagina(numPage) {
+      $('#localidades').DataTable().page(numPage).draw('page');
+    }
+
+    function fechaModal() {
+      $("#ModalLocalidade").modal("hide");
+    }
+
+    function carregaEstados() {
+      $("#selectuf").empty();
+      $("#selectuf").append('<option value="AC">AC</option>');
+      $("#selectuf").append('<option value="AL">AL</option>');
+      $("#selectuf").append('<option value="AM">AM</option>');
+      $("#selectuf").append('<option value="BA">BA</option>');
+      $("#selectuf").append('<option value="CE">CE</option>');
+      $("#selectuf").append('<option value="DF">DF</option>');
+      $("#selectuf").append('<option value="ES">ES</option>');
+      $("#selectuf").append('<option value="GO">GO</option>');
+      $("#selectuf").append('<option value="MA">MA</option>');
+      $("#selectuf").append('<option value="MG">MG</option>');
+      $("#selectuf").append('<option value="MS">MS</option>');
+      $("#selectuf").append('<option value="MT">MT</option>');
+      $("#selectuf").append('<option value="PA">PA</option>');
+      $("#selectuf").append('<option value="PB">PB</option>');
+      $("#selectuf").append('<option value="PE">PE</option>');
+      $("#selectuf").append('<option value="PI">PI</option>');
+      $("#selectuf").append('<option value="PR">PR</option>');
+      $("#selectuf").append('<option value="RJ">RJ</option>');
+      $("#selectuf").append('<option value="RN">RN</option>');
+      $("#selectuf").append('<option value="RO">RO</option>');
+      $("#selectuf").append('<option value="RR">RR</option>');
+      $("#selectuf").append('<option value="RS">RS</option>');
+      $("#selectuf").append('<option value="SC">SC</option>');
+      $("#selectuf").append('<option value="SE">SE</option>');
+      $("#selectuf").append('<option value="SP">SP</option>');
+      $("#selectuf").append('<option value="TO">TO</option>');
+    }
+
+    function carregaRegioes() {
+      $("#selectregiao").empty();
+      $("#selectregiao").append('<option value="CO">CO</option>');
+      $("#selectregiao").append('<option value="ND">ND</option>');
+      $("#selectregiao").append('<option value="NO">NO</option>');
+      $("#selectregiao").append('<option value="SD">SD</option>');
+      $("#selectregiao").append('<option value="SU">SU</option>');
+    }
+
+
+// botões
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      var elemento  = document.getElementById('IWEDITLOCALIDADENOME');
+      var elemento1 = document.getElementById('IWEDITLOCALIDADECODIBGE');
+
+      if ((elemento.value=='') || (elemento1.value=='')) {
+         alert("Campo(s) obrigatório(s) devem ser preenchidos");
+      } else {        
+          $("#loader3").css("display","block");     
+          $("#ModalAcessaAPI").modal('show');
+          var wpagina = $('#localidades').DataTable().page();
+          var wselectUF = $("#selectuf :selected");
+          var wselectRegiao = $("#selectregiao :selected");
+
+          document.getElementById('IWEDITNOME').value = '[ConfirmaLocalidade]'+wpagina;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          document.getElementById('IWEDITUF').value = wselectUF.text();
+          AddChangedControl('IWEDITUF');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          document.getElementById('IWEDITREGIAO').value = wselectRegiao.text();
+          AddChangedControl('IWEDITREGIAO');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();              
+          $("#ModalLocalidade").modal("hide");
+      }
+    })
+
+    $("#IWBUTTONINCLUI").on("click",function(){
+      carregaEstados();
+      carregaRegioes();
+      $("#selectuf").val('');
+      $("#selectregiao").val('');
+      $("#tituloLocalidade").text('Inclui Localidade');
+      $("#ModalLocalidade").modal("show");
+      document.getElementById('IWEDITID').value = 0;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[IncluiLocalidade]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();              
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){
+        $("#ModalLocalidade").modal("hide");
+    })
+
+
+  </script>
+  </body>
+</html>

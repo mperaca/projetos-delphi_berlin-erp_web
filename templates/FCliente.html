@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      input[type="text"]:disabled {
+       background: #dddddd;
+      }
+
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 85%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -50px 0 0 -50px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 90px;
+        height: 90px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+  </style>
+
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Clientes</span>
+        <div style="float: right">
+          <div class="btn-group">
+            <button class="btn-info material-icons" id="IWBUTTONCARREGAAPI" style="width: 50px; height: 30px;" title="Baixa Dados da API">cloud_download
+            </button>
+            <button class="btn-secondary material-icons" id="IWBUTTONGRAVAAPI" style="width: 50px; height: 30px;" title="Envia Dados para API">cloud_upload
+            </button>
+          </div>
+        </div>                
+      </div>  
+      <div class="card-body">
+        <form> 
+          <!--{%IWMemo1%}-->
+          <div class="table-responsive display">
+            <table class="table table-bordered table-hover table-striped table-sm" id="clientes" width="100%" cellspacing="0">
+              <thead class="thead-dark">
+                <tr>
+                <th width="5%">id</th>
+                <th width="30%">name</th>
+                <th width="15%">identification</th>
+                <th width="10%">phone</th>
+                <th width="30%">email</th>
+                <th width="10%" style="text-align: center;">Ação</th>
+                </tr>
+              </thead>
+            </table>    
+          </div>
+          <div class="btn-group" style="margin-top: 10px">
+            <button type="button" id="IWBUTTONATUALIZA" class="btn btn-primary" data-toggle="tooltip"   data-placement="top" title="Atualiza Lista">Atualiza</button>
+            <button type="button" id="IWBUTTONIMPRIME" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Imprime">Imprime</button>
+          </div>        
+          <div id="loader2" style="display: none;"></div>
+        </form>
+      </div>
+      <div class="card-footer">       
+      </div>
+    </div>
+  </div>
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWBUTTONACAO%}</div>
+
+
+  <!--Modal Acessa API>-->
+  <div class="modal" id="ModalAcessaAPI">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="tituloAPI">Acessando API Nuvem Shop</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+            <div class="modal-body">
+              <div class="row">
+          <img src="/images/nuvemshop.jpg" class="mx-auto d-block" width="350" height="150">     
+        </div>
+            <p align="center" id="statusAutorizacao"></p>         
+          </div>
+      <!--tela de splash--> 
+          <div id="loader" style="display: none;">            
+      </div>
+          <div class="modal-footer">
+            </div>    
+        </div>
+    </div>
+  </div>    
+
+<!--Modal Cliente-->
+  <div class="modal" id="ModalCliente">
+      <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-light">
+          <span class="text-uppercase page-subtitle" id="tituloCliente" style="font-size: 15px">Cliente</span>
+          <button type="button" class="close" data-dismiss="modal" id="fechaModalCliente">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <!--Cadastro do Cliente-->
+          <div id="cadastroCliente" style="display: block;">
+              <div class="row">
+                  <div class="col col-md-12">
+                    <span class="text-uppercase page-subtitle">name</span>
+                    {%IWEditNomeCliente%}
+                  </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-8">
+                    <span class="text-uppercase page-subtitle">identification</span>
+                    {%IWEditIdentificacaoCliente%}
+                </div>              
+                <div class="col col-md-4">
+                  <span class="text-uppercase page-subtitle">phone</span>
+                  {%IWEditFoneCliente%}
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-8">
+                  <span class="text-uppercase page-subtitle">email</span>
+                  {%IWEditEmailCliente%}
+                </div>              
+                <div class="col col-md-4">
+                  <span class="text-uppercase page-subtitle">note</span>
+                  {%IWEditNotaCliente%}
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-9">
+                  <span class="text-uppercase page-subtitle">address</span>
+                  {%IWEditEnderecoCliente%}
+                </div>              
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">number</span>
+                  {%IWEditNumeroEndereco%}
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-9">
+                  <span class="text-uppercase page-subtitle">floor</span>
+                  {%IWEditComplementoEndereco%}
+                </div>              
+                <div class="col col-md-3">
+                  <span class="text-uppercase page-subtitle">zipcode</span>
+                  {%IWEditCEPCliente%}
+                </div>              
+              </div>
+              <div class="row">
+                <div class="col col-md-6">
+                  <span class="text-uppercase page-subtitle">locality</span>
+                  {%IWEditBairroCliente%}
+                </div>              
+                <div class="col col-md-4">
+                  <span class="text-uppercase page-subtitle">city</span>
+                  {%IWEditCidadeCliente%}
+                </div>              
+                <div class="col col-md-2">
+                  <span class="text-uppercase page-subtitle">province</span>
+                  {%IWEditUFCliente%}
+                </div>              
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <script>
+
+    $(document).ready(function() {
+        carregaListaClientes();
+    });
+
+// Funções
+    function carregaListaClientes() {     
+      $('#clientes').DataTable(
+          {
+          "responsive": true,
+          "pageLength": 10,       
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetClientes"       
+          });      
+    }
+
+    function baixaClienteAPI(idNSCliente,NameCliente) {
+      if (confirm("Deseja baixar Cliente da API?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = idNSCliente;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[BaixarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }      
+    }
+
+    function enviaClienteAPI(idCliente,NameCliente) {
+      if (confirm("Deseja enviar Cliente para API?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = idCliente;
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[EnviarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }      
+    }
+
+    function selecionaCliente(idCliente, NameCliente) {
+      $("#ModalCliente").modal({backdrop: "static"});
+      document.getElementById('IWEDITID').value = idCliente;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaCliente]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();        
+    }
+
+//Botões
+    $("#IWBUTTONCARREGAAPI").on("click",function(){
+      if (confirm("Deseja baixar Clientes da API?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = "0";
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[BaixarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+
+    $("#IWBUTTONGRAVAAPI").on("click",function(){
+      if (confirm("Deseja enviar Clientes para API?")) {        
+        $("#loader").css("display","block");     
+        $("#ModalAcessaAPI").modal({backdrop: "static"});
+        document.getElementById('IWEDITID').value = "0";
+        AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+        document.getElementById('IWEDITNOME').value = '[EnviarAPI]';
+        AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+        $("#IWBUTTONACAO").click();  
+      }
+    })
+      
+  </script>
+
+
+</body>
+</html>

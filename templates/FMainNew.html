@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Dados da Loja</span>
+      </div>  
+      <div class="card-body">          
+        <form>
+          <!-- Identificação-->  
+          <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Identificação</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>name</label>
+              <span class="text-uppercase page-subtitle"> (Nome da loja)</span>
+              {%IWEditLojaName%}
+            </div>              
+            <div class="col-md-6">
+              <label>description</label>
+              <span class="text-uppercase page-subtitle"> (Descrição da loja)</span>
+              {%IWEditLojaDescription%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>type</label>
+              <span class="text-uppercase page-subtitle"> (Tipo da loja)</span>
+              {%IWEditLojaType%}
+            </div>              
+            <div class="col-md-6">
+              <label>logo</label>
+              <span class="text-uppercase page-subtitle"> (URL do logo da loja)</span>
+              {%IWEditLojaLogo%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>business_id</label>
+              <span class="text-uppercase page-subtitle"> (Documento da loja. Ex: CNPJ / IE)</span>
+              {%IWEditLojaBusinessId%}
+            </div>              
+            <div class="col-md-6">
+              <label>contact_email</label>
+              <span class="text-uppercase page-subtitle"> (Email de contato da loja)</span>
+              {%IWEditLojaContactEmail%}
+            </div>              
+          </div>
+          <!-- Redes Sociais-->  
+          <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Redes Sociais</h3>
+            </div>                        
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>facebook</label>
+              <span class="text-uppercase page-subtitle"> (URL do facebook da loja)</span>
+              {%IWEditLojaFacebook%}
+            </div>              
+            <div class="col-md-6">
+              <label>twitter</label>
+              <span class="text-uppercase page-subtitle"> (URL do twitter da loja)</span>
+              {%IWEditLojaTwitter%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>instagram</label>
+              <span class="text-uppercase page-subtitle"> (URL do instagram da loja)</span>
+              {%IWEditLojaInstagram%}
+            </div>              
+            <div class="col-md-6">
+              <label>google_plus</label>
+              <span class="text-uppercase page-subtitle"> (URL do google_plus da loja)</span>
+              {%IWEditLojaGooglePlus%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>pinterest</label>
+              <span class="text-uppercase page-subtitle"> (URL do pinterest da loja)</span>
+              {%IWEditLojaPinterest%}
+            </div>              
+            <div class="col-md-6">
+              <label>blog</label>
+              <span class="text-uppercase page-subtitle"> (URL do blog da loja)</span>
+              {%IWEditLojaBlog%}
+            </div>              
+          </div>
+          <!-- Logradouro-->  
+          <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Logradouro</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>address</label>
+              <span class="text-uppercase page-subtitle"> (Endereço da loja)</span>
+              {%IWEditLojaAddress%}
+            </div>              
+            <div class="col-md-6">
+              <label>country</label>
+              <span class="text-uppercase page-subtitle"> (País de origem da loja)</span>
+              {%IWEditLojaGooglePlus%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>email</label>
+              <span class="text-uppercase page-subtitle"> (Email da loja)</span>
+              {%IWEditLojaEmail%}
+            </div>              
+            <div class="col-md-6">
+              <label>phone</label>
+              <span class="text-uppercase page-subtitle"> (Telefone da loja)</span>
+              {%IWEditLojaPhone%}
+            </div>              
+          </div>
+          <!-- Configurações-->  
+          <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Configurações</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>languages</label>
+              <span class="text-uppercase page-subtitle"> (Linguagens suportadas pela loja)</span>
+              {%IWEditLojaEmail%}
+            </div>              
+            <div class="col-md-6">
+              <label>domains</label>
+              <span class="text-uppercase page-subtitle"> (Domínios da loja)</span>
+              {%IWEditLojaPhone%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>main_language</label>
+              <span class="text-uppercase page-subtitle"> (Linguagem oficial da loja)</span>
+              {%IWEditLojaEmail%}
+            </div>              
+            <div class="col-md-6">
+              <label>original_domain</label>
+              <span class="text-uppercase page-subtitle"> (Domínio original da loja)</span>
+              {%IWEditLojaPhone%}
+            </div>              
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>plan_name</label>
+              <span class="text-uppercase page-subtitle"> (Nome do plano pela loja)</span>
+              {%IWEditLojaPlanName%}
+            </div>              
+            <div class="col-md-6">
+              <label>current_theme</label>
+              <span class="text-uppercase page-subtitle"> (Tema principal da loja)</span>
+              {%IWEditLojaCurrentTheme%}
+            </div>              
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">       
+      </div>
+    </div>
+  </div>
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWButtonSubCategoria%}{%IWBUTTONACAO%}</div>
+
+  <script>
+
+    $(document).ready(function() {
+        carregaListaCategorias();
+    });
+
+// clica botão altera
+    $("#IWBUTTONALTERA").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled", true);
+      $("#IWBUTTONEXCLUI").attr("disabled", true);
+      $("#IWBUTTONCONFIRMA").attr("disabled", false);
+      $("#IWBUTTONCANCELA").attr("disabled", false);      
+    })
+// clica botão confirma
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled", false);
+      $("#IWBUTTONEXCLUI").attr("disabled", false);
+      $("#IWBUTTONCONFIRMA").attr("disabled", true);
+      $("#IWBUTTONCANCELA").attr("disabled", true);      
+    })
+// clica botão cancela
+    $("#IWBUTTONCANCELA").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled", false);
+      $("#IWBUTTONEXCLUI").attr("disabled", false);
+      $("#IWBUTTONCONFIRMA").attr("disabled", true);
+      $("#IWBUTTONCANCELA").attr("disabled", true);      
+    })
+// clica botão inclui
+    $("#IWBUTTONINCLUI").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled", true);
+      $("#IWBUTTONEXCLUI").attr("disabled", true);
+      $("#IWBUTTONCONFIRMA").attr("disabled", false);
+      $("#IWBUTTONCANCELA").attr("disabled", false);      
+    })
+// clica botão fecha
+    $("#fechaModalCategoria").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled", false);
+      $("#IWBUTTONEXCLUI").attr("disabled", false);
+      $("#IWBUTTONCONFIRMA").attr("disabled", true);
+      $("#IWBUTTONCANCELA").attr("disabled", true);      
+      document.getElementById('IWEDITNOME').value = '[fechaModalCategoria]';
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick pois       
+      $("#IWBUTTONACAO").click();
+    })
+// clica botão inclui subcategoria
+    $("#IWBUTTONINCLUISUB").on("click",function(){
+//      $("#tituloSubCategoria").text("Nova SubCategoria");      
+      $("#tableSubCategoria").css("display","none");
+      $("#formSubCategoria").css("display","block");
+      $("#IWBUTTONINCLUISUB").attr("disabled", true);
+      $("#IWBUTTONCANCELASUB").attr("disabled", false);      
+      $("#IWBUTTONCONFIRMASUB").attr("disabled", false);
+    })
+// clica botão cancela subcategoria
+    $("#IWBUTTONCANCELASUB").on("click",function(){
+//      $("#tituloSubCategoria").text("Nova SubCategoria");      
+      $("#tableSubCategoria").css("display","block");
+      $("#formSubCategoria").css("display","none");
+      $("#IWBUTTONINCLUISUB").attr("disabled", false);
+      $("#IWBUTTONCANCELASUB").attr("disabled", true);      
+      $("#IWBUTTONCONFIRMASUB").attr("disabled", true);
+      $("#IWBUTTONALTERASUB").css("display","none");
+      $("#IWBUTTONINCLUISUB").css("display","block");
+    })
+// clica botão confirma subcategoria
+    $("#IWBUTTONCONFIRMASUB").on("click",function(){
+//      $("#tituloSubCategoria").text("Nova SubCategoria");      
+      $("#IWBUTTONINCLUISUB").attr("disabled", false);
+      $("#IWBUTTONCANCELASUB").attr("disabled", true);      
+      $("#IWBUTTONCONFIRMASUB").attr("disabled", true);
+      $("#IWBUTTONALTERASUB").css("display","none");
+      $("#IWBUTTONINCLUISUB").css("display","block");
+    })
+
+// clica botão altera subcategoria
+    $("#IWBUTTONALTERASUB").on("click",function(){
+//      $("#tituloSubCategoria").text("Nova SubCategoria");      
+      $("#IWBUTTONALTERASUB").attr("disabled", true);      
+      $("#IWBUTTONCANCELASUB").attr("disabled", false);      
+      $("#IWBUTTONCONFIRMASUB").attr("disabled", false);
+    })
+
+    function criaNovaCategoria() {
+      $("#ModalCategoria").modal("show");
+      $("#tituloCategoria").text("Nova Categoria");      
+    }
+
+
+    function selecionaCategoria(idCategoria, nomeCategoria) {
+      $("#ModalCategoria").modal("show");
+      $("#tituloCategoria").text("Categoria ("+ nomeCategoria+")");
+      document.getElementById('IWEDITID').value = idCategoria;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois       
+      document.getElementById('IWEDITNOME').value = '[Categoria]'+nomeCategoria;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick pois       
+      $("#IWBUTTONACAO").click();
+      $("#IWBUTTONCONFIRMA").attr("disabled", true);
+      $("#IWBUTTONCANCELA").attr("disabled", true);
+    }
+
+    function selecionaSubCategoria(idCategoria, nomeCategoria) {
+      document.getElementById('IWEDITID').value = idCategoria;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[ListaSubCategorias]'+nomeCategoria;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick pois       
+      $("#IWBUTTONACAO").click();
+      $("#ModalSubCategoria").modal("show");
+      $("#tituloSubCategoria").text("SubCategorias ("+ nomeCategoria+")");
+      $("#tableSubCategoria").css("display","block");
+      $("#formSubCategoria").css("display","none");
+      $("#IWBUTTONINCLUISUB").attr("disabled", false);
+      $("#IWBUTTONCONFIRMASUB").attr("disabled", true);
+      $("#IWBUTTONCANCELASUB").attr("disabled", true);            
+      $("#IWBUTTONALTERASUB").css("display","none");
+      $("#IWBUTTONINCLUISUB").css("display","block");
+    }
+
+    function excluiCategoriax(idCategoria, nomeCategoria) {
+      var confirma = confirm('Confirma exclusão da categoria '+nomeCategoria+'?');
+      if (confirma==true) {
+          document.getElementById('IWEDITID').value = idCategoria;
+          AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+          document.getElementById('IWEDITNOME').value = '[ExcluiCategoria]'+nomeCategoria;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();      
+        }
+    }
+
+    function excluiSub(idCategoria, nomeCategoria) {
+      var confirma = confirm('Confirma exclusão da subcategoria '+nomeCategoria+'?');
+      if (confirma==true) {
+          document.getElementById('IWEDITID').value = idCategoria;
+          AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+          document.getElementById('IWEDITNOME').value = '[ExcluiSubCategoria]'+nomeCategoria;
+          AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+          $("#IWBUTTONACAO").click();      
+        }
+    }
+
+    function selecionaSub(idCategoria, nomeCategoria) {
+      $("#tableSubCategoria").css("display","none");
+      $("#formSubCategoria").css("display","block");
+      document.getElementById('IWEDITID').value = idCategoria;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[SelecionaSubCategoria]'+nomeCategoria;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+      $("#IWBUTTONALTERASUB").css("display","block");
+      $("#IWBUTTONALTERASUB").attr("disabled", false);            
+      $("#IWBUTTONINCLUISUB").css("display","none");
+    }
+
+    function carregaListaCategorias() {     
+      $('#categorias').DataTable(
+          {
+          "responsive": true,
+          "pageLength": 10,       
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   true,
+          "ordering": true,
+          "searching": true,
+          "serverSide": true,
+          "processing": true,
+          "bDestroy": true,
+          "ajax": "GetCategorias"       
+          });      
+    }
+
+    function carregaListaSubCategorias() {     
+      $('#subcategorias').DataTable(
+          {
+          "responsive": true,
+          "pageLength": 10,       
+          "language": {"url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"},
+          "pagingType": "full",
+          "paging":   false,
+          "ordering": true,
+          "searching": false,
+          "serverSide": true,
+          "processing": false,
+          "bDestroy": true,
+          "ajax": "GetSubCategorias"       
+          });      
+    }
+
+      
+  </script>
+
+
+</body>
+</html>

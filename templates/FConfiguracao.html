@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <!--
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+  <style type="text/css">
+      td{
+         white-space: nowrap !important;
+      }
+      label{
+        margin-bottom: -10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+
+      input[type="text"]:disabled {
+       background: #dddddd;
+      }
+
+      .w_load_icon{
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(/images/w_load.gif) no-repeat;
+      }
+
+      .w_load_body{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(233, 233, 232, 0.5);
+      }
+
+      #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }      
+
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+/* Add animation to "page content" */
+      .animate-bottom {
+        position: relative;
+        -webkit-animation-name: animatebottom;
+        -webkit-animation-duration: 1s;
+        animation-name: animatebottom;
+        animation-duration: 1s
+      }
+
+      @-webkit-keyframes animatebottom {
+        from { bottom:-100px; opacity:0 } 
+        to { bottom:0px; opacity:1 }
+      }
+
+      @keyframes animatebottom { 
+        from{ bottom:-100px; opacity:0 } 
+        to{ bottom:0; opacity:1 }
+      }
+
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <span class="text-uppercase page-subtitle">{%CaminhoPao%}</span>
+    <div class="card mb-3">
+      <div class="card-header">
+        <span class="text-uppercase page-subtitle" style="font-size: 25px">Configuração</span>
+      </div>  
+      <div class="card-body">          
+        <form>
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Base Local</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <span class="text-uppercase page-subtitle">host name</span>
+              {%IWEditTrabinHostName%}
+            </div>              
+            <div class="col-md-4">
+              <span class="text-uppercase page-subtitle">data base</span>
+              {%IWEditTrabinDataBase%}
+            </div>              
+            <div class="col-md-2">
+              <span class="text-uppercase page-subtitle">port</span>
+              {%IWEditTrabinPort%}
+            </div>              
+            <div class="col-md-2">
+              <center>
+                {%IWBUTTONTESTACONEXAO%}
+              </center>
+            </div>    
+          </div>
+            <p id="pSucesso" style="color: green; font-weight: bold; display: none;">Conexão estabelida com sucesso!</p>
+            <p id="pErro" style="color: red; font-weight: bold; display: none;">Problema na conexão com base local!</p>                      
+
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">API</h3>
+            </div>                        
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">url</span>
+              {%IWEditURLAPI%}
+            </div>              
+            <div class="col-md-4">
+              <span class="text-uppercase page-subtitle">resource</span>
+              {%IWEditRecursoAPI%}
+            </div>              
+            <div class="col-md-2">
+              <center>
+                {%IWBUTTONTESTAAPI%}
+              </center>
+            </div>    
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <span class="text-uppercase page-subtitle">token</span>
+              {%IWEditTokenAPI%}
+            </div>              
+            <div class="col-md-2">
+              <span class="text-uppercase page-subtitle">store id</span>
+              {%IWEditStoreIdAPI%}
+            </div>              
+            <div class="col-md-4">
+              <span class="text-uppercase page-subtitle">user agent</span>
+              {%IWEditUserAgentAPI%}
+            </div>    
+          </div>
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Upload</h3>
+            </div>                        
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <fieldset>
+                {%IWLabelUpload%}
+              </fieldset>
+            </div>
+          </div>
+          <div class="page-header row no-gutters py-2 mb-2 border-bottom" style="margin-top: 30px">
+            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+              <h3 class="page-title">Geral</h3>
+            </div>                        
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <span class="text-uppercase page-subtitle">Produtos por Página</span><br>
+              <select id="selectproduto" disabled="" style="width: 200px; 
+              font-weight: bold; font-size: 13px">
+                {%IWLabelSelect%}
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <span class="text-uppercase page-subtitle">Página Inicial</span><br>
+              <select id="selectpagina" disabled="" style="width: 200px; 
+              font-weight: bold; font-size: 13px">
+                {%IWLabelSelect2%}
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <span class="text-uppercase page-subtitle">Status Pedido</span><br>
+              <select id="selectstatus" disabled="" style="width: 300px; 
+              font-weight: bold; font-size: 13px">
+                {%IWLabelSelect3%}
+              </select>
+            </div>
+          </div>
+
+          <div id="loader" style="display: none;"></div>
+          <div class="row" style="height: 400px">
+            <div class="col-md-12">
+              <!--<span class="text-uppercase page-subtitle">content</span>
+              {%IWMemoContentAPI%}-->
+            </div>                          
+          </div>
+          <div class="btn-group" style="margin-top: 10px">
+            <button type="button" id="IWBUTTONALTERA" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Altera">Altera</button>
+            <button type="button" id="IWBUTTONCONFIRMA" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirma" disabled="disabled">Confirma</button>
+            <button type="button" id="IWBUTTONCANCELA" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancela" disabled="disabled">Cancela</button>
+          </div>
+        </form>
+
+      </div>
+      <div class="card-footer">       
+      </div>
+    </div>
+  </div>
+  <div style="display: none;">{%IWEDITID%}{%IWEDITNOME%}{%IWBUTTONACAO%}{%IWEditLojaDominio1%}{%IWEDITTIPO%}</div>
+
+
+
+  <script>
+// botões
+    $("#IWBUTTONTESTAAPI").on("click",function(){
+      $("#loader").css("display","block");
+      carregaAPI();
+    })
+
+    $("#IWBUTTONALTERA").on("click",function(){
+      var elemento = document.getElementById('IWEDITTIPO');
+      if (elemento.value=='A') {
+        $("#IWBUTTONALTERA").attr("disabled",true);
+        $("#IWBUTTONCONFIRMA").attr("disabled",false);
+        $("#IWBUTTONCANCELA").attr("disabled",false);
+        $("#selectproduto").attr("disabled",false);
+        $("#selectpagina").attr("disabled",false);
+        $("#selectstatus").attr("disabled",false);
+      } else {
+        $("#IWBUTTONALTERA").attr("disabled",false);
+        $("#IWBUTTONCONFIRMA").attr("disabled",true);
+        $("#IWBUTTONCANCELA").attr("disabled",true);
+        $("#selectproduto").attr("disabled",true);
+        $("#selectpagina").attr("disabled",true);        
+        $("#selectstatus").attr("disabled",true);        
+      }
+    })
+
+    $("#IWBUTTONCONFIRMA").on("click",function(){
+      var wvariacao = '0';
+      var wimagem   = '0';
+      var westoque  = '0';
+      var wselecao  = '010';
+      var wselecao2 = 'Loja';
+      var wselecao3 = 'Todos';
+      if ($("#customToggle2").is(':checked')) { //envia produto variação
+        wvariacao = '1';
+      } else {
+        wvariacao = '0';
+      }
+      if ($("#customToggle3").is(':checked')) { //envia produto imagem
+        wimagem = '1';
+      } else {
+        wimagem = '0';
+      }
+      if ($("#customToggle4").is(':checked')) { //envia estoque
+        westoque = '1';
+      } else {
+        westoque = '0';
+      }
+      // select
+      if ($("#valor1").is(':selected')) { 
+         wselecao = '010';
+      }
+      if ($("#valor2").is(':selected')) { 
+         wselecao = '025';
+      }
+      if ($("#valor3").is(':selected')) { 
+         wselecao = '050';
+      }
+      if ($("#valor4").is(':selected')) { 
+         wselecao = '100';
+      }
+      // select2
+      if ($("#valorx1").is(':selected')) { 
+         wselecao2 = 'Lojaxxxxxxxx';
+      }
+      if ($("#valorx2").is(':selected')) { 
+         wselecao2 = 'Categoriaxxx';
+      }
+      if ($("#valorx3").is(':selected')) { 
+         wselecao2 = 'Produtoxxxxx';
+      }
+      if ($("#valorx4").is(':selected')) { 
+         wselecao2 = 'Clientexxxxx';
+      }
+      if ($("#valorx5").is(':selected')) { 
+         wselecao2 = 'Pedidoxxxxxx';
+      }
+      if ($("#valorx6").is(':selected')) { 
+         wselecao2 = 'Configuração';
+      }
+      // select3
+      if ($("#valorz1").is(':selected')) { 
+         wselecao3 = 'Todos';
+      }
+      if ($("#valorz2").is(':selected')) { 
+         wselecao3 = 'Todos (exceto arquivados e cancelados)';
+      }
+      if ($("#valorz3").is(':selected')) { 
+         wselecao3 = 'Arquivados';
+      }
+      if ($("#valorz4").is(':selected')) { 
+         wselecao3 = 'Cancelados';
+      }
+
+      $("#IWBUTTONALTERA").attr("disabled",false);
+      $("#IWBUTTONCONFIRMA").attr("disabled",true);
+      $("#IWBUTTONCANCELA").attr("disabled",true);
+      $("#selectproduto").attr("disabled",true);
+      $("#selectpagina").attr("disabled",true);
+      $("#selectstatus").attr("disabled",true);
+
+      document.getElementById('IWEDITID').value = wvariacao+wimagem+westoque;
+      AddChangedControl('IWEDITID');   // colocar essa linha sempre que usar o onAsyncClick pois co
+      document.getElementById('IWEDITNOME').value = '[Confirma]'+wselecao+wselecao2+wselecao3;
+      AddChangedControl('IWEDITNOME');   // colocar essa linha sempre que usar o onAsyncClick ois       
+      $("#IWBUTTONACAO").click();      
+
+    })
+
+    $("#IWBUTTONCANCELA").on("click",function(){
+      $("#IWBUTTONALTERA").attr("disabled",false);
+      $("#IWBUTTONCONFIRMA").attr("disabled",true);
+      $("#IWBUTTONCANCELA").attr("disabled",true);
+      $("#selectproduto").attr("disabled",true);      
+      $("#selectpagina").attr("disabled",true);      
+      $("#selectstatus").attr("disabled",true);      
+    })
+
+    function carregaAPI() {
+//      $.ajax({dataType: "json",
+//              url: "https://api.tiendanube.com/v1/1033354/store",
+//			  headers: {"Authentication":"bearer 41b3b800fcaf4846c49dfee652c14454ace75d0a", 
+//			            "User-Agent":"sergio@trabin.com.br", 
+//			            "Content-Type":"application/json"},              
+//              error: function(){alert('Erro ao carregar API');},
+//              success: function(e){
+//                          const myObjStr = JSON.stringify(e);
+//                          alert(myObjStr);
+//            });
+    }
+  </script>
+    
+
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ERP Intraweb</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="/css/sb-admin.css" rel="stylesheet">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!--
+  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+
+
+  <link rel="stylesheet" href="/bower_components/Ionicons/css/ionicons.min.css">
+
+  <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
+
+  <link rel="stylesheet" href="/bower_components/jvectormap/jquery-jvectormap.css">
+
+  <link rel="stylesheet" href="/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+
+  <link rel="stylesheet" href="/plugins/timepicker/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.min.css">
+  <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+  
+  <link rel="stylesheet" href="/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link href="/sweetAlert/sweetalert.css" rel="stylesheet" type="text/css">-->
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="/TrabinWeb/index.html">ERP Intraweb</a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+
+ <!-- Navbar text-->
+	<span class="navbar-text ml-auto mr-md-0">
+		{%UsuarioLogado%}
+	</span>	
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto mr-md-0">
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user-circle fa-2x"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="configuracao.html">Configurações</a>
+          <a class="dropdown-item" href="#">Logs</a>
+          <div class="dropdown-divider"></div>
+<!--          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>-->
+          <a class="dropdown-item" href="/ERPIntraweb/login.html">Sair</a>		  
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/TrabinWeb/index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Estatísticas</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Cadastros</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="/TrabinWeb/atividade.html">Atividades</a>
+          <a class="dropdown-item" href="/TrabinWeb/localidade.html">Localidades</a>
+          <a class="dropdown-item" href="/TrabinWeb/codigofiscal.html">Códigos Fiscais</a>
+          <a class="dropdown-item" href="/TrabinWeb/categoria.html">Categorias</a>
+          <a class="dropdown-item" href="/TrabinWeb/planoestoque.html">Plano de Estoques</a>
+<!--          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Other Pages:</h6>
+          <a class="dropdown-item" href="404.html">404 Page</a>
+          <a class="dropdown-item" href="blank.html">Blank Page</a>-->
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Movimentos</span>
+		</a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Faturamentox</h6>
+          <a class="dropdown-item" href="/ERPIntraweb/orcamento.html">Orçamentos</a>
+          <a class="dropdown-item" href="/ERPIntraweb/notafiscal.html">Notas Fiscais</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Estoque</h6>
+          <a class="dropdown-item" href="404.html">Inventário</a>
+          <a class="dropdown-item" href="blank.html">Entradas/Saídas</a>
+          <a class="dropdown-item" href="/ERPIntraweb/pesquisaitem.html">Pesquisa Ítem</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Relatórios</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Faturamento</h6>
+          <a class="dropdown-item" href="cliente.html">Vendas por Cliente</a>
+          <a class="dropdown-item" href="fornecedor.html">Vendas por Condição</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Estoque</h6>
+          <a class="dropdown-item" href="404.html">Estoque Existente</a>
+          <a class="dropdown-item" href="blank.html">Pontos de Pedido</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Ferramentas</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Manutenção</h6>
+          <a class="dropdown-item" href="/ERPIntraweb/statuswebservice.html">Status WebService</a>
+        </div>
+      </li>
+    </ul>
+
+    <div style="display: none;">{%IWBUTTONACAO%}</div>
+    <div id="content-wrapper">
+	<!-- /.container-fluid -->
+		$body
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Marcelo T. Peraça</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Page level plugin JavaScript-->
+  <script src="/vendor/chart.js/Chart.min.js"></script>
+  <script src="/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin.min.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script src="/js/demo/chart-area-demo.js"></script>
+
+  <script src="/bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="/dist/js/adminlte.min.js"></script>
+  <script src="/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+  <script src="/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+  <script src="/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+  <script src="/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="/bower_components/Chart.js/Chart.js"></script>
+
+  <script src="/bower_components/raphael/raphael.min.js"></script>
+  <script src="/bower_components/morris.js/morris.min.js"></script>
+  
+  <script src="/plugins/input-mask/jquery.inputmask.js"></script>
+  <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+  <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+                
+  <script src="/bower_components/moment/min/moment.min.js"></script>
+  <script src="/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        
+  <script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+  <script src="/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+        
+  <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+  <script src="//cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+        
+  <script src="../wwwroot/sweetAlert/sweetalert.min.js"></script> 
+  <script src="/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+  <script src='/bower_components/fullcalendar/dist/locale/pt-br.js'></script>-->
+
+
+
+</body>
+
+</html>
